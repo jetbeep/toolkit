@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log Analysis</title>
+     <div id="dropZone" style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
+        Drag and drop your log file here, or click to select a file.
+        <input type="file" id="fileInput" style="display: none;" />
+    </div>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 4px 8px; text-align: left; }
+        th { border-bottom: 2px solid #ddd; }
+        td { border-bottom: 1px solid #eee; }
+            #dropZone {
+                margin: 20px auto;
+                width: 80%;
+                max-width: 500px;
+                cursor: pointer;
+                background-color: #f9f9f9;
+                transition: background-color 0.2s ease-in-out;
+            }
+            #dropZone.dragover {
+                background-color: #e8f5e9; /* Highlight when a file is dragged over */
+            }
+        .asp_script_print { color: blue; }
+        .asp_script_rw_data { color: green; }
+        .jb_modem { color: purple; }
+        .default { color: black; }
+        .floating-table { 
+            position: fixed; 
+            top: 10px; 
+            right: 10px; 
+            border: 1px solid #ccc; 
+            background: #fff; 
+            padding: 10px; 
+            width: 300px;
+            height: 200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            resize: both;
+            overflow: auto;
+        }
+        .floating-table table { width: 100%; }
+        .floating-table th, .floating-table td { border: none; }
+        .delete-row { color: red; cursor: pointer; }
+       .resize-handle-bottom-left {
+              position: absolute;
+            width: 10px;
+            height: 10px;
+            bottom: 0;
+            left: 0;
+            cursor: sw-resize;
+            background: #ddd;
+        }
+        
+        #pasteArea {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        #pasteArea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+    </style>
+</head>
+<body>
+<div id="queryFilter" style="margin: 20px;">
+    <h4>Filter Logs</h4>
+    <textarea id="queryInput" rows="3" placeholder='Type == default OR Type == jb_modem where Log Entry contains main' style="width: 100%;"></textarea>
+    <button onclick="applyQueryFilter()" style="margin-top: 10px;">Filter Logs</button>
+    <button onclick="resetLogs()" style="margin-left: 10px;">Reset Logs</button>
+</div>
+
+<!-- Add the search bar here -->
+<input type="text" id="searchInput" class="search-bar" placeholder="Search logs..." oninput="filterLogs()">
+<h1>Log Analysis</h1>
+<table id="logTable">
+    <tr>
+        <th>Time Diff (Any)</th>
+        <th>Time Diff (Same Type)</th>
+        <th>Type</th>
+        <th>Log Entry</th>
+    </tr>
+</table>
+<div id="summary">
+    <p>Total Logs: <span id="totalLogs"></span></p>
+    <p>Average Time Diff: <span id="averageTimeDiff"></span> ms</p>
+    <p>Most Frequent Type: <span id="mostFrequentType"></span></p>
+</div>
+
+<div class="floating-table" id="floatingTable" style="display: none;">
+    <h3>Selected Logs</h3>
+    <button onclick="clearFloatingTable()">Clear All</button>
+    <button onclick="exportFloatingTableLogs()">Export Logs</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Time Diff (Any)</th>
+                <th>Type</th>
+                <th>Log Entry</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="floatingTableBody"></tbody>
+    </table>
+    <p><b>Total Time:</b> <span id="totalTime">0 ms</span></p>
+    <div id="dragHandle"></div>
+    <div class="resize-handle-bottom-left"></div>
+    <div class="resize-handle"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
