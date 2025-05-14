@@ -1,5 +1,3 @@
-# JetBeep Toolkit
-
 A collection of tools for the JetBeep ecosystem.
 
 | Tool | Description |
