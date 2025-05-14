@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleet Asset Updater</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    .container {
+      max-width: 900px;
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+    .card {
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .log-container {
+      max-height: 300px;
+      overflow-y: auto;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 15px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .log-container .error {
+      color: #dc3545;
+    }
+    .log-container .success {
+      color: #198754;
+    }
+    .log-container .info {
+      color: #0d6efd;
+    }
+    .hidden {
+      display: none;
+    }
+    #jsonEditor {
+      font-family: monospace;
+      min-height: 150px;
+    }
+    .json-error {
+      border-color: #dc3545;
+    }
+    .form-text.text-danger {
+      display: none;
+    }
+    .json-error + .form-text.text-danger {
+      display: block;
+    }
+    .curl-command {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .curl-container {
+      position: relative;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .copy-curl-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .copy-curl-btn:hover {
+      background: #0069d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-4 text-center">Fleet Asset Updater</h1>
+    
+    <!-- Config Import/Export -->
+    <div class="card mb-4">
+      <div class="card-header">
+        Configuration
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <button id="exportConfig" class="btn btn-outline-primary w-100">Export Configuration</button>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <input type="file" class="form-control" id="importConfig" accept=".json">
+              <button class="btn btn-outline-secondary" type="button" id="importConfigBtn">Import</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Form -->
+    <form id="assetUpdateForm">
+      <!-- API Configuration -->
+      <div class="card">
+        <div class="card-header">
+          API Configuration
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="baseUrl" class="form-label">Base URL</label>
+              <input type="url" class="form-control" id="baseUrl" required placeholder="https://api.example.com">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="apiKey" class="form-label">API Key</label>
+              <input type="password" class="form-control" id="apiKey" required placeholder="Your API key">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controller IDs -->
+      <div class="card">
+        <div class="card-header">
+          Controllers
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="controllerIds" class="form-label">Controller IDs (comma-separated)</label>
+            <textarea class="form-control" id="controllerIds" rows="2" required placeholder="2, 8846, 1024"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Device Settings JSON -->
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Device Settings (JSON)</span>
+          <div>
+            <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="formatJsonBtn">Format JSON</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="loadExampleBtn">Load Example</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="jsonEditor" class="form-label">Device Settings JSON</label>
+            <textarea 
+              class="form-control" 
+              id="jsonEditor" 
+              rows="8" 
+              required 
+              placeholder='{"aspScripts_rebootOnAspCrash": false, "aspScripts_useTcpBridge": true, "fileSetIds": {"images": 388, "scripts": 389}}'
+            ></textarea>
+            <div class="form-text text-danger">Invalid JSON format. Please check your input.</div>
+            <div class="form-text">Enter a JSON object with the settings you want to update.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Firmware Version -->
+      <div class="card">
+        <div class="card-header">
+          Firmware Version
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="mainFirmwareVersion" class="form-label">Main Firmware Version</label>
+              <input type="text" class="form-control" id="mainFirmwareVersion" placeholder="e.g., 1.1.5">
+              <div class="form-text">Optional: Specify firmware version for update. If left blank, no firmware update will be performed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Firmware Update -->
+      <div class="card">
+        <div class="card-header">
+          Update Options
+        </div>
+        <div class="card-body">
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="enableFirmwareUpdate">
+            <label class="form-check-label" for="enableFirmwareUpdate">Schedule update after device settings update</label>
+          </div>
+          <div id="firmwareOptions" class="hidden">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="updateType" class="form-label">Update Type</label>
+                <select class="form-select" id="updateType">
+                  <option value="sleep">Sleep (during inactive hours)</option>
+                  <option value="urgent">Urgent (immediate)</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="customField1" class="form-label">Custom Field</label>
+                <input type="text" class="form-control" id="customField1" placeholder="Optional tracking identifier">
+                <div class="form-text">Custom identifier for tracking purposes</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label for="comment" class="form-label">Comment</label>
+                <input type="text" class="form-control" id="comment" placeholder="Publisher Update" value="Publisher Update">
+                <div class="form-text">Description of this update</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+        <button type="button" class="btn btn-secondary me-md-2" id="resetFormBtn">Reset</button>
+        <button type="submit" class="btn btn-primary" id="updateFilesetsBtn">Update Device Settings</button>
+        <button type="button" class="btn btn-success" id="scheduleUpdateBtn" disabled>Schedule Update</button>
+      </div>
+    </form>
+
+    <!-- Progress and Logs -->
+    <div class="card mt-4 hidden" id="progressCard">
+      <div class="card-header">
+        Progress
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span id="progressText">0%</span>
+            <span id="progressStatus">Initializing...</span>
+          </div>
+          <div class="progress">
+            <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="log-container" id="logContainer">
+          <!-- Logs will appear here -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Load Axios for HTTP requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <!-- Load the business logic script -->
+  <script src="asset-updater.js"></script>
+</body>
+</html> 

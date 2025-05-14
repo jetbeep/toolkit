@@ -1,0 +1,18 @@
+{
+  "aspScripts_rebootOnAspCrash": false,
+  "aspScripts_useTcpBridge": true,
+  "displaySettings_brightness": 80,
+  "displaySettings_sleepTimeout": 300,
+  "fileSetIds": {
+    "images": 388,
+    "scripts": 389,
+    "service_menu": 390
+  },
+  "firmwareUpdate": {
+    "enabled": true,
+    "version": "1.2.3+0",
+    "type": "sleep",
+    "customField1": "tracking123",
+    "comment": "Publisher Update"
+  }
+} 
