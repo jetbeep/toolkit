@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Renamer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockhash-core@1.0.1/dist/blockhash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .drop-zone {
+            border: 3px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+        }
+        .file-list {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .file-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .progress {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        .mapping-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .mapping-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        .mapping-table th, .mapping-table td {
+            border: 1px solid #ddd;
+            padding: 25px;
+            text-align: center;
+            vertical-align: top;
+        }
+        .mapping-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .mapping-table td {
+            width: 50%;
+        }
+        .thumb {
+            max-width: 800px;
+            max-height: 800px;
+            border-radius: 10px;
+            border: 4px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .thumb:hover {
+            transform: scale(1.02);
+            border-color: #007bff;
+            z-index: 10;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+        .warning {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        #log {
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .stat-item {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        .hidden {
+            display: none;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖼️ Image Renamer</h1>
+    <p>Privacy-safe, browser-based tool for mapping and renaming images between archives and reference images.</p>
+
+    <div class="box">
+        <h2>1. Upload Archives (ZIP files)</h2>
+        <p>Upload up to 6 ZIP archives containing images you want to rename:</p>
+        <div class="drop-zone" id="archiveDropZone">
+            <p>📁 Drag & Drop ZIP archives here or click to select</p>
+            <input type="file" id="archiveInput" multiple accept=".zip" style="display: none;">
+        </div>
+        <div id="archiveList" class="file-list hidden"></div>
+    </div>
+
+    <div class="box">
+        <h2>2. Upload Reference Images</h2>
+        <p>Upload original/reference images (individual files or ZIP archive):</p>
+        <div class="drop-zone" id="originalsDropZone">
+            <p>🖼️ Drag & Drop images or ZIP archive here or click to select</p>
+            <input type="file" id="originalsInput" multiple accept=".jpg,.jpeg,.png,.zip">
+        </div>
+        <div id="originalsList" class="file-list hidden"></div>
+    </div>
+
+    <div class="controls">
+        <button id="startBtn" onclick="startMapping()" disabled>🚀 Start Mapping</button>
+        <button onclick="clearAll()">🗑️ Clear All</button>
+        <button onclick="clearLog()">📝 Clear Log</button>
+    </div>
+
+    <div id="progressSection" class="box hidden">
+        <h3>Progress</h3>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressText">Ready to start...</p>
+    </div>
+
+    <div id="statsSection" class="box hidden">
+        <h3>Statistics</h3>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="archiveCount">0</div>
+                <div>Archives</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="archiveImageCount">0</div>
+                <div>Archive Images</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="originalCount">0</div>
+                <div>Reference Images</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="matchCount">0</div>
+                <div>Matches Found</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="preview" class="box hidden"></div>
+
+    <div id="downloads" class="box hidden">
+        <h3>Download Results</h3>
+        <button onclick="downloadCSV()">📊 Download Mapping CSV</button>
+        <button onclick="downloadAllZips()">📦 Download Renamed Archives</button>
+    </div>
+
+    <div id="logpanel" class="box">
+        <h3>Log</h3>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        // Global variables
+        let archives = [];
+        let originals = [];
+        let mapping = [];
+        let unmatchedOriginals = []; // Originals that user deselected
+        let unmatchedArchiveImages = []; // Archive images not assigned to any original
+        let manualAssignments = {}; // Manual original->archive assignments
+
+        // Fallback simple hash function if blockhash library doesn't load
+        function simpleImageHash(imageData, size = 8) {
+            const data = imageData.data;
+            const width = imageData.width;
+            const height = imageData.height;
+            
+            // Create a smaller version for hashing
+            const stepX = Math.floor(width / size);
+            const stepY = Math.floor(height / size);
+            
+            let hash = '';
+            const brightness = [];
+            
+            // Calculate average brightness for each cell
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    let total = 0;
+                    let count = 0;
+                    
+                    for (let py = y * stepY; py < (y + 1) * stepY && py < height; py++) {
+                        for (let px = x * stepX; px < (x + 1) * stepX && px < width; px++) {
+                            const i = (py * width + px) * 4;
+                            // Calculate luminance
+                            const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                            total += lum;
+                            count++;
+                        }
+                    }
+                    
+                    brightness.push(count > 0 ? total / count : 0);
+                }
+            }
+            
+            // Calculate average brightness
+            const avg = brightness.reduce((a, b) => a + b, 0) / brightness.length;
+            
+            // Create binary hash based on whether each cell is above or below average
+            for (const b of brightness) {
+                hash += b > avg ? '1' : '0';
+            }
+            
+            return hash;
+        }
+
+        // Check which hash function to use
+        function getImageHash(imageData, bits = 16, method = 2) {
+            if (typeof blockhash !== 'undefined') {
+                try {
+                    return blockhash(imageData, bits, method);
+                } catch (error) {
+                    console.warn('blockhash failed, using fallback:', error);
+                    return simpleImageHash(imageData, 8);
+                }
+            } else {
+                console.warn('blockhash library not available, using simple fallback hash');
+                return simpleImageHash(imageData, 8);
+            }
+        }
+
+        // OCR Text extraction function
+        async function extractTextFromImage(imageBlob, filename) {
+            if (typeof Tesseract === 'undefined') {
+                logMessage(`⚠️ Tesseract.js not available, skipping OCR for ${filename}`);
+                return '';
+            }
+
+            try {
+                logMessage(`🔍 Extracting text from: ${filename}`);
+                
+                const { data: { text } } = await Tesseract.recognize(
+                    imageBlob,
+                    'eng',
+                    {
+                        logger: (m) => {
+                            if (m.status === 'recognizing text') {
+                                // Update progress for this specific image
+                                const progress = Math.round(m.progress * 100);
+                                if (progress % 20 === 0) { // Log every 20%
+                                    logMessage(`📝 OCR Progress for ${filename}: ${progress}%`);
+                                }
+                            }
+                        }
+                    }
+                );
+                
+                const cleanText = text.trim().replace(/\s+/g, ' ').toLowerCase();
+                logMessage(`✅ OCR completed for ${filename}: ${cleanText.length} characters extracted`);
+                return cleanText;
+            } catch (error) {
+                logMessage(`❌ OCR failed for ${filename}: ${error.message}`);
+                return '';
+            }
+        }
+
+        // Text similarity calculation using multiple methods
+        function calculateTextSimilarity(text1, text2) {
+            if (!text1 || !text2) return 0;
+            
+            // Normalize texts
+            const t1 = text1.toLowerCase().trim();
+            const t2 = text2.toLowerCase().trim();
+            
+            if (t1 === t2) return 1.0;
+            if (t1.length === 0 || t2.length === 0) return 0;
+            
+            // Method 1: Jaccard similarity (word-based)
+            const words1 = new Set(t1.split(/\s+/));
+            const words2 = new Set(t2.split(/\s+/));
+            const intersection = new Set([...words1].filter(x => words2.has(x)));
+            const union = new Set([...words1, ...words2]);
+            const jaccardSimilarity = intersection.size / union.size;
+            
+            // Method 2: Character n-gram similarity
+            function getNgrams(text, n = 3) {
+                const ngrams = new Set();
+                for (let i = 0; i <= text.length - n; i++) {
+                    ngrams.add(text.substr(i, n));
+                }
+                return ngrams;
+            }
+            
+            const ngrams1 = getNgrams(t1, 3);
+            const ngrams2 = getNgrams(t2, 3);
+            const ngramIntersection = new Set([...ngrams1].filter(x => ngrams2.has(x)));
+            const ngramUnion = new Set([...ngrams1, ...ngrams2]);
+            const ngramSimilarity = ngramUnion.size > 0 ? ngramIntersection.size / ngramUnion.size : 0;
+            
+            // Method 3: Longest common subsequence ratio
+            function lcsLength(a, b) {
+                const dp = Array(a.length + 1).fill().map(() => Array(b.length + 1).fill(0));
+                for (let i = 1; i <= a.length; i++) {
+                    for (let j = 1; j <= b.length; j++) {
+                        if (a[i-1] === b[j-1]) {
+                            dp[i][j] = dp[i-1][j-1] + 1;
+                        } else {
+                            dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                        }
+                    }
+                }
+                return dp[a.length][b.length];
+            }
+            
+            const lcs = lcsLength(t1, t2);
+            const lcsRatio = (2 * lcs) / (t1.length + t2.length);
+            
+            // Combine all methods with weights
+            const combinedSimilarity = (
+                jaccardSimilarity * 0.4 +      // Word overlap
+                ngramSimilarity * 0.4 +        // Character pattern
+                lcsRatio * 0.2                 // Sequence similarity
+            );
+            
+            return Math.min(1.0, combinedSimilarity);
+        }
+
+        // Enhanced distance calculation combining visual and text similarity
+        function calculateCombinedDistance(originalHash, originalText, originalFilename, candidateHash, candidateText, candidateFilename) {
+            // Visual distance (0-64, lower is better)
+            const visualDistance = hammingDistance(originalHash, candidateHash);
+            
+            // Text similarity (0-1, higher is better)
+            const textSimilarity = calculateTextSimilarity(originalText, candidateText);
+            
+            // Filename similarity (0-1, higher is better)
+            const filenameBoost = filenameSimilarity(originalFilename, candidateFilename);
+            
+            // Normalize visual distance to 0-1 scale (64 max hamming distance)
+            const normalizedVisualDistance = Math.min(visualDistance / 64, 1.0);
+            
+            // Combine distances with weights
+            // Visual: 50%, Text: 40%, Filename: 10%
+            const combinedSimilarity = (
+                (1 - normalizedVisualDistance) * 0.5 +  // Visual similarity
+                textSimilarity * 0.4 +                  // Text similarity  
+                filenameBoost * 0.1                     // Filename similarity
+            );
+            
+            // Convert back to distance (lower is better)
+            const combinedDistance = (1 - combinedSimilarity) * 100;
+            
+            return {
+                combinedDistance: Math.round(combinedDistance * 100) / 100,
+                visualDistance: visualDistance,
+                textSimilarity: Math.round(textSimilarity * 100) / 100,
+                filenameSimilarity: Math.round(filenameBoost * 100) / 100
+            };
+        }
+
+        // Utility functions
+        function logMessage(msg) {
+            const logDiv = document.getElementById("log");
+            const now = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${now}] ${msg}<br>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById("log").innerHTML = '';
+        }
+
+        function showProgress(text, percentage = null) {
+            const progressSection = document.getElementById("progressSection");
+            const progressText = document.getElementById("progressText");
+            const progressBar = document.getElementById("progressBar");
+            
+            progressSection.classList.remove("hidden");
+            progressText.textContent = text;
+            
+            if (percentage !== null) {
+                progressBar.style.width = `${percentage}%`;
+            }
+        }
+
+        function updateStats() {
+            document.getElementById("archiveCount").textContent = archives.length;
+            document.getElementById("archiveImageCount").textContent = archives.reduce((sum, arc) => sum + arc.images.length, 0);
+            document.getElementById("originalCount").textContent = originals.length;
+            document.getElementById("matchCount").textContent = mapping.filter(m => m.candidates && m.candidates.length > 0).length;
+            document.getElementById("statsSection").classList.remove("hidden");
+        }
+
+        function updateStartButton() {
+            const startBtn = document.getElementById("startBtn");
+            startBtn.disabled = archives.length === 0 || originals.length === 0;
+        }
+
+        // File handling functions
+        async function createImageObject(name, blob, enableOCR = true) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const url = URL.createObjectURL(blob);
+                
+                img.onload = async () => {
+                    try {
+                        // Create canvas for thumbnail and hashing
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        // Create larger thumbnail for better visibility
+                        const thumbSize = 400;
+                        canvas.width = thumbSize;
+                        canvas.height = thumbSize;
+                        
+                        const scale = Math.min(thumbSize / img.width, thumbSize / img.height);
+                        const newWidth = img.width * scale;
+                        const newHeight = img.height * scale;
+                        const x = (thumbSize - newWidth) / 2;
+                        const y = (thumbSize - newHeight) / 2;
+                        
+                        ctx.fillStyle = '#f0f0f0';
+                        ctx.fillRect(0, 0, thumbSize, thumbSize);
+                        ctx.drawImage(img, x, y, newWidth, newHeight);
+                        
+                        const thumbURL = canvas.toDataURL('image/jpeg', 0.8);
+                        
+                        // Create hash canvas (smaller for performance)
+                        canvas.width = 256;
+                        canvas.height = 256;
+                        ctx.drawImage(img, 0, 0, 256, 256);
+                        
+                        const imageData = ctx.getImageData(0, 0, 256, 256);
+                        const hash = getImageHash(imageData, 16, 2);
+                        
+                        // Extract text using OCR if enabled
+                        let extractedText = '';
+                        if (enableOCR) {
+                            try {
+                                extractedText = await extractTextFromImage(blob, name);
+                            } catch (error) {
+                                logMessage(`⚠️ OCR extraction failed for ${name}: ${error.message}`);
+                                extractedText = '';
+                            }
+                        }
+                        
+                        URL.revokeObjectURL(url);
+                        
+                        resolve({
+                            name: name,
+                            blob: blob,
+                            thumbURL: thumbURL,
+                            hash: hash,
+                            text: extractedText
+                        });
+                    } catch (error) {
+                        URL.revokeObjectURL(url);
+                        reject(error);
+                    }
+                };
+                
+                img.onerror = () => {
+                    URL.revokeObjectURL(url);
+                    reject(new Error(`Failed to load image: ${name}`));
+                };
+                
+                img.src = url;
+            });
+        }
+
+        async function processArchive(file) {
+            logMessage(`Processing archive: ${file.name}`);
+            
+            try {
+                const zip = await JSZip.loadAsync(file);
+                const images = [];
+                
+                // First, log all files in the archive for debugging
+                const allFiles = Object.keys(zip.files);
+                logMessage(`📁 Archive contains ${allFiles.length} total files:`);
+                
+                const imageFiles = [];
+                const otherFiles = [];
+                
+                for (const filename of allFiles) {
+                    const zipEntry = zip.files[filename];
+                    if (zipEntry.dir) {
+                        logMessage(`📂 Directory: ${filename}`);
+                    } else {
+                        // More comprehensive image format support
+                        if (/\.(jpe?g|png|gif|bmp|webp|tiff?)$/i.test(filename)) {
+                            imageFiles.push(filename);
+                            logMessage(`🖼️ Found image: ${filename}`);
+                        } else {
+                            otherFiles.push(filename);
+                            logMessage(`📄 Other file: ${filename}`);
+                        }
+                    }
+                }
+                
+                logMessage(`📊 Summary: ${imageFiles.length} image files, ${otherFiles.length} other files`);
+                
+                if (imageFiles.length === 0) {
+                    logMessage(`⚠️ No image files found in archive. Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP, TIFF`);
+                    throw new Error(`No valid images found in archive. Found ${allFiles.length} files but none were images.`);
+                }
+                
+                // Process each image file
+                for (const filename of imageFiles) {
+                    const zipEntry = zip.files[filename];
+                    try {
+                        logMessage(`🔄 Processing image: ${filename}`);
+                        const blob = await zipEntry.async('blob');
+                        
+                        // Validate that the blob has content
+                        if (blob.size === 0) {
+                            logMessage(`⚠️ Image ${filename} is empty (0 bytes), skipping`);
+                            continue;
+                        }
+                        
+                        const imageObj = await createImageObject(filename, blob);
+                        images.push(imageObj);
+                        logMessage(`✓ Successfully processed image: ${filename} (${blob.size} bytes)`);
+                    } catch (error) {
+                        logMessage(`⚠ Failed to process image ${filename}: ${error.message}`);
+                        console.error(`Image processing error for ${filename}:`, error);
+                    }
+                }
+                
+                if (images.length === 0) {
+                    throw new Error(`Archive contained ${imageFiles.length} image files, but none could be processed successfully.`);
+                }
+                
+                logMessage(`✅ Successfully processed ${images.length} out of ${imageFiles.length} image files`);
+                
+                return {
+                    archiveName: file.name,
+                    zip: zip,
+                    images: images
+                };
+            } catch (error) {
+                logMessage(`❌ Failed to process archive ${file.name}: ${error.message}`);
+                throw error;
+            }
+        }
+
+        async function processOriginals(files) {
+            const processedOriginals = [];
+            
+            for (const file of files) {
+                try {
+                    if (file.name.toLowerCase().endsWith('.zip')) {
+                        logMessage(`Processing originals ZIP: ${file.name}`);
+                        const zip = await JSZip.loadAsync(file);
+                        
+                        for (const [filename, zipEntry] of Object.entries(zip.files)) {
+                            if (!zipEntry.dir && /\.(jpe?g|png)$/i.test(filename)) {
+                                try {
+                                    const blob = await zipEntry.async('blob');
+                                    const imageObj = await createImageObject(filename, blob);
+                                    processedOriginals.push(imageObj);
+                                    logMessage(`✓ Processed original: ${filename}`);
+                                } catch (error) {
+                                    logMessage(`⚠ Failed to process original ${filename}: ${error.message}`);
+                                }
+                            }
+                        }
+                    } else if (/\.(jpe?g|png)$/i.test(file.name)) {
+                        const imageObj = await createImageObject(file.name, file);
+                        processedOriginals.push(imageObj);
+                        logMessage(`✓ Processed original: ${file.name}`);
+                    }
+                } catch (error) {
+                    logMessage(`❌ Failed to process original file ${file.name}: ${error.message}`);
+                }
+            }
+            
+            return processedOriginals;
+        }
+
+        // Hash comparison function
+        function hammingDistance(hash1, hash2) {
+            if (hash1.length !== hash2.length) return Infinity;
+            
+            let distance = 0;
+            for (let i = 0; i < hash1.length; i++) {
+                if (hash1[i] !== hash2[i]) distance++;
+            }
+            return distance;
+        }
+
+        // Filename similarity (optional boost)
+        function filenameSimilarity(name1, name2) {
+            const base1 = name1.replace(/\.[^/.]+$/, '').toLowerCase();
+            const base2 = name2.replace(/\.[^/.]+$/, '').toLowerCase();
+            
+            if (base1.includes(base2) || base2.includes(base1)) return 0.8;
+            
+            // Simple edit distance approximation
+            const maxLen = Math.max(base1.length, base2.length);
+            const minLen = Math.min(base1.length, base2.length);
+            return minLen / maxLen;
+        }
+
+        // Mapping function
+        async function createMapping() {
+            logMessage("Creating enhanced mapping with visual and text analysis...");
+            mapping = [];
+            
+            for (let i = 0; i < originals.length; i++) {
+                const original = originals[i];
+                showProgress(`Analyzing image ${i + 1}/${originals.length}: ${original.name}`, 
+                           ((i / originals.length) * 100));
+                
+                const candidates = [];
+                
+                // Compare with all archive images
+                for (const archive of archives) {
+                    for (const archiveImage of archive.images) {
+                        // Calculate combined distance using visual, text, and filename similarity
+                        const distanceMetrics = calculateCombinedDistance(
+                            original.hash, 
+                            original.text, 
+                            original.name,
+                            archiveImage.hash, 
+                            archiveImage.text, 
+                            archiveImage.name
+                        );
+                        
+                        candidates.push({
+                            img: archiveImage,
+                            arc: archive,
+                            dist: distanceMetrics.combinedDistance,
+                            visualDist: distanceMetrics.visualDistance,
+                            textSimilarity: distanceMetrics.textSimilarity,
+                            filenameBoost: distanceMetrics.filenameSimilarity
+                        });
+                    }
+                }
+                
+                // Sort by combined distance (best matches first)
+                candidates.sort((a, b) => a.dist - b.dist);
+                
+                mapping.push({
+                    orig: original,
+                    candidates: candidates,
+                    matchedIdx: candidates.length > 0 ? 0 : undefined
+                });
+                
+                if (candidates.length > 0) {
+                    const best = candidates[0];
+                    logMessage(`✅ Best match for "${original.name}": "${best.img.name}" (Combined: ${best.dist}, Visual: ${best.visualDist}, Text: ${best.textSimilarity}, Filename: ${best.filenameBoost})`);
+                } else {
+                    logMessage(`⚠️ No matches found for ${original.name}`);
+                }
+            }
+            
+            showProgress("Enhanced mapping complete!", 100);
+            window._mapping = mapping; // Store globally for access from HTML
+            return mapping;
+        }
+
+        // Preview function
+        function showPreview(mapping) {
+            let html = `<h3>🖼️ Image Comparison Preview</h3>
+            <div style="margin-bottom: 25px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><strong>Instructions:</strong> Compare original images with their best matches. Use the dropdown to select different matches if needed.</p>
+                <p style="margin: 0; font-size: 14px;">
+                    <b>Match Quality:</b> 
+                    <span style="background:#e6ffe6; padding:6px 12px; border-radius:6px; margin:4px; display:inline-block;">🟢 Confident (distance ≤ 5)</span> 
+                    <span style="background:#fffbe6; padding:6px 12px; border-radius:6px; margin:4px; display:inline-block;">🟡 Uncertain (distance 6-15)</span> 
+                    <span style="background:#ffe6e6; padding:6px 12px; border-radius:6px; margin:4px; display:inline-block;">🔴 Poor (distance ≥ 16)</span>
+                </p>
+                <p style="margin: 10px 0 0 0; font-size: 13px; color: #666;"><i>💡 Tip: Hover over images to slightly enlarge them, click to view full size</i></p>
+            </div>
+            <div class="mapping-table">`;
+            
+            mapping.forEach((m, i) => {
+                // Start a new table for each comparison pair
+                html += `<table style="margin-bottom: 30px; width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th style="width: 50%; font-size: 18px; padding: 15px;">📄 Original Image</th>
+                        <th style="width: 50%; font-size: 18px; padding: 15px;">🎯 Best Match</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 30px;">`;
+                
+                // Original image section
+                html += `<div style="text-align: center;">
+                    <img src="${m.orig.thumbURL}" class="thumb" onclick="openImageModal('${m.orig.thumbURL}', 'Original: ${m.orig.name}')" title="Click to view full size">
+                    <div style="margin-top: 15px; padding: 10px; background: #f1f3f4; border-radius: 6px;">
+                        <div style="font-weight: bold; font-size: 14px; color: #333; margin-bottom: 5px;">${m.orig.name}</div>
+                        <div style="font-size: 12px; color: #666;">📁 Reference Image</div>
+                    </div>
+                </div>`;
+                
+                html += `</td><td style="padding: 30px;">`;
+                
+                // Check if candidates exist and matchedIdx is valid
+                if (!m.candidates || m.candidates.length === 0 || m.matchedIdx === undefined || m.matchedIdx >= m.candidates.length || m.isDeselected) {
+                    // Show deselected or no matches state
+                    const isDeselected = m.isDeselected;
+                    html += `<div style="text-align: center; padding: 40px; color: ${isDeselected ? '#ff9800' : '#dc3545'};">
+                        <div style="font-size: 48px; margin-bottom: 15px;">${isDeselected ? '📤' : '❌'}</div>
+                        <div style="font-size: 18px; font-weight: bold;">${isDeselected ? 'Deselected for manual assignment' : 'No matches found'}</div>
+                        <div style="font-size: 14px; color: #666; margin-top: 10px;">${isDeselected ? 'Use manual assignment section below' : 'No similar images found in archives'}</div>
+                        ${isDeselected ? `<button onclick="reselectOriginal(${i})" style="margin-top: 15px; padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Re-enable Auto Match</button>` : ''}
+                    </div>`;
+                    html += `</td></tr></table>`;
+                    return;
+                }
+                
+                // Show enhanced dropdown for match selection including unmatched options
+                const topN = m.candidates.slice(0, 5);
+                html += `<div style="margin-bottom: 20px;">
+                    <select data-idx="${i}" onchange="overrideMatch(this)" style="width: 100%; padding: 12px; font-size: 14px; border-radius: 6px; border: 2px solid #ddd; background: white;">`;
+                
+                // Add top candidates
+                topN.forEach((cand, j) => {
+                    const isSelected = (j === m.matchedIdx) ? "selected" : "";
+                    const truncatedName = cand.img.name.length > 50 ? cand.img.name.substring(0, 50) + "..." : cand.img.name;
+                    html += `<option value="${j}" ${isSelected}>Match ${j + 1}: ${truncatedName} (distance: ${cand.dist})</option>`;
+                });
+                
+                // Add separator and unmatched options
+                if (unmatchedArchiveImages.length > 0) {
+                    html += `<option disabled>── Manual Assignment Options ──</option>`;
+                    unmatchedArchiveImages.forEach((unmatched, idx) => {
+                        const truncatedName = unmatched.img.name.length > 50 ? unmatched.img.name.substring(0, 50) + "..." : unmatched.img.name;
+                        html += `<option value="manual_${idx}">📌 ${truncatedName} (${unmatched.arc.archiveName})</option>`;
+                    });
+                }
+                
+                html += `</select></div>`;
+                
+                // Add deselect button
+                html += `<div style="margin-bottom: 15px;">
+                    <button onclick="deselectOriginal(${i})" style="width: 100%; padding: 10px; background: #dc3545; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;">
+                        📤 Deselect for Manual Assignment
+                    </button>
+                </div>`;
+                
+                // Show selected match image
+                const sel = (topN && m.matchedIdx < topN.length) ? topN[m.matchedIdx] : undefined;
+                
+                if (sel) {
+                    // Determine match quality and colors
+                    let qualityText, qualityIcon, bgColor, borderColor;
+                    if (sel.dist <= 5) {
+                        qualityText = "Confident Match";
+                        qualityIcon = "🟢";
+                        bgColor = "#e6ffe6";
+                        borderColor = "#4caf50";
+                    } else if (sel.dist <= 15) {
+                        qualityText = "Uncertain Match";
+                        qualityIcon = "🟡";
+                        bgColor = "#fffbe6";
+                        borderColor = "#ff9800";
+                    } else {
+                        qualityText = "Poor Match";
+                        qualityIcon = "🔴";
+                        bgColor = "#ffe6e6";
+                        borderColor = "#f44336";
+                    }
+                    
+                    html += `<div style="text-align: center;">
+                        <img src="${sel.img.thumbURL}" class="thumb" onclick="openImageModal('${sel.img.thumbURL}', 'Match: ${sel.img.name}')" 
+                             style="background: ${bgColor}; padding: 8px; border-color: ${borderColor};" title="Click to view full size">
+                        <div style="margin-top: 15px; padding: 12px; background: ${bgColor}; border-radius: 6px; border: 1px solid ${borderColor};">
+                            <div style="font-weight: bold; font-size: 14px; color: #333; margin-bottom: 8px; word-break: break-word;">${sel.img.name}</div>
+                            <div style="font-size: 13px; color: #555; margin-bottom: 6px;">
+                                ${qualityIcon} <strong>${qualityText}</strong>
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-bottom: 4px;">
+                                📊 <strong>Combined Score:</strong> ${sel.dist}/100
+                            </div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 4px;">
+                                👁️ Visual: ${sel.visualDist} | 📝 Text: ${sel.textSimilarity || 0} | 📄 Filename: ${sel.filenameBoost || 0}
+                            </div>
+                            <div style="font-size: 12px; color: #666;">
+                                📦 Archive: ${sel.arc.archiveName}
+                            </div>
+                        </div>
+                    </div>`;
+                } else {
+                    html += `<div style="text-align: center; padding: 40px; color: #dc3545;">
+                        <div style="font-size: 32px; margin-bottom: 10px;">⚠️</div>
+                        <div style="font-weight: bold;">No valid selection</div>
+                    </div>`;
+                }
+                
+                html += `</td></tr></table>`;
+            });
+            
+            html += `</div>`;
+            
+            // Add manual assignment section
+            if (unmatchedOriginals.length > 0 || Object.keys(manualAssignments).length > 0) {
+                html += `<div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px; border: 2px solid #dee2e6;">
+                    <h3 style="margin-top: 0; color: #495057;">🔧 Manual Assignment Center</h3>
+                    <p style="color: #6c757d; margin-bottom: 20px;">Manually assign deselected originals to unmatched archive images</p>`;
+                
+                // Show manual assignments
+                if (Object.keys(manualAssignments).length > 0) {
+                    html += `<div style="margin-bottom: 25px;">
+                        <h4 style="color: #28a745; margin-bottom: 15px;">✅ Manual Assignments (${Object.keys(manualAssignments).length})</h4>`;
+                    
+                    Object.entries(manualAssignments).forEach(([originalName, assignment]) => {
+                        html += `<div style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; background: #d4edda; border-radius: 6px; border: 1px solid #c3e6cb;">
+                            <div style="flex: 1;">
+                                <strong>${originalName}</strong> ➜ <em>${assignment.img.name}</em>
+                                <small style="color: #666; display: block;">from ${assignment.arc.archiveName}</small>
+                            </div>
+                            <button onclick="removeManualAssignment('${originalName}')" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Remove</button>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                }
+                
+                // Show unmatched originals for assignment
+                if (unmatchedOriginals.length > 0) {
+                    html += `<div>
+                        <h4 style="color: #dc3545; margin-bottom: 15px;">📤 Unmatched Originals (${unmatchedOriginals.length})</h4>
+                        <p style="color: #666; margin-bottom: 15px; font-size: 14px;">Drag and drop or use dropdowns to assign these originals to archive images</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 15px;">`;
+                    
+                    unmatchedOriginals.forEach(original => {
+                        html += `<div style="padding: 15px; background: white; border-radius: 8px; border: 2px solid #ffc107;">
+                            <img src="${original.thumbURL}" style="max-width: 250px; max-height: 250px; border-radius: 4px; display: block; margin: 0 auto 10px; cursor: pointer;" onclick="openImageModal('${original.thumbURL}', 'Original: ${original.name}')">
+                            <div style="text-align: center; font-weight: bold; margin-bottom: 10px; font-size: 14px;">${original.name}</div>
+                            <select onchange="showAssignmentPreview(this, '${original.name}')" id="dropdown_${original.name.replace(/[^a-zA-Z0-9]/g, '_')}" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 10px;">
+                                <option value="">Select archive image to assign...</option>`;
+                        
+                        // Add all available archive images (unmatched)
+                        if (unmatchedArchiveImages.length > 0) {
+                            html += `<optgroup label="Unmatched Archive Images">`;
+                            unmatchedArchiveImages.forEach(unmatched => {
+                                const truncatedName = unmatched.img.name.length > 35 ? unmatched.img.name.substring(0, 35) + "..." : unmatched.img.name;
+                                html += `<option value="${unmatched.key}">📁 ${truncatedName} (${unmatched.arc.archiveName})</option>`;
+                            });
+                            html += `</optgroup>`;
+                        }
+                        
+                        // Add option to reassign from other manual assignments
+                        const otherManualAssignments = Object.entries(manualAssignments).filter(([name, _]) => name !== original.name);
+                        if (otherManualAssignments.length > 0) {
+                            html += `<optgroup label="Steal from Other Manual Assignments">`;
+                            otherManualAssignments.forEach(([otherOriginalName, assignment]) => {
+                                const truncatedName = assignment.img.name.length > 30 ? assignment.img.name.substring(0, 30) + "..." : assignment.img.name;
+                                html += `<option value="steal_${otherOriginalName}">🔄 ${truncatedName} (from ${otherOriginalName})</option>`;
+                            });
+                            html += `</optgroup>`;
+                        }
+                        
+                        html += `</select>
+                            
+                            <!-- Preview area for selected archive image -->
+                            <div id="preview_${original.name.replace(/[^a-zA-Z0-9]/g, '_')}" style="display: none; margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 2px solid #007bff;">
+                                <div style="text-align: center; margin-bottom: 8px; font-weight: bold; color: #007bff;">Preview of Selected Archive Image:</div>
+                                <img id="preview_img_${original.name.replace(/[^a-zA-Z0-9]/g, '_')}" style="max-width: 200px; max-height: 200px; border-radius: 4px; display: block; margin: 0 auto 8px; cursor: pointer;">
+                                <div id="preview_name_${original.name.replace(/[^a-zA-Z0-9]/g, '_')}" style="text-align: center; font-size: 12px; margin-bottom: 8px;"></div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button onclick="confirmAssignment('${original.name}')" style="flex: 1; padding: 8px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        ✅ Confirm Assignment
+                                    </button>
+                                    <button onclick="cancelAssignmentPreview('${original.name}')" style="flex: 1; padding: 8px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        ❌ Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <button onclick="reselectForAutomatic('${original.name}')" style="width: 100%; padding: 8px; background: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                🔄 Return to Automatic Matching
+                            </button>
+                        </div>`;
+                    });
+                    
+                    html += `</div>`;
+                    
+                    // Add available archive images section
+                    if (unmatchedArchiveImages.length > 0) {
+                        html += `<div style="margin-top: 25px;">
+                            <h5 style="color: #6c757d; margin-bottom: 15px;">📦 Available Archive Images (${unmatchedArchiveImages.length})</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; max-height: 300px; overflow-y: auto; padding: 10px; background: #f8f9fa; border-radius: 6px;">`;
+                        
+                        unmatchedArchiveImages.forEach(unmatched => {
+                            html += `<div style="padding: 10px; background: white; border-radius: 6px; border: 1px solid #ddd; text-align: center;">
+                                <img src="${unmatched.img.thumbURL}" style="max-width: 120px; max-height: 120px; border-radius: 4px; cursor: pointer;" onclick="openImageModal('${unmatched.img.thumbURL}', 'Archive: ${unmatched.img.name}')">
+                                <div style="font-size: 12px; margin-top: 5px; word-break: break-word;">${unmatched.img.name}</div>
+                                <div style="font-size: 11px; color: #666;">${unmatched.arc.archiveName}</div>
+                            </div>`;
+                        });
+                        
+                        html += `</div></div>`;
+                    }
+                    
+                    html += `</div>`;
+                }
+            }
+            
+            // Add modal for full-size image viewing
+            html += `<div id="imageModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.9);" onclick="closeImageModal()">
+                <div style="position:relative; margin:auto; padding:20px; width:95%; height:95%; display:flex; align-items:center; justify-content:center;">
+                    <img id="modalImage" style="max-width:100%; max-height:100%; border-radius:8px; box-shadow:0 8px 32px rgba(0,0,0,0.8);">
+                    <span style="position:absolute; top:20px; right:40px; color:#fff; font-size:50px; font-weight:bold; cursor:pointer; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);" onclick="closeImageModal()">&times;</span>
+                    <div id="modalCaption" style="position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#fff; font-size:18px; text-align:center; background:rgba(0,0,0,0.8); padding:15px 25px; border-radius:8px; max-width:80%;"></div>
+                </div>
+            </div>`;
+            
+            document.getElementById("preview").innerHTML = html;
+            document.getElementById("preview").classList.remove("hidden");
+            
+            // Update unmatched pools after preview update
+            updateUnmatchedArchiveImages();
+        }
+
+        // Enhanced override match function
+        window.overrideMatch = function(sel) {
+            const mapIdx = Number(sel.getAttribute("data-idx"));
+            const value = sel.value;
+            
+            if (value.startsWith('manual_')) {
+                // Handle manual assignment
+                const unmatchedIdx = parseInt(value.replace('manual_', ''));
+                const original = mapping[mapIdx].orig;
+                const unmatched = unmatchedArchiveImages[unmatchedIdx];
+                
+                if (unmatched) {
+                    manuallyAssign(original.name, unmatched.key);
+                    // Deselect the original from automatic mapping
+                    mapping[mapIdx].matchedIdx = undefined;
+                    mapping[mapIdx].isDeselected = true;
+                }
+            } else {
+                // Handle normal match selection
+                mapping[mapIdx].matchedIdx = Number(value);
+                mapping[mapIdx].isDeselected = false;
+            }
+            
+            showPreview(mapping);
+        }
+
+        // Additional helper functions
+        window.reselectOriginal = function(originalIndex) {
+            mapping[originalIndex].isDeselected = false;
+            unmatchedOriginals = unmatchedOriginals.filter(o => o.name !== mapping[originalIndex].orig.name);
+            
+            logMessage(`🔄 Re-enabled auto matching for: ${mapping[originalIndex].orig.name}`);
+            updateUnmatchedArchiveImages();
+            showPreview(mapping);
+        }
+
+        window.reselectForAutomatic = function(originalName) {
+            // Remove from unmatched originals
+            unmatchedOriginals = unmatchedOriginals.filter(o => o.name !== originalName);
+            
+            // Find the mapping entry and re-enable it
+            const mappingEntry = mapping.find(m => m.orig.name === originalName);
+            if (mappingEntry) {
+                mappingEntry.isDeselected = false;
+                // Reset to best automatic match if available
+                if (mappingEntry.candidates && mappingEntry.candidates.length > 0) {
+                    mappingEntry.matchedIdx = 0;
+                }
+            }
+            
+            logMessage(`🔄 Returned "${originalName}" to automatic matching`);
+            updateUnmatchedArchiveImages();
+            showPreview(mapping);
+        }
+
+        // Download functions
+        window.downloadCSV = function() {
+            logMessage("Preparing simplified mapping CSV for download...");
+            let csv = "old_filename,new_filename,archive_name\n";
+            
+            // Add automatic mappings
+            for (const m of mapping) {
+                if (!m.isDeselected && m.candidates && m.candidates.length > 0 && m.matchedIdx !== undefined && m.matchedIdx < m.candidates.length) {
+                    const sel = m.candidates[m.matchedIdx];
+                    csv += `"${sel.img.name}","${m.orig.name}","${sel.arc.archiveName}"\n`;
+                }
+            }
+            
+            // Add manual assignments
+            Object.entries(manualAssignments).forEach(([originalName, assignment]) => {
+                csv += `"${assignment.img.name}","${originalName}","${assignment.arc.archiveName}"\n`;
+            });
+            
+            const blob = new Blob([csv], {type: "text/csv"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url; 
+            a.download = "file_renaming_map.csv";
+            document.body.appendChild(a); 
+            a.click(); 
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            logMessage(`<span class="success">✔ Simplified mapping CSV downloaded: file_renaming_map.csv</span>`);
+        };
+
+        window.downloadAllZips = async function() {
+            logMessage("Preparing renamed zip files for download...");
+            showProgress("Preparing zips...");
+            
+            let archivePlans = {};
+            
+            // Process automatic mappings
+            for (const m of mapping) {
+                if (!m.isDeselected && m.candidates && m.candidates.length > 0 && m.matchedIdx !== undefined && m.matchedIdx < m.candidates.length) {
+                    const sel = m.candidates[m.matchedIdx];
+                    const archName = sel.arc.archiveName;
+                    if (!archivePlans[archName]) archivePlans[archName] = [];
+                    archivePlans[archName].push({
+                        old: sel.img.name, 
+                        new: m.orig.name, 
+                        blob: sel.img.blob
+                    });
+                }
+            }
+            
+            // Process manual assignments
+            Object.entries(manualAssignments).forEach(([originalName, assignment]) => {
+                const archName = assignment.arc.archiveName;
+                if (!archivePlans[archName]) archivePlans[archName] = [];
+                archivePlans[archName].push({
+                    old: assignment.img.name,
+                    new: originalName,
+                    blob: assignment.img.blob
+                });
+            });
+            
+            for (let i = 0; i < archives.length; i++) {
+                const arc = archives[i];
+                showProgress(`Creating archive ${i + 1}/${archives.length}: ${arc.archiveName}`, 
+                           ((i / archives.length) * 100));
+                
+                const plan = archivePlans[arc.archiveName] || [];
+                const newZip = new JSZip();
+                
+                // Add renamed images
+                for (const img of arc.images) {
+                    let entry = plan.find(x => x.old === img.name);
+                    if (entry) {
+                        newZip.file(entry.new, entry.blob);
+                        logMessage(`✓ Renamed: ${entry.old} → ${entry.new}`);
+                    } else {
+                        newZip.file(img.name, img.blob);
+                        logMessage(`- Kept original: ${img.name}`);
+                    }
+                }
+                
+                // Add non-image files from original archive
+                for (const key in arc.zip.files) {
+                    if (!arc.zip.files[key].dir && !/\.(jpe?g|png|gif|bmp|webp|tiff?)$/i.test(key)) {
+                        const f = arc.zip.files[key];
+                        newZip.file(f.name, await f.async("blob"));
+                    }
+                }
+                
+                const blob = await newZip.generateAsync({type: "blob"});
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = arc.archiveName.replace(/\.zip$/, "-renamed.zip");
+                document.body.appendChild(a); 
+                a.click(); 
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+                
+                logMessage(`<span class="success">✔ Downloaded: ${a.download}</span>`);
+            }
+            
+            logMessage("<span class='success'>✔ All zips prepared and download triggered!</span>");
+            logMessage(`📊 Final summary: ${Object.keys(archivePlans).length} archives processed, ${Object.values(archivePlans).flat().length} images renamed`);
+            showProgress("All done!", 100);
+        };
+
+        // Main mapping function
+        async function startMapping() {
+            try {
+                logMessage("=== Starting image mapping process ===");
+                showProgress("Creating visual hashes and mapping...", 0);
+                
+                const finalMapping = await createMapping();
+                
+                logMessage(`<span class="success">✔ Mapping completed! Found matches for ${finalMapping.filter(m => m.candidates && m.candidates.length > 0).length}/${finalMapping.length} originals</span>`);
+                
+                showPreview(finalMapping);
+                updateStats();
+                
+                document.getElementById("downloads").classList.remove("hidden");
+                
+            } catch (error) {
+                logMessage(`❌ Mapping failed: ${error.message}`);
+                showProgress("Mapping failed", 0);
+            }
+        }
+
+        // Clear all data
+        function clearAll() {
+            archives = [];
+            originals = [];
+            mapping = [];
+            window._mapping = [];
+            
+            document.getElementById("archiveList").innerHTML = '';
+            document.getElementById("archiveList").classList.add("hidden");
+            document.getElementById("originalsList").innerHTML = '';
+            document.getElementById("originalsList").classList.add("hidden");
+            document.getElementById("preview").classList.add("hidden");
+            document.getElementById("downloads").classList.add("hidden");
+            document.getElementById("statsSection").classList.add("hidden");
+            document.getElementById("progressSection").classList.add("hidden");
+            
+            updateStartButton();
+            logMessage("🗑️ All data cleared");
+        }
+
+        // File input handling
+        function setupDropZone(dropZoneId, inputId, isArchive) {
+            const dropZone = document.getElementById(dropZoneId);
+            const input = document.getElementById(inputId);
+            
+            if (!dropZone) {
+                logMessage(`❌ Drop zone element not found: ${dropZoneId}`);
+                return;
+            }
+            if (!input) {
+                logMessage(`❌ Input element not found: ${inputId}`);
+                return;
+            }
+            
+            logMessage(`✅ Setting up drop zone: ${dropZoneId} (isArchive: ${isArchive})`);
+            
+            dropZone.addEventListener('click', () => {
+                logMessage(`🖱️ Drop zone clicked: ${dropZoneId}`);
+                input.click();
+            });
+            
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+                logMessage(`📁 Files dragging over: ${dropZoneId}`);
+            });
+            
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                logMessage(`📁 Files dropped on: ${dropZoneId}`);
+                handleFiles(Array.from(e.dataTransfer.files), isArchive);
+            });
+            
+            input.addEventListener('change', (e) => {
+                logMessage(`📂 Files selected via input: ${inputId}`);
+                handleFiles(Array.from(e.target.files), isArchive);
+            });
+        }
+
+        async function handleFiles(files, isArchive) {
+            logMessage(`📁 handleFiles called with ${files.length} files, isArchive: ${isArchive}`);
+            
+            if (isArchive) {
+                if (archives.length + files.length > 6) {
+                    alert("Maximum 6 archives allowed");
+                    logMessage("❌ Maximum 6 archives allowed, upload rejected");
+                    return;
+                }
+                
+                logMessage(`Processing ${files.length} archive files...`);
+                
+                for (const file of files) {
+                    logMessage(`📄 Checking file: ${file.name} (${file.size} bytes)`);
+                    
+                    if (!file.name.toLowerCase().endsWith('.zip')) {
+                        logMessage(`⚠ Skipping non-ZIP file: ${file.name}`);
+                        continue;
+                    }
+                    
+                    try {
+                        logMessage(`🔄 Starting to process archive: ${file.name}`);
+                        showProgress(`Processing archive: ${file.name}...`);
+                        
+                        // Check if JSZip is available
+                        if (typeof JSZip === 'undefined') {
+                            throw new Error('JSZip library not loaded');
+                        }
+                        
+                        const archive = await processArchive(file);
+                        archives.push(archive);
+                        updateArchiveList();
+                        logMessage(`<span class="success">✔ Archive loaded: ${file.name} (${archive.images.length} images)</span>`);
+                    } catch (error) {
+                        logMessage(`❌ Failed to load archive: ${file.name} - Error: ${error.message}`);
+                        console.error('Archive processing error:', error);
+                    }
+                }
+            } else {
+                logMessage(`Processing ${files.length} reference files...`);
+                
+                try {
+                    showProgress("Processing reference images...");
+                    const newOriginals = await processOriginals(files);
+                    originals.push(...newOriginals);
+                    updateOriginalsList();
+                    logMessage(`<span class="success">✔ Loaded ${newOriginals.length} reference images</span>`);
+                } catch (error) {
+                    logMessage(`❌ Failed to load reference images: ${error.message}`);
+                    console.error('Reference processing error:', error);
+                }
+            }
+            
+            updateStartButton();
+            showProgress("Ready to start mapping", 0);
+            logMessage(`📊 Current state: ${archives.length} archives, ${originals.length} originals`);
+        }
+
+        function updateArchiveList() {
+            const listDiv = document.getElementById("archiveList");
+            if (archives.length === 0) {
+                listDiv.classList.add("hidden");
+                return;
+            }
+            
+            listDiv.classList.remove("hidden");
+            listDiv.innerHTML = '<strong>Loaded Archives:</strong><br>' + 
+                archives.map((arc, i) => 
+                    `<div class="file-item">${i + 1}. ${arc.archiveName} (${arc.images.length} images) 
+                     <button onclick="removeArchive(${i})" style="background:#dc3545; padding:2px 8px; font-size:12px;">Remove</button></div>`
+                ).join('');
+        }
+
+        function updateOriginalsList() {
+            const listDiv = document.getElementById("originalsList");
+            if (originals.length === 0) {
+                listDiv.classList.add("hidden");
+                return;
+            }
+            
+            listDiv.classList.remove("hidden");
+            listDiv.innerHTML = '<strong>Reference Images:</strong><br>' + 
+                `<div class="file-item">${originals.length} images loaded 
+                 <button onclick="clearOriginals()" style="background:#dc3545; padding:2px 8px; font-size:12px;">Clear All</button></div>`;
+        }
+
+        window.removeArchive = function(index) {
+            archives.splice(index, 1);
+            updateArchiveList();
+            updateStartButton();
+            logMessage(`Removed archive at index ${index}`);
+        }
+
+        window.clearOriginals = function() {
+            originals = [];
+            updateOriginalsList();
+            updateStartButton();
+            logMessage("Cleared all reference images");
+        }
+
+        // Modal functions for full-size image viewing
+        window.openImageModal = function(src, caption) {
+            document.getElementById("imageModal").style.display = "block";
+            document.getElementById("modalImage").src = src;
+            document.getElementById("modalCaption").textContent = caption;
+        }
+
+        window.closeImageModal = function() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // Manual assignment functions
+        window.deselectOriginal = function(originalIndex) {
+            const original = originals[originalIndex];
+            if (!unmatchedOriginals.find(o => o.name === original.name)) {
+                unmatchedOriginals.push(original);
+                logMessage(`📤 Deselected original: ${original.name}`);
+            }
+            
+            // Remove from mapping
+            mapping[originalIndex].matchedIdx = undefined;
+            mapping[originalIndex].isDeselected = true;
+            
+            updateUnmatchedArchiveImages();
+            showPreview(mapping);
+        }
+
+        function updateUnmatchedArchiveImages() {
+            // Get all assigned archive images
+            const assignedImages = new Set();
+            
+            // From automatic mappings
+            mapping.forEach(m => {
+                if (m.candidates && m.matchedIdx !== undefined && !m.isDeselected) {
+                    const sel = m.candidates[m.matchedIdx];
+                    if (sel) {
+                        assignedImages.add(`${sel.arc.archiveName}:${sel.img.name}`);
+                    }
+                }
+            });
+            
+            // From manual assignments
+            Object.values(manualAssignments).forEach(assignment => {
+                assignedImages.add(`${assignment.arc.archiveName}:${assignment.img.name}`);
+            });
+            
+            // Update unmatched archive images
+            unmatchedArchiveImages = [];
+            archives.forEach(archive => {
+                archive.images.forEach(img => {
+                    const key = `${archive.archiveName}:${img.name}`;
+                    if (!assignedImages.has(key)) {
+                        unmatchedArchiveImages.push({
+                            img: img,
+                            arc: archive,
+                            key: key
+                        });
+                    }
+                });
+            });
+            
+            logMessage(`📊 Updated unmatched pool: ${unmatchedOriginals.length} originals, ${unmatchedArchiveImages.length} archive images`);
+        }
+
+        window.manuallyAssign = function(originalName, archiveKey) {
+            const unmatched = unmatchedArchiveImages.find(u => u.key === archiveKey);
+            if (!unmatched) {
+                logMessage(`❌ Archive image not found: ${archiveKey}`);
+                return;
+            }
+            
+            manualAssignments[originalName] = unmatched;
+            
+            // Remove from unmatched pools
+            unmatchedOriginals = unmatchedOriginals.filter(o => o.name !== originalName);
+            unmatchedArchiveImages = unmatchedArchiveImages.filter(u => u.key !== archiveKey);
+            
+            logMessage(`✅ Manually assigned: ${originalName} → ${unmatched.img.name}`);
+            updateUnmatchedArchiveImages();
+            showPreview(mapping);
+        }
+
+        window.removeManualAssignment = function(originalName) {
+            if (manualAssignments[originalName]) {
+                const assignment = manualAssignments[originalName];
+                delete manualAssignments[originalName];
+                
+                // Add back to unmatched pools
+                const original = originals.find(o => o.name === originalName);
+                if (original && !unmatchedOriginals.find(o => o.name === originalName)) {
+                    unmatchedOriginals.push(original);
+                }
+                
+                logMessage(`🗑️ Removed manual assignment: ${originalName}`);
+                updateUnmatchedArchiveImages();
+                showPreview(mapping);
+            }
+        }
+
+        window.showAssignmentPreview = function(selectElement, originalName) {
+            const value = selectElement.value;
+            const safeName = originalName.replace(/[^a-zA-Z0-9]/g, '_');
+            const previewDiv = document.getElementById(`preview_${safeName}`);
+            const previewImg = document.getElementById(`preview_img_${safeName}`);
+            const previewNameDiv = document.getElementById(`preview_name_${safeName}`);
+            
+            if (!value) {
+                // Hide preview if nothing selected
+                previewDiv.style.display = 'none';
+                return;
+            }
+            
+            let archiveImage = null;
+            let sourceInfo = '';
+            
+            if (value.startsWith('steal_')) {
+                // Handle stealing from another manual assignment
+                const otherOriginalName = value.replace('steal_', '');
+                const stolenAssignment = manualAssignments[otherOriginalName];
+                if (stolenAssignment) {
+                    archiveImage = stolenAssignment.img;
+                    sourceInfo = `Will be stolen from: ${otherOriginalName}`;
+                }
+            } else {
+                // Handle normal assignment from unmatched
+                const unmatched = unmatchedArchiveImages.find(u => u.key === value);
+                if (unmatched) {
+                    archiveImage = unmatched.img;
+                    sourceInfo = `From archive: ${unmatched.arc.archiveName}`;
+                }
+            }
+            
+            if (archiveImage) {
+                // Show preview
+                previewImg.src = archiveImage.thumbURL;
+                previewImg.onclick = () => openImageModal(archiveImage.thumbURL, `Archive Preview: ${archiveImage.name}`);
+                previewNameDiv.innerHTML = `<strong>${archiveImage.name}</strong><br><small style="color: #666;">${sourceInfo}</small>`;
+                previewDiv.style.display = 'block';
+                
+                // Store the selection for confirmation
+                selectElement.dataset.pendingValue = value;
+            }
+        }
+
+        window.confirmAssignment = function(originalName) {
+            const safeName = originalName.replace(/[^a-zA-Z0-9]/g, '_');
+            const selectElement = document.getElementById(`dropdown_${safeName}`);
+            const value = selectElement.dataset.pendingValue;
+            
+            if (!value) return;
+            
+            if (value.startsWith('steal_')) {
+                // Handle stealing from another manual assignment
+                const otherOriginalName = value.replace('steal_', '');
+                const stolenAssignment = manualAssignments[otherOriginalName];
+                
+                if (stolenAssignment) {
+                    // Remove the stolen assignment
+                    delete manualAssignments[otherOriginalName];
+                    
+                    // Add the stolen original back to unmatched pool
+                    const otherOriginal = originals.find(o => o.name === otherOriginalName);
+                    if (otherOriginal && !unmatchedOriginals.find(o => o.name === otherOriginalName)) {
+                        unmatchedOriginals.push(otherOriginal);
+                    }
+                    
+                    // Assign the stolen archive image to current original
+                    manualAssignments[originalName] = stolenAssignment;
+                    unmatchedOriginals = unmatchedOriginals.filter(o => o.name !== originalName);
+                    
+                    logMessage(`🔄 Confirmed reassignment: ${stolenAssignment.img.name} from "${otherOriginalName}" to "${originalName}"`);
+                }
+            } else {
+                // Handle normal assignment
+                window.manuallyAssign(originalName, value);
+                logMessage(`✅ Confirmed assignment: ${originalName}`);
+            }
+            
+            // Clear the pending selection
+            selectElement.dataset.pendingValue = '';
+            selectElement.value = '';
+            showPreview(mapping);
+        }
+
+        window.cancelAssignmentPreview = function(originalName) {
+            const safeName = originalName.replace(/[^a-zA-Z0-9]/g, '_');
+            const selectElement = document.getElementById(`dropdown_${safeName}`);
+            const previewDiv = document.getElementById(`preview_${safeName}`);
+            
+            // Reset dropdown and hide preview
+            selectElement.value = '';
+            selectElement.dataset.pendingValue = '';
+            previewDiv.style.display = 'none';
+            
+            logMessage(`❌ Cancelled assignment preview for: ${originalName}`);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            logMessage("🚀 Image Renamer with OCR initialized and ready!");
+            
+            // Check if required libraries are loaded
+            if (typeof JSZip === 'undefined') {
+                logMessage("❌ JSZip library not loaded! Check internet connection.");
+            } else {
+                logMessage("✅ JSZip library loaded successfully");
+            }
+            
+            if (typeof blockhash === 'undefined') {
+                logMessage("❌ blockhash library not loaded! Check internet connection.");
+            } else {
+                logMessage("✅ blockhash library loaded successfully");
+            }
+            
+            if (typeof Tesseract === 'undefined') {
+                logMessage("❌ Tesseract.js library not loaded! OCR features disabled.");
+                logMessage("⚠️ Text recognition will be skipped, using visual matching only.");
+            } else {
+                logMessage("✅ Tesseract.js library loaded successfully - OCR enabled!");
+                logMessage("📝 Text recognition will be used to improve matching accuracy.");
+            }
+            
+            setupDropZone('archiveDropZone', 'archiveInput', true);
+            setupDropZone('originalsDropZone', 'originalsInput', false);
+            
+            logMessage("📝 Upload archives and reference images to begin enhanced matching.");
+            logMessage("🎯 Click on the drop zones or drag files to test upload functionality.");
+        });
+    </script>
+</body>
+</html>
