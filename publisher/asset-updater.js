@@ -67,6 +67,10 @@ class FleetAssetUpdater {
     this.exportConfigBtn = document.getElementById('exportConfig');
     this.importConfigInput = document.getElementById('importConfig');
     this.importConfigBtn = document.getElementById('importConfigBtn');
+    
+    // Converter inputs for cross-tab population
+    this.converterBaseUrlInput = document.getElementById('converterBaseUrl');
+    this.converterApiKeyInput = document.getElementById('converterApiKey');
 
     // Variables to track state
     this.isUpdating = false;
@@ -717,6 +721,10 @@ class FleetAssetUpdater {
         this.baseUrlInput.value = config.baseUrl || '';
         this.apiKeyInput.value = config.apiKey || '';
         
+        // Also populate converter tab with same API credentials
+        this.converterBaseUrlInput.value = config.baseUrl || '';
+        this.converterApiKeyInput.value = config.apiKey || '';
+        
         // Controller IDs
         this.controllerIdsInput.value = (config.controllerIds || []).join(', ');
         
@@ -751,7 +759,454 @@ class FleetAssetUpdater {
   }
 }
 
+// Unit ID Converter Class
+class UnitIdConverter {
+  constructor() {
+    // DOM Elements for converter
+    this.converterBaseUrlInput = document.getElementById('converterBaseUrl');
+    this.converterApiKeyInput = document.getElementById('converterApiKey');
+    this.unitIdsInput = document.getElementById('unitIds');
+    this.convertUnitsBtn = document.getElementById('convertUnitsBtn');
+    this.downloadCsvBtn = document.getElementById('downloadCsvBtn');
+    this.clearConverterBtn = document.getElementById('clearConverterBtn');
+    this.converterProgressCard = document.getElementById('converterProgressCard');
+    this.converterProgressBar = document.getElementById('converterProgressBar');
+    this.converterProgressText = document.getElementById('converterProgressText');
+    this.converterProgressStatus = document.getElementById('converterProgressStatus');
+    this.conversionResultsCard = document.getElementById('conversionResultsCard');
+    this.conversionResultsTable = document.getElementById('conversionResultsTable');
+    this.converterLogCard = document.getElementById('converterLogCard');
+    this.converterLogContainer = document.getElementById('converterLogContainer');
+
+    // State variables
+    this.isConverting = false;
+    this.conversionResults = [];
+    this.axiosInstance = null;
+
+    // Initialize event listeners
+    this.initConverterEventListeners();
+    
+    // Set up sync with main tab API credentials
+    this.setupApiCredentialsSync();
+  }
+
+  initConverterEventListeners() {
+    // Convert units button
+    this.convertUnitsBtn.addEventListener('click', () => {
+      if (!this.isConverting) {
+        this.startConversion();
+      }
+    });
+
+    // Download CSV button
+    this.downloadCsvBtn.addEventListener('click', () => {
+      this.downloadCsv();
+    });
+
+    // Clear button
+    this.clearConverterBtn.addEventListener('click', () => {
+      this.clearConverter();
+    });
+  }
+
+  // Setup synchronization with main tab API credentials
+  setupApiCredentialsSync() {
+    const mainBaseUrl = document.getElementById('baseUrl');
+    const mainApiKey = document.getElementById('apiKey');
+    
+    if (mainBaseUrl && mainApiKey) {
+      // Sync when main tab values change
+      mainBaseUrl.addEventListener('input', () => {
+        this.converterBaseUrlInput.value = mainBaseUrl.value;
+      });
+      
+      mainApiKey.addEventListener('input', () => {
+        this.converterApiKeyInput.value = mainApiKey.value;
+      });
+      
+      // Initial sync if main tab already has values
+      this.syncFromMainTab();
+    }
+  }
+
+  // Sync converter credentials from main tab
+  syncFromMainTab() {
+    const mainBaseUrl = document.getElementById('baseUrl');
+    const mainApiKey = document.getElementById('apiKey');
+    
+    if (mainBaseUrl && mainBaseUrl.value) {
+      this.converterBaseUrlInput.value = mainBaseUrl.value;
+    }
+    
+    if (mainApiKey && mainApiKey.value) {
+      this.converterApiKeyInput.value = mainApiKey.value;
+    }
+  }
+
+  // Validate converter form
+  validateConverterForm() {
+    const baseUrl = this.converterBaseUrlInput.value.trim();
+    const apiKey = this.converterApiKeyInput.value.trim();
+    const unitIds = this.parseUnitIds();
+
+    if (!baseUrl) {
+      this.addConverterLog('Please enter a base URL', 'error');
+      return false;
+    }
+
+    if (!apiKey) {
+      this.addConverterLog('Please enter an API key', 'error');
+      return false;
+    }
+
+    if (unitIds.length === 0) {
+      this.addConverterLog('Please enter at least one Unit ID', 'error');
+      return false;
+    }
+
+    return true;
+  }
+
+  // Parse Unit IDs from input
+  parseUnitIds() {
+    return this.unitIdsInput.value
+      .split('\n')
+      .map(id => id.trim())
+      .filter(id => id && id.length > 0);
+  }
+
+  // Start conversion process
+  async startConversion() {
+    if (!this.validateConverterForm()) return;
+
+    this.isConverting = true;
+    this.conversionResults = [];
+    
+    // Show progress card and logs
+    this.converterProgressCard.classList.remove('hidden');
+    this.converterLogCard.classList.remove('hidden');
+    this.conversionResultsCard.classList.add('hidden');
+    
+    // Clear previous results
+    this.conversionResultsTable.innerHTML = '';
+    this.converterLogContainer.innerHTML = '';
+    
+    // Disable form controls
+    this.toggleConverterFormControls(true);
+    
+    const baseUrl = this.converterBaseUrlInput.value.trim();
+    const apiKey = this.converterApiKeyInput.value.trim();
+    const unitIds = this.parseUnitIds();
+    
+    this.addConverterLog(`Starting conversion of ${unitIds.length} Unit IDs...`, 'info');
+    this.updateConverterProgress(0, 'Initializing...');
+    
+    // Create axios instance
+    this.createConverterAxiosInstance(baseUrl, apiKey);
+    
+    try {
+      for (let i = 0; i < unitIds.length; i++) {
+        const unitId = unitIds[i];
+        const progress = Math.round(((i + 1) / unitIds.length) * 100);
+        
+        this.updateConverterProgress(progress, `Converting Unit ID: ${unitId}`);
+        this.addConverterLog(`Converting Unit ID: ${unitId}`, 'info');
+        
+        try {
+          const result = await this.convertUnitToControllerId(unitId);
+          const controllerIdsStr = result.controllerIds.join(', ');
+          const status = result.hasMultiple ? 'Multiple Found' : 'Success';
+          
+          this.conversionResults.push({
+            unitId: unitId,
+            controllerId: controllerIdsStr,
+            status: status,
+            hasMultiple: result.hasMultiple,
+            controllerCount: result.controllerIds.length
+          });
+          
+          if (result.hasMultiple) {
+            this.addConverterLog(`✅ Unit ID ${unitId} → Multiple Controller IDs: ${controllerIdsStr}`, 'success');
+          } else {
+            this.addConverterLog(`✅ Unit ID ${unitId} → Controller ID ${controllerIdsStr}`, 'success');
+          }
+        } catch (error) {
+          this.conversionResults.push({
+            unitId: unitId,
+            controllerId: 'N/A',
+            status: 'Failed',
+            hasMultiple: false,
+            controllerCount: 0
+          });
+          this.addConverterLog(`❌ Failed to convert Unit ID ${unitId}: ${error.message}`, 'error');
+        }
+        
+        // Add small delay to prevent overwhelming the API
+        if (i < unitIds.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+      
+      this.updateConverterProgress(100, 'Conversion completed');
+      const successCount = this.conversionResults.filter(r => r.status === 'Success' || r.status === 'Multiple Found').length;
+      const multipleCount = this.conversionResults.filter(r => r.status === 'Multiple Found').length;
+      
+      let summaryMessage = `Conversion completed. ${successCount}/${unitIds.length} successful`;
+      if (multipleCount > 0) {
+        summaryMessage += ` (${multipleCount} with multiple controllers)`;
+      }
+      
+      this.addConverterLog(summaryMessage, 'info');
+      
+      // Show results
+      this.displayConversionResults();
+      this.downloadCsvBtn.disabled = false;
+      
+    } catch (error) {
+      this.addConverterLog(`Conversion failed: ${error.message}`, 'error');
+    } finally {
+      this.isConverting = false;
+      this.toggleConverterFormControls(false);
+    }
+  }
+
+  // Convert single Unit ID to Controller ID(s)
+  async convertUnitToControllerId(unitId) {
+    const url = `/f-controllers/dashboard/list`;
+    const params = {
+      t: Date.now(),
+      filter: JSON.stringify({ settingsUnitId: unitId }),
+      perPage: 50
+    };
+    
+    this.addConverterLog(`GET ${this.converterBaseUrlInput.value.trim()}${url}?filter=${params.filter}`, 'info');
+    
+    const response = await this.axiosInstance.get(url, { params });
+    
+    if (response.data && response.data.rows && response.data.rows.length > 0) {
+      const controllers = response.data.rows.map(row => row.id);
+      
+      if (controllers.length > 1) {
+        this.addConverterLog(`⚠️ Multiple controllers found for Unit ID ${unitId}: ${controllers.join(', ')}`, 'warning');
+      }
+      
+      return {
+        controllerIds: controllers,
+        hasMultiple: controllers.length > 1
+      };
+    } else {
+      throw new Error('No controller found for this Unit ID');
+    }
+  }
+
+  // Create axios instance for converter
+  createConverterAxiosInstance(baseUrl, apiKey) {
+    this.axiosInstance = axios.create({
+      baseURL: baseUrl,
+      headers: {
+        'api-key': apiKey,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    // Add interceptors for logging
+    this.axiosInstance.interceptors.request.use(request => {
+      console.log('Converter API Request:', request);
+      return request;
+    }, error => {
+      console.error('Converter Request error:', error);
+      return Promise.reject(error);
+    });
+    
+    this.axiosInstance.interceptors.response.use(response => {
+      console.log(`Converter API Response from ${response.config.url}:`, response.data);
+      return response;
+    }, error => {
+      console.error('Converter Response error:', error);
+      if (error.response) {
+        console.error(`Status: ${error.response.status}`, error.response.data);
+      }
+      return Promise.reject(error);
+    });
+  }
+
+  // Display conversion results in table
+  displayConversionResults() {
+    this.conversionResultsCard.classList.remove('hidden');
+    
+    this.conversionResults.forEach(result => {
+      if (result.status === 'Failed') {
+        // Single row for failed conversions
+        const row = document.createElement('tr');
+        
+        const unitIdCell = document.createElement('td');
+        unitIdCell.textContent = result.unitId;
+        
+        const controllerIdCell = document.createElement('td');
+        controllerIdCell.textContent = result.controllerId;
+        
+        const statusCell = document.createElement('td');
+        statusCell.textContent = result.status;
+        statusCell.className = 'text-danger';
+        
+        row.appendChild(unitIdCell);
+        row.appendChild(controllerIdCell);
+        row.appendChild(statusCell);
+        
+        this.conversionResultsTable.appendChild(row);
+      } else {
+        // Expand multiple controllers into separate rows
+        const controllerIds = result.controllerId.split(', ');
+        
+        controllerIds.forEach((controllerId, index) => {
+          const row = document.createElement('tr');
+          
+          // Add warning background for multiple results
+          if (result.hasMultiple) {
+            row.classList.add('table-warning');
+          }
+          
+          const unitIdCell = document.createElement('td');
+          unitIdCell.textContent = result.unitId;
+          
+          const controllerIdCell = document.createElement('td');
+          controllerIdCell.textContent = controllerId.trim();
+          // Add warning icon only to the first row of multiple results
+          if (result.hasMultiple && index === 0) {
+            const warningIcon = document.createElement('span');
+            warningIcon.innerHTML = ' ⚠️';
+            warningIcon.title = `${result.controllerCount} controllers found for this Unit ID`;
+            controllerIdCell.appendChild(warningIcon);
+          }
+          
+          const statusCell = document.createElement('td');
+          // Show detailed status on first row, simplified on subsequent rows
+          if (index === 0) {
+            statusCell.textContent = result.status;
+          } else {
+            statusCell.textContent = result.hasMultiple ? 'Multiple Found' : 'Success';
+          }
+          
+          // Set status cell colors
+          if (result.status === 'Success') {
+            statusCell.className = 'text-success';
+          } else if (result.status === 'Multiple Found') {
+            statusCell.className = 'text-warning fw-bold';
+          }
+          
+          row.appendChild(unitIdCell);
+          row.appendChild(controllerIdCell);
+          row.appendChild(statusCell);
+          
+          this.conversionResultsTable.appendChild(row);
+        });
+      }
+    });
+  }
+
+  // Download results as CSV
+  downloadCsv() {
+    if (this.conversionResults.length === 0) {
+      this.addConverterLog('No results to download', 'error');
+      return;
+    }
+    
+    // Create CSV content with separate rows for each Unit ID + Controller ID pair
+    const headers = ['Unit ID', 'Controller ID', 'Status', 'Multiple Controllers', 'Controller Count', 'Warning'];
+    const csvRows = [headers.join(',')];
+    
+    this.conversionResults.forEach(result => {
+      if (result.status === 'Failed') {
+        // Single row for failed conversions
+        csvRows.push([
+          result.unitId,
+          result.controllerId,
+          result.status,
+          'NO',
+          result.controllerCount,
+          ''
+        ].join(','));
+      } else {
+        // Expand multiple controllers into separate rows
+        const controllerIds = result.controllerId.split(', ');
+        
+        controllerIds.forEach((controllerId, index) => {
+          const warning = result.hasMultiple ? 'ATTENTION: Multiple controllers found!' : '';
+          csvRows.push([
+            result.unitId,
+            controllerId.trim(),
+            result.status,
+            result.hasMultiple ? 'YES' : 'NO',
+            result.controllerCount,
+            warning
+          ].join(','));
+        });
+      }
+    });
+    
+    const csvContent = csvRows.join('\n');
+    
+    // Create and download file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `unit-controller-mapping-${new Date().toISOString().slice(0, 10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    this.addConverterLog('CSV file downloaded successfully', 'success');
+  }
+
+  // Clear converter form and results
+  clearConverter() {
+    this.unitIdsInput.value = '';
+    this.conversionResults = [];
+    this.conversionResultsTable.innerHTML = '';
+    this.converterLogContainer.innerHTML = '';
+    this.converterProgressCard.classList.add('hidden');
+    this.conversionResultsCard.classList.add('hidden');
+    this.converterLogCard.classList.add('hidden');
+    this.downloadCsvBtn.disabled = true;
+    this.updateConverterProgress(0, 'Ready');
+  }
+
+  // Add log entry for converter
+  addConverterLog(message, type = 'info') {
+    const logEntry = document.createElement('div');
+    logEntry.className = type;
+    logEntry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+    this.converterLogContainer.appendChild(logEntry);
+    this.converterLogContainer.scrollTop = this.converterLogContainer.scrollHeight;
+  }
+
+  // Update converter progress
+  updateConverterProgress(progress, status) {
+    this.converterProgressBar.style.width = `${progress}%`;
+    this.converterProgressText.textContent = `${progress}%`;
+    this.converterProgressStatus.textContent = status;
+  }
+
+  // Toggle converter form controls
+  toggleConverterFormControls(disabled) {
+    this.converterBaseUrlInput.disabled = disabled;
+    this.converterApiKeyInput.disabled = disabled;
+    this.unitIdsInput.disabled = disabled;
+    this.convertUnitsBtn.disabled = disabled;
+    this.clearConverterBtn.disabled = disabled;
+    
+    if (disabled) {
+      this.convertUnitsBtn.textContent = 'Converting...';
+    } else {
+      this.convertUnitsBtn.textContent = 'Convert Unit IDs';
+    }
+  }
+}
+
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   const app = new FleetAssetUpdater();
+  const converter = new UnitIdConverter();
 }); 

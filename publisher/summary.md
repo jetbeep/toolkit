@@ -6,9 +6,12 @@ The Fleet Asset Updater is a utility tool designed to update device settings and
 ## Key Features
 - Update device settings for multiple controllers simultaneously
 - Schedule firmware updates with customizable options
+- Convert Unit IDs to Controller IDs with progress tracking
 - Import/export configurations for easier reuse
+- CSV export functionality for conversion results
 - Detailed logging with curl command generation for debugging
 - Support for both GUI and CLI operation modes
+- Tabbed interface for organized functionality
 
 ## Architecture and Components
 
@@ -20,13 +23,23 @@ The Fleet Asset Updater is a utility tool designed to update device settings and
 - API documentation: PDF files containing Fleet UpdatePlans and FileSets API documentation
 
 ### Web Interface (Frontend)
-The web interface provides a user-friendly way to:
+The web interface provides a tabbed user-friendly interface with two main sections:
+
+**Asset Updater Tab:**
 - Configure API settings (base URL and API key)
 - Specify controllers to update (via comma-separated IDs)
 - Edit device settings in JSON format (with validation)
 - Schedule updates with options for firmware version, update type, tracking, etc.
 - Monitor progress with detailed logs and curl command display
 - Export/import configurations for reuse
+
+**Unit ID Converter Tab:**
+- Convert Unit IDs to Controller IDs using Fleet API
+- Batch processing with progress tracking
+- Real-time conversion status display
+- Results table showing Unit ID, Controller ID, and conversion status
+- CSV export functionality for conversion results
+- Detailed conversion logs with timestamps
 
 ### CLI Interface
 The command-line tool enables automation and scripting with:
@@ -71,9 +84,11 @@ Updates follow a two-step process:
 ## Usage Scenarios
 - Single controller updates via web interface
 - Batch updates of multiple controllers
+- Converting Unit IDs to Controller IDs for integration purposes
 - Automated updates via CLI scripting
 - Settings-only updates without firmware changes
 - Full updates with firmware version changes
 - Scheduled updates during inactive hours
+- CSV export of ID mappings for external systems
 
 This project provides a comprehensive tool for managing Fleet controller assets with a focus on flexibility, robustness, and user experience. 

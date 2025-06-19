@@ -34,6 +34,10 @@
     .log-container .info {
       color: #0d6efd;
     }
+    .log-container .warning {
+      color: #fd7e14;
+      font-weight: bold;
+    }
     .hidden {
       display: none;
     }
@@ -87,25 +91,41 @@
   <div class="container">
     <h1 class="mb-4 text-center">Fleet Asset Updater</h1>
     
-    <!-- Config Import/Export -->
-    <div class="card mb-4">
-      <div class="card-header">
-        Configuration
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <button id="exportConfig" class="btn btn-outline-primary w-100">Export Configuration</button>
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4" id="mainTabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="updater-tab" data-bs-toggle="tab" href="#updater-content">Asset Updater</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="converter-tab" data-bs-toggle="tab" href="#converter-content">Unit ID Converter</a>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="mainTabContent">
+      
+      <!-- Asset Updater Tab -->
+      <div class="tab-pane fade show active" id="updater-content">
+        
+        <!-- Config Import/Export -->
+        <div class="card mb-4">
+          <div class="card-header">
+            Configuration
           </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <input type="file" class="form-control" id="importConfig" accept=".json">
-              <button class="btn btn-outline-secondary" type="button" id="importConfigBtn">Import</button>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <button id="exportConfig" class="btn btn-outline-primary w-100">Export Configuration</button>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="file" class="form-control" id="importConfig" accept=".json">
+                  <button class="btn btn-outline-secondary" type="button" id="importConfigBtn">Import</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
     <!-- Main Form -->
     <form id="assetUpdateForm">
@@ -247,8 +267,111 @@
       </div>
     </div>
 
+      </div> <!-- End Asset Updater Tab -->
+
+      <!-- Unit ID Converter Tab -->
+      <div class="tab-pane fade" id="converter-content">
+        
+        <!-- Converter API Configuration -->
+        <div class="card mb-4">
+          <div class="card-header">
+            API Configuration
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="converterBaseUrl" class="form-label">Base URL</label>
+                <input type="url" class="form-control" id="converterBaseUrl" placeholder="https://api.example.com">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="converterApiKey" class="form-label">API Key</label>
+                <input type="password" class="form-control" id="converterApiKey" placeholder="Your API key">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unit IDs Input -->
+        <div class="card mb-4">
+          <div class="card-header">
+            Unit IDs to Convert
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="unitIds" class="form-label">Unit IDs (one per line)</label>
+              <textarea class="form-control" id="unitIds" rows="8" placeholder="10311050&#10;10311051&#10;10311052"></textarea>
+              <div class="form-text">Enter Unit IDs, one per line. Example: 10311050</div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex">
+              <button type="button" class="btn btn-primary" id="convertUnitsBtn">Convert Unit IDs</button>
+              <button type="button" class="btn btn-outline-success" id="downloadCsvBtn" disabled>Download CSV</button>
+              <button type="button" class="btn btn-outline-secondary" id="clearConverterBtn">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Converter Progress -->
+        <div class="card mb-4 hidden" id="converterProgressCard">
+          <div class="card-header">
+            Conversion Progress
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <span id="converterProgressText">0%</span>
+                <span id="converterProgressStatus">Ready</span>
+              </div>
+              <div class="progress">
+                <div id="converterProgressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversion Results -->
+        <div class="card mb-4 hidden" id="conversionResultsCard">
+          <div class="card-header">
+            Conversion Results
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Unit ID</th>
+                    <th>Controller ID</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="conversionResultsTable">
+                  <!-- Results will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Converter Logs -->
+        <div class="card hidden" id="converterLogCard">
+          <div class="card-header">
+            Conversion Logs
+          </div>
+          <div class="card-body">
+            <div class="log-container" id="converterLogContainer">
+              <!-- Logs will appear here -->
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- End Unit ID Converter Tab -->
+
+    </div> <!-- End Tab Content -->
+
   </div>
 
+  <!-- Load Bootstrap JS for tabs -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
   <!-- Load Axios for HTTP requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   
