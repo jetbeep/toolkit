@@ -807,6 +807,25 @@ class UnitIdConverter {
     this.clearConverterBtn.addEventListener('click', () => {
       this.clearConverter();
     });
+
+    // Sync credentials button
+    const syncCredentialsBtn = document.getElementById('syncCredentialsBtn');
+    if (syncCredentialsBtn) {
+      syncCredentialsBtn.addEventListener('click', () => {
+        this.syncFromMainTab();
+        this.addConverterLog('API credentials synced from Asset Updater tab', 'success');
+        
+        // Add visual feedback
+        const originalText = syncCredentialsBtn.innerHTML;
+        syncCredentialsBtn.innerHTML = '✅ Synced!';
+        syncCredentialsBtn.disabled = true;
+        
+        setTimeout(() => {
+          syncCredentialsBtn.innerHTML = originalText;
+          syncCredentialsBtn.disabled = false;
+        }, 2000);
+      });
+    }
   }
 
   // Setup synchronization with main tab API credentials
@@ -824,8 +843,31 @@ class UnitIdConverter {
         this.converterApiKeyInput.value = mainApiKey.value;
       });
       
+      // Sync when converter tab becomes visible
+      const converterTab = document.getElementById('converter-tab');
+      if (converterTab) {
+        converterTab.addEventListener('shown.bs.tab', () => {
+          this.syncFromMainTab();
+        });
+      }
+      
+      // Also sync when tab is clicked (fallback for different Bootstrap versions)
+      if (converterTab) {
+        converterTab.addEventListener('click', () => {
+          setTimeout(() => this.syncFromMainTab(), 100);
+        });
+      }
+      
       // Initial sync if main tab already has values
       this.syncFromMainTab();
+      
+      // Periodic sync every 2 seconds when converter tab is active
+      setInterval(() => {
+        const activeTab = document.querySelector('.nav-link.active');
+        if (activeTab && activeTab.id === 'converter-tab') {
+          this.syncFromMainTab();
+        }
+      }, 2000);
     }
   }
 
@@ -834,13 +876,31 @@ class UnitIdConverter {
     const mainBaseUrl = document.getElementById('baseUrl');
     const mainApiKey = document.getElementById('apiKey');
     
-    if (mainBaseUrl && mainBaseUrl.value) {
+    let synced = false;
+    
+    if (mainBaseUrl && mainBaseUrl.value && mainBaseUrl.value !== this.converterBaseUrlInput.value) {
       this.converterBaseUrlInput.value = mainBaseUrl.value;
+      synced = true;
     }
     
-    if (mainApiKey && mainApiKey.value) {
+    if (mainApiKey && mainApiKey.value && mainApiKey.value !== this.converterApiKeyInput.value) {
       this.converterApiKeyInput.value = mainApiKey.value;
+      synced = true;
     }
+    
+    // Visual indication that fields were synced
+    if (synced) {
+      [this.converterBaseUrlInput, this.converterApiKeyInput].forEach(input => {
+        if (input.value) {
+          input.style.backgroundColor = '#d4edda';
+          setTimeout(() => {
+            input.style.backgroundColor = '';
+          }, 1000);
+        }
+      });
+    }
+    
+    return synced;
   }
 
   // Validate converter form

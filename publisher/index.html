@@ -274,8 +274,11 @@
         
         <!-- Converter API Configuration -->
         <div class="card mb-4">
-          <div class="card-header">
-            API Configuration
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span>API Configuration</span>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="syncCredentialsBtn" title="Sync credentials from Asset Updater tab">
+              🔄 Sync from Asset Updater
+            </button>
           </div>
           <div class="card-body">
             <div class="row">
@@ -287,6 +290,9 @@
                 <label for="converterApiKey" class="form-label">API Key</label>
                 <input type="password" class="form-control" id="converterApiKey" placeholder="Your API key">
               </div>
+            </div>
+            <div class="alert alert-info" style="font-size: 0.875rem;">
+              💡 <strong>Tip:</strong> API credentials are automatically synced from the Asset Updater tab. You can also use the sync button above to manually update them.
             </div>
           </div>
         </div>
