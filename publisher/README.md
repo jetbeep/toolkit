@@ -139,16 +139,11 @@ CLI options:
 
 ## How It Works
 
-The tool follows these steps for each controller:
+The tool uses the new Fleet API to update device settings directly:
 
-1. Fetches the current configuration from `/f-controllers/{controllerId}/for-configuration`
-2. Extracts the current device settings (excluding metadata)
-3. Merges your specified changes with the current configuration:
-   - For regular properties: Updates the value
-   - For `fileSetIds`: Replaces the entire object
-4. Sends the merged configuration to `/f-controllers/{controllerId}/settings-form`
+1. Sends only the settings you want to change to `/f-controllers/{controllerId}/device-settings`
 
-This ensures that you only need to specify the settings you want to change, not the entire configuration.
+The new API handles partial updates automatically, so you only need to specify the settings you want to change. The API will merge your changes with the existing configuration on the server side.
 
 ## Development
 

@@ -247,37 +247,6 @@ class FleetAssetUpdater {
     }
   }
 
-  // Utility function to omit properties from an object
-  omit(obj, keysToOmit) {
-    if (!obj) return {};
-    return Object.keys(obj)
-      .filter(key => !keysToOmit.includes(key))
-      .reduce((acc, key) => {
-        acc[key] = obj[key];
-        return acc;
-      }, {});
-  }
-
-  // Utility function to merge configurations
-  mergeConfigurations(currentConfig, userChanges) {
-    // Create a deep copy of current config
-    const result = JSON.parse(JSON.stringify(currentConfig));
-    
-    // For each key in user changes
-    for (const key in userChanges) {
-      // Special handling for fileSetIds
-      if (key === 'fileSetIds' && typeof userChanges[key] === 'object') {
-        // Replace the entire fileSetIds object
-        result[key] = { ...userChanges[key] };
-      } else {
-        // For other properties, simply update the value
-        result[key] = userChanges[key];
-      }
-    }
-    
-    return result;
-  }
-
   // Start update process
   async startUpdateProcess() {
     console.log('Starting update process');
@@ -332,55 +301,26 @@ class FleetAssetUpdater {
   async updateDeviceSettings(controllerIds, userSettings) {
     console.log('Starting device settings update for controllers:', controllerIds);
     console.log('User specified settings:', userSettings);
-    
+
     const totalControllers = controllerIds.length;
     let completedCount = 0;
-    
+
     for (const controllerId of controllerIds) {
       try {
         this.addLog(`Processing controller ${controllerId}...`, 'info');
         console.log(`Processing controller ${controllerId}...`);
-        
-        // Step 1: Get current configuration
-        this.addLog(`Fetching current configuration for controller ${controllerId}...`, 'info');
-        console.log(`GET request to fetch current config for controller ${controllerId}`);
-        
-        const getResponse = await this.axiosInstance.get(`/f-controllers/${controllerId}/for-configuration`);
-        console.log(`Current configuration received for controller ${controllerId}:`, getResponse.data);
-        
-        // Step 2: Extract and process configuration data
-        const currentData = getResponse.data;
-        
-        if (!currentData || !currentData.fData) {
-          throw new Error('Invalid response format from configuration endpoint');
-        }
-        
-        const fullConfigNoFilesets = this.omit(currentData.fData.deviceSettings || {}, ['meta']);
-        const fileSetsData = currentData.fData.fileSetsData || {};
-        
-        this.addLog(`Current configuration extracted (excluding meta):`, 'info');
-        this.addLog(`Full config: ${JSON.stringify(fullConfigNoFilesets, null, 2)}`, 'info');
-        this.addLog(`Current fileSets data: ${JSON.stringify(fileSetsData, null, 2)}`, 'info');
-        
-        console.log('Full config (no filesets):', fullConfigNoFilesets);
-        console.log('FileSets data:', fileSetsData);
-        
-        // Step 3: Merge current configuration with user changes
-        const mergedConfig = this.mergeConfigurations(fullConfigNoFilesets, userSettings);
-        
-        this.addLog(`Merged configuration: ${JSON.stringify(mergedConfig, null, 2)}`, 'info');
-        console.log('Merged configuration:', mergedConfig);
-        
-        // Step 4: Post updated configuration
+
+        // Post device settings directly (new API allows partial updates)
         this.addLog(`Updating settings for controller ${controllerId}...`, 'info');
         console.log(`POST request to update settings for controller ${controllerId}`);
-        
-        const postResponse = await this.axiosInstance.post(`/f-controllers/${controllerId}/settings-form`, mergedConfig);
-        
+        this.addLog(`Settings to apply: ${JSON.stringify(userSettings, null, 2)}`, 'info');
+
+        const postResponse = await this.axiosInstance.post(`/f-controllers/${controllerId}/device-settings`, userSettings);
+
         console.log(`Settings update response for controller ${controllerId}:`, postResponse.data);
         this.addLog(`Device settings updated successfully for controller ${controllerId}`, 'success');
         this.updatedControllers.push(controllerId);
-        
+
       } catch (error) {
         console.error(`Error processing controller ${controllerId}:`, error);
         this.addLog(`Error processing controller ${controllerId}: ${error.message}`, 'error');
@@ -391,13 +331,13 @@ class FleetAssetUpdater {
         }
         this.failedControllers.push(controllerId);
       }
-      
+
       // Update progress
       completedCount++;
       const progress = Math.round((completedCount / totalControllers) * 100);
       this.updateProgress(progress, `Completed ${completedCount} of ${totalControllers} controllers`);
     }
-    
+
     // Update final status
     if (this.failedControllers.length === 0) {
       console.log('All device settings updated successfully!');
@@ -410,7 +350,7 @@ class FleetAssetUpdater {
       // Enable update button for partial success
       this.scheduleUpdateBtn.disabled = !(this.updatedControllers.length > 0 && this.enableFirmwareUpdateCheckbox.checked);
     }
-    
+
     // Mark update as completed
     this.isUpdating = false;
     this.toggleFormControls(false);

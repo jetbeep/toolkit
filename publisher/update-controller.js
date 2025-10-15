@@ -3,40 +3,6 @@
 const axios = require('axios');
 const fs = require('fs');
 
-/**
- * Utility function to omit properties from an object
- */
-function omit(obj, keysToOmit) {
-  if (!obj) return {};
-  return Object.keys(obj)
-    .filter(key => !keysToOmit.includes(key))
-    .reduce((acc, key) => {
-      acc[key] = obj[key];
-      return acc;
-    }, {});
-}
-
-/**
- * Utility function to merge configurations
- */
-function mergeConfigurations(currentConfig, userChanges) {
-  // Create a deep copy of current config
-  const result = JSON.parse(JSON.stringify(currentConfig));
-  
-  // For each key in user changes
-  for (const key in userChanges) {
-    // Special handling for fileSetIds
-    if (key === 'fileSetIds' && typeof userChanges[key] === 'object') {
-      // Replace the entire fileSetIds object
-      result[key] = { ...userChanges[key] };
-    } else {
-      // For other properties, simply update the value
-      result[key] = userChanges[key];
-    }
-  }
-  
-  return result;
-}
 
 /**
  * Schedule and activate firmware update for a controller
@@ -127,7 +93,7 @@ async function scheduleUpdate(api, controllerId, options) {
  */
 async function updateControllerSettings(baseUrl, apiKey, controllerId, userSettings) {
   console.log(`\n=== Updating Controller ${controllerId} ===`);
-  
+
   try {
     // Create axios instance with authorization
     const api = axios.create({
@@ -137,77 +103,39 @@ async function updateControllerSettings(baseUrl, apiKey, controllerId, userSetti
         'Content-Type': 'application/json'
       }
     });
-    
-    // Step 1: Get current configuration
-    console.log(`\n1. Fetching current configuration...`);
-    const getUrl = `/f-controllers/${controllerId}/for-configuration`;
-    console.log(`GET ${baseUrl}${getUrl}`);
-    
-    const getResponse = await api.get(getUrl);
-    console.log(`Response status: ${getResponse.status}`);
-    
-    // Step 2: Extract and process configuration data
-    console.log(`\n2. Processing configuration data...`);
-    const currentData = getResponse.data;
-    
-    if (!currentData || !currentData.fData) {
-      throw new Error('Invalid response format from configuration endpoint');
-    }
-    
-    const fullConfigNoFilesets = omit(currentData.fData.deviceSettings || {}, ['meta']);
-    const fileSetsData = currentData.fData.fileSetsData || {};
-    
-    console.log(`Current config (without meta):`);
-    console.log(JSON.stringify(fullConfigNoFilesets, null, 2));
-    console.log(`\nCurrent fileSets data:`);
-    console.log(JSON.stringify(fileSetsData, null, 2));
-    
-    // Step 3: Merge current configuration with user changes
-    console.log(`\n3. Merging with user changes...`);
-    console.log(`User settings to apply:`);
-    console.log(JSON.stringify(userSettings, null, 2));
-    
-    const mergedConfig = mergeConfigurations(fullConfigNoFilesets, userSettings);
-    
-    console.log(`\nMerged configuration:`);
-    console.log(JSON.stringify(mergedConfig, null, 2));
-    
-    // Step 4: Post updated configuration
-    console.log(`\n4. Updating settings...`);
-    const postUrl = `/f-controllers/${controllerId}/settings-form`;
+
+    // Post device settings directly (new API allows partial updates)
+    console.log(`\nUpdating settings...`);
+    const postUrl = `/f-controllers/${controllerId}/device-settings`;
     console.log(`POST ${baseUrl}${postUrl}`);
-    console.log(`Request payload:`);
-    console.log(JSON.stringify(mergedConfig, null, 2));
-    
+    console.log(`Settings to apply:`);
+    console.log(JSON.stringify(userSettings, null, 2));
+
     // Generate curl command for debugging
     const curlCmd = `curl -X POST "${baseUrl}${postUrl}" \\
   -H "api-key: ${apiKey}" \\
   -H "Content-Type: application/json" \\
-  -d '${JSON.stringify(mergedConfig)}'`;
-    
+  -d '${JSON.stringify(userSettings)}'`;
+
     console.log(`\nEquivalent curl command:`);
     console.log(curlCmd);
-    
-    const postResponse = await api.post(postUrl, mergedConfig);
-    
+
+    const postResponse = await api.post(postUrl, userSettings);
+
     console.log(`\nResponse status: ${postResponse.status}`);
     console.log(`Response data:`);
     console.log(JSON.stringify(postResponse.data, null, 2));
-    
+
     console.log(`\n✅ Successfully updated controller ${controllerId}`);
-    
-    // Return response object for potential firmware update
+
     return {
       success: true,
-      data: {
-        fullConfigNoFilesets,
-        fileSetsData
-      }
+      data: postResponse.data
     };
-    
+
   } catch (error) {
     console.error(`\n❌ Error updating controller ${controllerId}:`);
-    
+
     if (error.response) {
       console.error(`Status: ${error.response.status}`);
       console.error(`Error details:`);
@@ -215,7 +143,7 @@ async function updateControllerSettings(baseUrl, apiKey, controllerId, userSetti
     } else {
       console.error(error.message);
     }
-    
+
     return { success: false };
   }
 }
