@@ -310,14 +310,14 @@ class FleetAssetUpdater {
         this.addLog(`Processing controller ${controllerId}...`, 'info');
         console.log(`Processing controller ${controllerId}...`);
 
-        // Post device settings directly (new API allows partial updates)
+        // Patch device settings directly (new API allows partial updates)
         this.addLog(`Updating settings for controller ${controllerId}...`, 'info');
-        console.log(`POST request to update settings for controller ${controllerId}`);
+        console.log(`PATCH request to update settings for controller ${controllerId}`);
         this.addLog(`Settings to apply: ${JSON.stringify(userSettings, null, 2)}`, 'info');
 
-        const postResponse = await this.axiosInstance.post(`/f-controllers/${controllerId}/device-settings`, userSettings);
+        const patchResponse = await this.axiosInstance.patch(`/f-controllers/${controllerId}/device-settings`, userSettings);
 
-        console.log(`Settings update response for controller ${controllerId}:`, postResponse.data);
+        console.log(`Settings update response for controller ${controllerId}:`, patchResponse.data);
         this.addLog(`Device settings updated successfully for controller ${controllerId}`, 'success');
         this.updatedControllers.push(controllerId);
 

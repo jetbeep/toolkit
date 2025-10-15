@@ -104,15 +104,15 @@ async function updateControllerSettings(baseUrl, apiKey, controllerId, userSetti
       }
     });
 
-    // Post device settings directly (new API allows partial updates)
+    // Patch device settings directly (new API allows partial updates)
     console.log(`\nUpdating settings...`);
-    const postUrl = `/f-controllers/${controllerId}/device-settings`;
-    console.log(`POST ${baseUrl}${postUrl}`);
+    const patchUrl = `/f-controllers/${controllerId}/device-settings`;
+    console.log(`PATCH ${baseUrl}${patchUrl}`);
     console.log(`Settings to apply:`);
     console.log(JSON.stringify(userSettings, null, 2));
 
     // Generate curl command for debugging
-    const curlCmd = `curl -X POST "${baseUrl}${postUrl}" \\
+    const curlCmd = `curl -X PATCH "${baseUrl}${patchUrl}" \\
   -H "api-key: ${apiKey}" \\
   -H "Content-Type: application/json" \\
   -d '${JSON.stringify(userSettings)}'`;
@@ -120,17 +120,17 @@ async function updateControllerSettings(baseUrl, apiKey, controllerId, userSetti
     console.log(`\nEquivalent curl command:`);
     console.log(curlCmd);
 
-    const postResponse = await api.post(postUrl, userSettings);
+    const patchResponse = await api.patch(patchUrl, userSettings);
 
-    console.log(`\nResponse status: ${postResponse.status}`);
+    console.log(`\nResponse status: ${patchResponse.status}`);
     console.log(`Response data:`);
-    console.log(JSON.stringify(postResponse.data, null, 2));
+    console.log(JSON.stringify(patchResponse.data, null, 2));
 
     console.log(`\n✅ Successfully updated controller ${controllerId}`);
 
     return {
       success: true,
-      data: postResponse.data
+      data: patchResponse.data
     };
 
   } catch (error) {
