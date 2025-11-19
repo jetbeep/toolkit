@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd version tracking to all JetBeep Toolkit pages\n\n- Add VERSION.md file for centralized version management and changelog\n- Add version 2.0.0 to main toolkit landing page\n- Add version 2.0.0 and footer to Publisher (Fleet Asset Updater)\n- Add version 1.0.0 and footer to Logs Viewer\n- Add version 1.0.0 and footer to Image Renamer\n- Add \"Back to JetBeep Toolkit\" navigation links to all tools\n- Implement consistent version display format across all pages\n\nVersion 2.0.0 highlights the major API refactoring in Publisher tool\n(migration from /settings-form to /device-settings endpoint)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git tag:*)",
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nChange HTTP method from POST to PATCH for device-settings endpoint\n\n- Update asset-updater.js to use axios.patch() instead of axios.post()\n- Update update-controller.js to use api.patch() instead of api.post()\n- Update curl commands to use -X PATCH\n- Update console log messages to reflect PATCH requests\n- Rename response variables from postResponse to patchResponse\n- Rename URL variable from postUrl to patchUrl\n\nThis change aligns with RESTful conventions where PATCH is used\nfor partial updates to resources.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
