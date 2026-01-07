@@ -9,6 +9,7 @@ class FileSetManager {
         this.currentFileSet = null;
         this.currentFiles = [];
         this.editingFileId = null;
+        this.selectedFileIds = new Set();
 
         this.init();
     }
@@ -133,6 +134,18 @@ class FileSetManager {
 
         // Edit File Modal
         document.getElementById('saveFileEditBtn').addEventListener('click', () => this.saveFileEdit());
+
+        // Bulk Selection
+        document.getElementById('selectAllCheckbox').addEventListener('change', (e) => this.toggleSelectAll(e.target.checked));
+        document.getElementById('deleteSelectedBtn').addEventListener('click', () => this.deleteSelectedFiles());
+        document.getElementById('deleteAllBtn').addEventListener('click', () => this.deleteAllFiles());
+
+        // Individual checkbox delegation on table body
+        document.getElementById('filesTableBody').addEventListener('change', (e) => {
+            if (e.target.classList.contains('file-checkbox')) {
+                this.toggleFileSelection(parseInt(e.target.dataset.fileId));
+            }
+        });
     }
 
     // API Methods
@@ -285,6 +298,9 @@ class FileSetManager {
 
     // Load File Set Detail
     async loadFileSetDetail(fileSetId) {
+        // Clear selection when loading a new file set
+        this.selectedFileIds.clear();
+
         document.getElementById('filesLoading').style.display = 'block';
         document.getElementById('fileSetDetailPanel').style.display = 'block';
 
@@ -360,17 +376,27 @@ class FileSetManager {
         if (this.currentFiles.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="5" class="text-center py-4 text-muted">
+                    <td colspan="6" class="text-center py-4 text-muted">
                         <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                         No files in this file set
                     </td>
                 </tr>
             `;
+            this.updateSelectionUI();
             return;
         }
 
         this.currentFiles.forEach(async (file) => {
             const row = document.createElement('tr');
+
+            // Create checkbox cell
+            const checkboxCell = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'form-check-input file-checkbox';
+            checkbox.dataset.fileId = file.id;
+            checkbox.checked = this.selectedFileIds.has(file.id);
+            checkboxCell.appendChild(checkbox);
 
             // Create cell for type badge
             const typeCell = document.createElement('td');
@@ -426,6 +452,7 @@ class FileSetManager {
             `;
 
             // Append all cells to row
+            row.appendChild(checkboxCell);
             row.appendChild(typeCell);
             row.appendChild(pathCell);
             row.appendChild(createdByCell);
@@ -434,6 +461,8 @@ class FileSetManager {
 
             tbody.appendChild(row);
         });
+
+        this.updateSelectionUI();
     }
 
     // Update File Preview
@@ -611,6 +640,94 @@ class FileSetManager {
         } catch (error) {
             this.showToast('Failed to delete file: ' + error.message, 'error');
         }
+    }
+
+    // Selection Methods
+    toggleFileSelection(fileId) {
+        if (this.selectedFileIds.has(fileId)) {
+            this.selectedFileIds.delete(fileId);
+        } else {
+            this.selectedFileIds.add(fileId);
+        }
+        this.updateSelectionUI();
+    }
+
+    toggleSelectAll(checked) {
+        if (checked) {
+            this.currentFiles.forEach(f => this.selectedFileIds.add(f.id));
+        } else {
+            this.selectedFileIds.clear();
+        }
+        this.updateSelectionUI();
+        this.updateCheckboxes();
+    }
+
+    updateSelectionUI() {
+        const count = this.selectedFileIds.size;
+        const deleteBtn = document.getElementById('deleteSelectedBtn');
+        const countSpan = document.getElementById('selectedCount');
+        const selectAll = document.getElementById('selectAllCheckbox');
+
+        if (deleteBtn) {
+            deleteBtn.style.display = count > 0 ? 'inline-block' : 'none';
+        }
+        if (countSpan) {
+            countSpan.textContent = count;
+        }
+
+        // Update "Select All" checkbox state
+        if (selectAll) {
+            selectAll.checked = count === this.currentFiles.length && count > 0;
+            selectAll.indeterminate = count > 0 && count < this.currentFiles.length;
+        }
+    }
+
+    updateCheckboxes() {
+        document.querySelectorAll('.file-checkbox').forEach(cb => {
+            cb.checked = this.selectedFileIds.has(parseInt(cb.dataset.fileId));
+        });
+    }
+
+    // Bulk Delete Methods
+    async deleteSelectedFiles() {
+        const count = this.selectedFileIds.size;
+        if (count === 0) return;
+
+        if (!confirm(`Are you sure you want to delete ${count} file(s)?`)) return;
+
+        let successCount = 0;
+        let failCount = 0;
+
+        for (const fileId of this.selectedFileIds) {
+            try {
+                await this.makeRequest(`/f-file-sets/files/${fileId}`, 'DELETE');
+                successCount++;
+            } catch (error) {
+                failCount++;
+                console.error(`Failed to delete file ${fileId}:`, error);
+            }
+        }
+
+        this.selectedFileIds.clear();
+        this.showToast(
+            `Deleted ${successCount} file(s)${failCount > 0 ? `, ${failCount} failed` : ''}`,
+            failCount > 0 ? 'info' : 'success'
+        );
+        await this.loadFileSetDetail(this.currentFileSet.id);
+    }
+
+    async deleteAllFiles() {
+        const count = this.currentFiles.length;
+        if (count === 0) {
+            this.showToast('No files to delete', 'info');
+            return;
+        }
+
+        if (!confirm(`Are you sure you want to delete ALL ${count} file(s) from this file set?`)) return;
+
+        // Select all and delete
+        this.currentFiles.forEach(f => this.selectedFileIds.add(f.id));
+        await this.deleteSelectedFiles();
     }
 
     // Get File as Data URL

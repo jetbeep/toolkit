@@ -169,10 +169,18 @@
 
                         <!-- Files List -->
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between align-items-center">
                                 <h6 class="mb-0">
                                     <i class="bi bi-files me-2"></i>Files (<span id="filesCount">0</span>)
                                 </h6>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-danger" id="deleteSelectedBtn" style="display: none;">
+                                        <i class="bi bi-trash-fill me-1"></i>Delete Selected (<span id="selectedCount">0</span>)
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger ms-2" id="deleteAllBtn">
+                                        <i class="bi bi-trash-fill me-1"></i>Delete All
+                                    </button>
+                                </div>
                             </div>
                             <div class="card-body p-0">
                                 <div id="filesLoading" class="text-center p-4" style="display: none;">
@@ -184,6 +192,9 @@
                                     <table class="table table-hover mb-0" id="filesTable">
                                         <thead class="table-light">
                                             <tr>
+                                                <th style="width: 40px;">
+                                                    <input type="checkbox" class="form-check-input" id="selectAllCheckbox" title="Select All">
+                                                </th>
                                                 <th>Type</th>
                                                 <th>Path</th>
                                                 <th>Created By</th>

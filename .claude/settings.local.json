@@ -1,13 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)",
       "Bash(git add:*)",
-      "Bash(git restore:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd version tracking to all JetBeep Toolkit pages\n\n- Add VERSION.md file for centralized version management and changelog\n- Add version 2.0.0 to main toolkit landing page\n- Add version 2.0.0 and footer to Publisher (Fleet Asset Updater)\n- Add version 1.0.0 and footer to Logs Viewer\n- Add version 1.0.0 and footer to Image Renamer\n- Add \"Back to JetBeep Toolkit\" navigation links to all tools\n- Implement consistent version display format across all pages\n\nVersion 2.0.0 highlights the major API refactoring in Publisher tool\n(migration from /settings-form to /device-settings endpoint)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git tag:*)",
-      "Bash(git push:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nChange HTTP method from POST to PATCH for device-settings endpoint\n\n- Update asset-updater.js to use axios.patch() instead of axios.post()\n- Update update-controller.js to use api.patch() instead of api.post()\n- Update curl commands to use -X PATCH\n- Update console log messages to reflect PATCH requests\n- Rename response variables from postResponse to patchResponse\n- Rename URL variable from postUrl to patchUrl\n\nThis change aligns with RESTful conventions where PATCH is used\nfor partial updates to resources.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd File Set Manager tool for JetBeep Fleet API\n\n- Create new File Set Manager tool for managing Fleet API file sets\n- Add comprehensive web interface with Bootstrap 5 UI\n- Implement file browsing, upload, edit, and delete functionality\n- Support multiple file uploads with batch processing\n- Add image preview functionality with hover zoom effect\n- Support file types: screenImage, uiScriptBin, uiScriptData, screenFont\n- Implement configuration persistence in localStorage\n- Add search and filtering capabilities\n- Include detailed README documentation\n- Update main toolkit landing page with File Set Manager card\n\nFeatures:\n- Browse and navigate file sets from Fleet API\n- Upload single or multiple files of same type\n- Edit existing files with PATCH endpoint\n- Delete files with confirmation\n- Preview images with thumbnails and full-size modal\n- Hover to zoom image thumbnails (6x magnification)\n- Save/load/import/export configuration\n- Real-time toast notifications\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git log:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
