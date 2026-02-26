@@ -44,6 +44,13 @@
     background: #ffecb5;
 }
 
+.unmapped-input-char {
+    cursor: pointer;
+}
+.unmapped-input-char:hover {
+    color: #0d6efd;
+}
+
 .char-auto-fallback {
     color: #e65100;
     background: #fff3e0;

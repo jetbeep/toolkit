@@ -289,7 +289,8 @@ class OledConvertor {
             }
 
             html += `<tr>
-                <td class="font-monospace fs-5">${this.escapeHtml(char)}</td>
+                <td class="font-monospace fs-5 unmapped-input-char" data-char-idx="${indices[0]}"
+                    title="Click to open character mapping">${this.escapeHtml(char)}</td>
                 <td class="text-muted small">U+${cp}</td>
                 <td>${indices.length}</td>
                 <td>${current}</td>
@@ -313,6 +314,14 @@ class OledConvertor {
                 this.customMappings[this.currentRom][ch] = alt.replacementChar;
                 this.saveCustomMappings();
                 this.renderPreview();
+            });
+        });
+
+        // Bind click handlers for input character cells
+        container.querySelectorAll('.unmapped-input-char').forEach(td => {
+            td.addEventListener('click', () => {
+                const idx = parseInt(td.getAttribute('data-char-idx'));
+                this.openCharacterModal(idx);
             });
         });
     }
