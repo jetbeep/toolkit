@@ -1,0 +1,1620 @@
+{
+  "metadata": {
+    "generated": "2026-02-26T12:53:21.636586+00:00",
+    "description": "Baltic language character availability in US2066 ROMs"
+  },
+  "characters": {
+    "Ä": {
+      "unicode": "U+00C4",
+      "name": "LATIN CAPITAL LETTER A WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x5B",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xA0",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x8E",
+        "fallbacks": []
+      }
+    },
+    "Õ": {
+      "unicode": "U+00D5",
+      "name": "LATIN CAPITAL LETTER O WITH TILDE",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "O",
+          "Ó",
+          "Ô",
+          "Ö",
+          "o",
+          "ò",
+          "ó",
+          "ô",
+          "ö"
+        ]
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xD5",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0xEC",
+        "fallbacks": []
+      }
+    },
+    "Ö": {
+      "unicode": "U+00D6",
+      "name": "LATIN CAPITAL LETTER O WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x5C",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xD6",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x99",
+        "fallbacks": []
+      }
+    },
+    "Ü": {
+      "unicode": "U+00DC",
+      "name": "LATIN CAPITAL LETTER U WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x5E",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xDC",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x9A",
+        "fallbacks": []
+      }
+    },
+    "ä": {
+      "unicode": "U+00E4",
+      "name": "LATIN SMALL LETTER A WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x7B",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xE4",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x84",
+        "fallbacks": []
+      }
+    },
+    "õ": {
+      "unicode": "U+00F5",
+      "name": "LATIN SMALL LETTER O WITH TILDE",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "o",
+          "ò",
+          "ó",
+          "ô",
+          "ö",
+          "O",
+          "Ó",
+          "Ô",
+          "Ö"
+        ]
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xF5",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0xED",
+        "fallbacks": []
+      }
+    },
+    "ö": {
+      "unicode": "U+00F6",
+      "name": "LATIN SMALL LETTER O WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x7C",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "o",
+          "ò",
+          "õ",
+          "O",
+          "Ó",
+          "Ô",
+          "Õ",
+          "Ö",
+          "Ő"
+        ]
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x94",
+        "fallbacks": []
+      }
+    },
+    "ü": {
+      "unicode": "U+00FC",
+      "name": "LATIN SMALL LETTER U WITH DIAERESIS",
+      "languages": [
+        "Estonian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0x7E",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xFC",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": true,
+        "byte_code": "0x81",
+        "fallbacks": []
+      }
+    },
+    "Ā": {
+      "unicode": "U+0100",
+      "name": "LATIN CAPITAL LETTER A WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "A",
+          "Á",
+          "Ä",
+          "Ȧ",
+          "a",
+          "à",
+          "á",
+          "ä",
+          "ȧ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "A",
+          "À",
+          "Á",
+          "Â",
+          "Ã",
+          "Ä",
+          "Ą",
+          "Ȧ",
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "A",
+          "Â",
+          "Ã",
+          "Ä",
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ"
+        ]
+      }
+    },
+    "ā": {
+      "unicode": "U+0101",
+      "name": "LATIN SMALL LETTER A WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ä",
+          "ȧ",
+          "A",
+          "Á",
+          "Ä",
+          "Ȧ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ",
+          "A",
+          "À",
+          "Á",
+          "Â",
+          "Ã",
+          "Ä",
+          "Ą",
+          "Ȧ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ",
+          "A",
+          "Â",
+          "Ã",
+          "Ä"
+        ]
+      }
+    },
+    "Ą": {
+      "unicode": "U+0104",
+      "name": "LATIN CAPITAL LETTER A WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "A",
+          "Á",
+          "Ä",
+          "Ȧ",
+          "a",
+          "à",
+          "á",
+          "ä",
+          "ȧ"
+        ]
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xA1",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "A",
+          "Â",
+          "Ã",
+          "Ä",
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ"
+        ]
+      }
+    },
+    "ą": {
+      "unicode": "U+0105",
+      "name": "LATIN SMALL LETTER A WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ä",
+          "ȧ",
+          "A",
+          "Á",
+          "Ä",
+          "Ȧ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ",
+          "A",
+          "À",
+          "Á",
+          "Â",
+          "Ã",
+          "Ä",
+          "Ą",
+          "Ȧ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "a",
+          "à",
+          "á",
+          "ã",
+          "ä",
+          "ȧ",
+          "A",
+          "Â",
+          "Ã",
+          "Ä"
+        ]
+      }
+    },
+    "Č": {
+      "unicode": "U+010C",
+      "name": "LATIN CAPITAL LETTER C WITH CARON",
+      "languages": [
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF0",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xA3",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "C",
+          "Ç",
+          "c",
+          "ç"
+        ]
+      }
+    },
+    "č": {
+      "unicode": "U+010D",
+      "name": "LATIN SMALL LETTER C WITH CARON",
+      "languages": [
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF5",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "c",
+          "ç",
+          "C",
+          "Ç",
+          "Ć",
+          "Č"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "c",
+          "ç",
+          "C",
+          "Ç"
+        ]
+      }
+    },
+    "Ē": {
+      "unicode": "U+0112",
+      "name": "LATIN CAPITAL LETTER E WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ë",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "ę"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "É",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë"
+        ]
+      }
+    },
+    "ē": {
+      "unicode": "U+0113",
+      "name": "LATIN SMALL LETTER E WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě",
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "ę",
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ë",
+          "Ě"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "E",
+          "É"
+        ]
+      }
+    },
+    "Ė": {
+      "unicode": "U+0116",
+      "name": "LATIN CAPITAL LETTER E WITH DOT ABOVE",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ë",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "ę"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "É",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë"
+        ]
+      }
+    },
+    "ė": {
+      "unicode": "U+0117",
+      "name": "LATIN SMALL LETTER E WITH DOT ABOVE",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě",
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "ę",
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ë",
+          "Ě"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "E",
+          "É"
+        ]
+      }
+    },
+    "Ę": {
+      "unicode": "U+0118",
+      "name": "LATIN CAPITAL LETTER E WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ë",
+          "Ě",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "ę"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "E",
+          "É",
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë"
+        ]
+      }
+    },
+    "ę": {
+      "unicode": "U+0119",
+      "name": "LATIN SMALL LETTER E WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ě",
+          "E",
+          "È",
+          "É",
+          "Ê",
+          "Ě"
+        ]
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xA6",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "e",
+          "è",
+          "é",
+          "ê",
+          "ë",
+          "E",
+          "É"
+        ]
+      }
+    },
+    "Ģ": {
+      "unicode": "U+0122",
+      "name": "LATIN CAPITAL LETTER G WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "G",
+          "g",
+          "ğ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "G",
+          "Ğ",
+          "g",
+          "ğ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "G",
+          "g"
+        ]
+      }
+    },
+    "ģ": {
+      "unicode": "U+0123",
+      "name": "LATIN SMALL LETTER G WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "g",
+          "ğ",
+          "G"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "g",
+          "ğ",
+          "G",
+          "Ğ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "g",
+          "G"
+        ]
+      }
+    },
+    "Ī": {
+      "unicode": "U+012A",
+      "name": "LATIN CAPITAL LETTER I WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "Í",
+          "İ",
+          "i",
+          "ì",
+          "í"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "Ì",
+          "Í",
+          "Î",
+          "Ï",
+          "İ",
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï"
+        ]
+      }
+    },
+    "ī": {
+      "unicode": "U+012B",
+      "name": "LATIN SMALL LETTER I WITH MACRON",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "I",
+          "Í",
+          "İ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï",
+          "I",
+          "Ì",
+          "Í",
+          "Î",
+          "Ï",
+          "İ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï",
+          "I"
+        ]
+      }
+    },
+    "Į": {
+      "unicode": "U+012E",
+      "name": "LATIN CAPITAL LETTER I WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "Í",
+          "İ",
+          "i",
+          "ì",
+          "í"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "Ì",
+          "Í",
+          "Î",
+          "Ï",
+          "İ",
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "I",
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï"
+        ]
+      }
+    },
+    "į": {
+      "unicode": "U+012F",
+      "name": "LATIN SMALL LETTER I WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "I",
+          "Í",
+          "İ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï",
+          "I",
+          "Ì",
+          "Í",
+          "Î",
+          "Ï",
+          "İ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "i",
+          "ì",
+          "í",
+          "î",
+          "ï",
+          "I"
+        ]
+      }
+    },
+    "Ķ": {
+      "unicode": "U+0136",
+      "name": "LATIN CAPITAL LETTER K WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "K",
+          "k"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "K",
+          "k"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "K",
+          "k"
+        ]
+      }
+    },
+    "ķ": {
+      "unicode": "U+0137",
+      "name": "LATIN SMALL LETTER K WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "k",
+          "K"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "k",
+          "K"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "k",
+          "K"
+        ]
+      }
+    },
+    "Ļ": {
+      "unicode": "U+013B",
+      "name": "LATIN CAPITAL LETTER L WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "L",
+          "l"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "L",
+          "l",
+          "ľ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "L",
+          "l"
+        ]
+      }
+    },
+    "ļ": {
+      "unicode": "U+013C",
+      "name": "LATIN SMALL LETTER L WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "l",
+          "L"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "l",
+          "ľ",
+          "L"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "l",
+          "L"
+        ]
+      }
+    },
+    "Ņ": {
+      "unicode": "U+0145",
+      "name": "LATIN CAPITAL LETTER N WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "N",
+          "Ñ",
+          "n",
+          "ñ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "N",
+          "Ñ",
+          "Ń",
+          "Ň",
+          "n",
+          "ñ"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "N",
+          "Ñ",
+          "n",
+          "ñ"
+        ]
+      }
+    },
+    "ņ": {
+      "unicode": "U+0146",
+      "name": "LATIN SMALL LETTER N WITH CEDILLA",
+      "languages": [
+        "Latvian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "n",
+          "ñ",
+          "N",
+          "Ñ"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "n",
+          "ñ",
+          "N",
+          "Ñ",
+          "Ń",
+          "Ň"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "n",
+          "ñ",
+          "N",
+          "Ñ"
+        ]
+      }
+    },
+    "Š": {
+      "unicode": "U+0160",
+      "name": "LATIN CAPITAL LETTER S WITH CARON",
+      "languages": [
+        "Estonian",
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF3",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "S",
+          "Ś",
+          "Ş",
+          "s",
+          "ş",
+          "š"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "S",
+          "s"
+        ]
+      }
+    },
+    "š": {
+      "unicode": "U+0161",
+      "name": "LATIN SMALL LETTER S WITH CARON",
+      "languages": [
+        "Estonian",
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF8",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xB3",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "s",
+          "S"
+        ]
+      }
+    },
+    "Ū": {
+      "unicode": "U+016A",
+      "name": "LATIN CAPITAL LETTER U WITH MACRON",
+      "languages": [
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ú",
+          "Ü",
+          "Ů",
+          "u",
+          "ù",
+          "ú",
+          "ü",
+          "ů"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ù",
+          "Ú",
+          "Û",
+          "Ü",
+          "Ů",
+          "Ű",
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ü",
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü"
+        ]
+      }
+    },
+    "ū": {
+      "unicode": "U+016B",
+      "name": "LATIN SMALL LETTER U WITH MACRON",
+      "languages": [
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "ü",
+          "ů",
+          "U",
+          "Ú",
+          "Ü",
+          "Ů"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü",
+          "U",
+          "Ù",
+          "Ú",
+          "Û",
+          "Ü",
+          "Ů",
+          "Ű"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü",
+          "U",
+          "Ü"
+        ]
+      }
+    },
+    "Ų": {
+      "unicode": "U+0172",
+      "name": "LATIN CAPITAL LETTER U WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ú",
+          "Ü",
+          "Ů",
+          "u",
+          "ù",
+          "ú",
+          "ü",
+          "ů"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ù",
+          "Ú",
+          "Û",
+          "Ü",
+          "Ů",
+          "Ű",
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "U",
+          "Ü",
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü"
+        ]
+      }
+    },
+    "ų": {
+      "unicode": "U+0173",
+      "name": "LATIN SMALL LETTER U WITH OGONEK",
+      "languages": [
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "ü",
+          "ů",
+          "U",
+          "Ú",
+          "Ü",
+          "Ů"
+        ]
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü",
+          "U",
+          "Ù",
+          "Ú",
+          "Û",
+          "Ü",
+          "Ů",
+          "Ű"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "u",
+          "ù",
+          "ú",
+          "û",
+          "ü",
+          "U",
+          "Ü"
+        ]
+      }
+    },
+    "Ž": {
+      "unicode": "U+017D",
+      "name": "LATIN CAPITAL LETTER Z WITH CARON",
+      "languages": [
+        "Estonian",
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF4",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "Z",
+          "Ź",
+          "Ż",
+          "z",
+          "ž"
+        ]
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "Z",
+          "z"
+        ]
+      }
+    },
+    "ž": {
+      "unicode": "U+017E",
+      "name": "LATIN SMALL LETTER Z WITH CARON",
+      "languages": [
+        "Estonian",
+        "Latvian",
+        "Lithuanian"
+      ],
+      "rom_a": {
+        "available": true,
+        "byte_code": "0xF9",
+        "fallbacks": []
+      },
+      "rom_b": {
+        "available": true,
+        "byte_code": "0xBA",
+        "fallbacks": []
+      },
+      "rom_c": {
+        "available": false,
+        "byte_code": null,
+        "fallbacks": [
+          "z",
+          "Z"
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total_special_chars": 40,
+    "rom_a_coverage": {
+      "available": 12,
+      "missing": 28
+    },
+    "rom_b_coverage": {
+      "available": 12,
+      "missing": 28
+    },
+    "rom_c_coverage": {
+      "available": 8,
+      "missing": 32
+    },
+    "best_rom": "rom_a"
+  }
+}
