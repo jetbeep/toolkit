@@ -1,0 +1,113 @@
+.preview-area {
+    font-family: monospace;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 1rem;
+    min-height: 80px;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background: #fff;
+}
+
+.char-mapped {
+    color: #198754;
+}
+
+.char-unmapped {
+    color: #dc3545;
+    background: #fff3cd;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.char-unmapped:hover {
+    background: #ffecb5;
+}
+
+.char-custom {
+    color: #0d6efd;
+}
+
+.char-passthrough {
+    color: inherit;
+}
+
+.rom-grid {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+    max-width: 100%;
+}
+
+.rom-grid-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.rom-grid-cell:hover {
+    background: #e7f1ff;
+    border-color: #0d6efd;
+}
+
+.rom-grid-cell.undefined {
+    background: #f5f5f5;
+    color: #ccc;
+    cursor: default;
+}
+
+.rom-grid-cell.undefined:hover {
+    background: #f5f5f5;
+    border-color: #dee2e6;
+}
+
+.rom-grid-cell.selected {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.suggestion-btn {
+    min-width: 3rem;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.suggestion-btn.selected {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}
+
+.mappings-table {
+    width: 100%;
+}
+
+.mappings-table th,
+.mappings-table td {
+    padding: 0.35rem 0.75rem;
+    font-family: monospace;
+}
+
+.rom-grid-header {
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: #6c757d;
+    cursor: default;
+    background: #f8f9fa;
+}
+
+.rom-grid-header:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+}

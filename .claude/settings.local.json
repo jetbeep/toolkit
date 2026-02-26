@@ -4,7 +4,8 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd File Set Manager tool for JetBeep Fleet API\n\n- Create new File Set Manager tool for managing Fleet API file sets\n- Add comprehensive web interface with Bootstrap 5 UI\n- Implement file browsing, upload, edit, and delete functionality\n- Support multiple file uploads with batch processing\n- Add image preview functionality with hover zoom effect\n- Support file types: screenImage, uiScriptBin, uiScriptData, screenFont\n- Implement configuration persistence in localStorage\n- Add search and filtering capabilities\n- Include detailed README documentation\n- Update main toolkit landing page with File Set Manager card\n\nFeatures:\n- Browse and navigate file sets from Fleet API\n- Upload single or multiple files of same type\n- Edit existing files with PATCH endpoint\n- Delete files with confirmation\n- Preview images with thumbnails and full-size modal\n- Hover to zoom image thumbnails (6x magnification)\n- Save/load/import/export configuration\n- Real-time toast notifications\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git log:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []
