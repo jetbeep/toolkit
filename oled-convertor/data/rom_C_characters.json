@@ -1,0 +1,2306 @@
+{
+  "0000_0000": {
+    "hex": "0x00",
+    "binary": "0000_0000",
+    "decimal": 0,
+    "rom_value": "⌠",
+    "ascii_value": "CONTROL (U+0000)",
+    "rom_unicode_name": "TOP HALF INTEGRAL",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0000)"
+  },
+  "0000_0001": {
+    "hex": "0x01",
+    "binary": "0000_0001",
+    "decimal": 1,
+    "rom_value": "⌡",
+    "ascii_value": "CONTROL (U+0001)",
+    "rom_unicode_name": "BOTTOM HALF INTEGRAL",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0001)"
+  },
+  "0000_0010": {
+    "hex": "0x02",
+    "binary": "0000_0010",
+    "decimal": 2,
+    "rom_value": "∞",
+    "ascii_value": "CONTROL (U+0002)",
+    "rom_unicode_name": "INFINITY",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0002)"
+  },
+  "0000_0011": {
+    "hex": "0x03",
+    "binary": "0000_0011",
+    "decimal": 3,
+    "rom_value": "∇",
+    "ascii_value": "CONTROL (U+0003)",
+    "rom_unicode_name": "NABLA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0003)"
+  },
+  "0000_0100": {
+    "hex": "0x04",
+    "binary": "0000_0100",
+    "decimal": 4,
+    "rom_value": "↵",
+    "ascii_value": "CONTROL (U+0004)",
+    "rom_unicode_name": "DOWNWARDS ARROW WITH CORNER LEFTWARDS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0004)"
+  },
+  "0000_0101": {
+    "hex": "0x05",
+    "binary": "0000_0101",
+    "decimal": 5,
+    "rom_value": "￪",
+    "ascii_value": "CONTROL (U+0005)",
+    "rom_unicode_name": "HALFWIDTH UPWARDS ARROW",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0005)"
+  },
+  "0000_0110": {
+    "hex": "0x06",
+    "binary": "0000_0110",
+    "decimal": 6,
+    "rom_value": "￬",
+    "ascii_value": "CONTROL (U+0006)",
+    "rom_unicode_name": "HALFWIDTH DOWNWARDS ARROW",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0006)"
+  },
+  "0000_0111": {
+    "hex": "0x07",
+    "binary": "0000_0111",
+    "decimal": 7,
+    "rom_value": "￫",
+    "ascii_value": "CONTROL (U+0007)",
+    "rom_unicode_name": "HALFWIDTH RIGHTWARDS ARROW",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0007)"
+  },
+  "0000_1000": {
+    "hex": "0x08",
+    "binary": "0000_1000",
+    "decimal": 8,
+    "rom_value": "￩",
+    "ascii_value": "CONTROL (U+0008)",
+    "rom_unicode_name": "HALFWIDTH LEFTWARDS ARROW",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0008)"
+  },
+  "0000_1001": {
+    "hex": "0x09",
+    "binary": "0000_1001",
+    "decimal": 9,
+    "rom_value": "┌",
+    "ascii_value": "CONTROL (U+0009)",
+    "rom_unicode_name": "BOX DRAWINGS LIGHT DOWN AND RIGHT",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0009)"
+  },
+  "0000_1010": {
+    "hex": "0x0A",
+    "binary": "0000_1010",
+    "decimal": 10,
+    "rom_value": "┐",
+    "ascii_value": "CONTROL (U+000A)",
+    "rom_unicode_name": "BOX DRAWINGS LIGHT DOWN AND LEFT",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000A)"
+  },
+  "0000_1011": {
+    "hex": "0x0B",
+    "binary": "0000_1011",
+    "decimal": 11,
+    "rom_value": "└",
+    "ascii_value": "CONTROL (U+000B)",
+    "rom_unicode_name": "BOX DRAWINGS LIGHT UP AND RIGHT",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000B)"
+  },
+  "0000_1100": {
+    "hex": "0x0C",
+    "binary": "0000_1100",
+    "decimal": 12,
+    "rom_value": "┘",
+    "ascii_value": "CONTROL (U+000C)",
+    "rom_unicode_name": "BOX DRAWINGS LIGHT UP AND LEFT",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000C)"
+  },
+  "0000_1101": {
+    "hex": "0x0D",
+    "binary": "0000_1101",
+    "decimal": 13,
+    "rom_value": "･",
+    "ascii_value": "CONTROL (U+000D)",
+    "rom_unicode_name": "HALFWIDTH KATAKANA MIDDLE DOT",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000D)"
+  },
+  "0000_1110": {
+    "hex": "0x0E",
+    "binary": "0000_1110",
+    "decimal": 14,
+    "rom_value": "®",
+    "ascii_value": "CONTROL (U+000E)",
+    "rom_unicode_name": "REGISTERED SIGN",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000E)"
+  },
+  "0000_1111": {
+    "hex": "0x0F",
+    "binary": "0000_1111",
+    "decimal": 15,
+    "rom_value": "©",
+    "ascii_value": "CONTROL (U+000F)",
+    "rom_unicode_name": "COPYRIGHT SIGN",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+000F)"
+  },
+  "0001_0000": {
+    "hex": "0x10",
+    "binary": "0001_0000",
+    "decimal": 16,
+    "rom_value": "™",
+    "ascii_value": "CONTROL (U+0010)",
+    "rom_unicode_name": "TRADE MARK SIGN",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0010)"
+  },
+  "0001_0001": {
+    "hex": "0x11",
+    "binary": "0001_0001",
+    "decimal": 17,
+    "rom_value": "†",
+    "ascii_value": "CONTROL (U+0011)",
+    "rom_unicode_name": "DAGGER",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0011)"
+  },
+  "0001_0010": {
+    "hex": "0x12",
+    "binary": "0001_0010",
+    "decimal": 18,
+    "rom_value": "§",
+    "ascii_value": "CONTROL (U+0012)",
+    "rom_unicode_name": "SECTION SIGN",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0012)"
+  },
+  "0001_0011": {
+    "hex": "0x13",
+    "binary": "0001_0011",
+    "decimal": 19,
+    "rom_value": "¶",
+    "ascii_value": "CONTROL (U+0013)",
+    "rom_unicode_name": "PILCROW SIGN",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0013)"
+  },
+  "0001_0100": {
+    "hex": "0x14",
+    "binary": "0001_0100",
+    "decimal": 20,
+    "rom_value": "Γ",
+    "ascii_value": "CONTROL (U+0014)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER GAMMA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0014)"
+  },
+  "0001_0101": {
+    "hex": "0x15",
+    "binary": "0001_0101",
+    "decimal": 21,
+    "rom_value": "Δ",
+    "ascii_value": "CONTROL (U+0015)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER DELTA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0015)"
+  },
+  "0001_0110": {
+    "hex": "0x16",
+    "binary": "0001_0110",
+    "decimal": 22,
+    "rom_value": "Θ",
+    "ascii_value": "CONTROL (U+0016)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER THETA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0016)"
+  },
+  "0001_0111": {
+    "hex": "0x17",
+    "binary": "0001_0111",
+    "decimal": 23,
+    "rom_value": "Λ",
+    "ascii_value": "CONTROL (U+0017)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER LAMDA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0017)"
+  },
+  "0001_1000": {
+    "hex": "0x18",
+    "binary": "0001_1000",
+    "decimal": 24,
+    "rom_value": "Ξ",
+    "ascii_value": "CONTROL (U+0018)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER XI",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0018)"
+  },
+  "0001_1001": {
+    "hex": "0x19",
+    "binary": "0001_1001",
+    "decimal": 25,
+    "rom_value": "Π",
+    "ascii_value": "CONTROL (U+0019)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER PI",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0019)"
+  },
+  "0001_1010": {
+    "hex": "0x1A",
+    "binary": "0001_1010",
+    "decimal": 26,
+    "rom_value": "Σ",
+    "ascii_value": "CONTROL (U+001A)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER SIGMA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001A)"
+  },
+  "0001_1011": {
+    "hex": "0x1B",
+    "binary": "0001_1011",
+    "decimal": 27,
+    "rom_value": "Υ",
+    "ascii_value": "CONTROL (U+001B)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER UPSILON",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001B)"
+  },
+  "0001_1100": {
+    "hex": "0x1C",
+    "binary": "0001_1100",
+    "decimal": 28,
+    "rom_value": "Φ",
+    "ascii_value": "CONTROL (U+001C)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER PHI",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001C)"
+  },
+  "0001_1101": {
+    "hex": "0x1D",
+    "binary": "0001_1101",
+    "decimal": 29,
+    "rom_value": "Ψ",
+    "ascii_value": "CONTROL (U+001D)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER PSI",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001D)"
+  },
+  "0001_1110": {
+    "hex": "0x1E",
+    "binary": "0001_1110",
+    "decimal": 30,
+    "rom_value": "Ω",
+    "ascii_value": "CONTROL (U+001E)",
+    "rom_unicode_name": "GREEK CAPITAL LETTER OMEGA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001E)"
+  },
+  "0001_1111": {
+    "hex": "0x1F",
+    "binary": "0001_1111",
+    "decimal": 31,
+    "rom_value": "α",
+    "ascii_value": "CONTROL (U+001F)",
+    "rom_unicode_name": "GREEK SMALL LETTER ALPHA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+001F)"
+  },
+  "0010_0000": {
+    "hex": "0x20",
+    "binary": "0010_0000",
+    "decimal": 32,
+    "rom_value": " ",
+    "ascii_value": " ",
+    "rom_unicode_name": "SPACE",
+    "ascii_unicode_name": "SPACE"
+  },
+  "0010_0001": {
+    "hex": "0x21",
+    "binary": "0010_0001",
+    "decimal": 33,
+    "rom_value": "!",
+    "ascii_value": "!",
+    "rom_unicode_name": "EXCLAMATION MARK",
+    "ascii_unicode_name": "EXCLAMATION MARK"
+  },
+  "0010_0010": {
+    "hex": "0x22",
+    "binary": "0010_0010",
+    "decimal": 34,
+    "rom_value": "\"",
+    "ascii_value": "\"",
+    "rom_unicode_name": "QUOTATION MARK",
+    "ascii_unicode_name": "QUOTATION MARK"
+  },
+  "0010_0011": {
+    "hex": "0x23",
+    "binary": "0010_0011",
+    "decimal": 35,
+    "rom_value": "#",
+    "ascii_value": "#",
+    "rom_unicode_name": "NUMBER SIGN",
+    "ascii_unicode_name": "NUMBER SIGN"
+  },
+  "0010_0100": {
+    "hex": "0x24",
+    "binary": "0010_0100",
+    "decimal": 36,
+    "rom_value": "$",
+    "ascii_value": "$",
+    "rom_unicode_name": "DOLLAR SIGN",
+    "ascii_unicode_name": "DOLLAR SIGN"
+  },
+  "0010_0101": {
+    "hex": "0x25",
+    "binary": "0010_0101",
+    "decimal": 37,
+    "rom_value": "%",
+    "ascii_value": "%",
+    "rom_unicode_name": "PERCENT SIGN",
+    "ascii_unicode_name": "PERCENT SIGN"
+  },
+  "0010_0110": {
+    "hex": "0x26",
+    "binary": "0010_0110",
+    "decimal": 38,
+    "rom_value": "&",
+    "ascii_value": "&",
+    "rom_unicode_name": "AMPERSAND",
+    "ascii_unicode_name": "AMPERSAND"
+  },
+  "0010_0111": {
+    "hex": "0x27",
+    "binary": "0010_0111",
+    "decimal": 39,
+    "rom_value": "'",
+    "ascii_value": "'",
+    "rom_unicode_name": "APOSTROPHE",
+    "ascii_unicode_name": "APOSTROPHE"
+  },
+  "0010_1000": {
+    "hex": "0x28",
+    "binary": "0010_1000",
+    "decimal": 40,
+    "rom_value": "(",
+    "ascii_value": "(",
+    "rom_unicode_name": "LEFT PARENTHESIS",
+    "ascii_unicode_name": "LEFT PARENTHESIS"
+  },
+  "0010_1001": {
+    "hex": "0x29",
+    "binary": "0010_1001",
+    "decimal": 41,
+    "rom_value": ")",
+    "ascii_value": ")",
+    "rom_unicode_name": "RIGHT PARENTHESIS",
+    "ascii_unicode_name": "RIGHT PARENTHESIS"
+  },
+  "0010_1010": {
+    "hex": "0x2A",
+    "binary": "0010_1010",
+    "decimal": 42,
+    "rom_value": "*",
+    "ascii_value": "*",
+    "rom_unicode_name": "ASTERISK",
+    "ascii_unicode_name": "ASTERISK"
+  },
+  "0010_1011": {
+    "hex": "0x2B",
+    "binary": "0010_1011",
+    "decimal": 43,
+    "rom_value": "+",
+    "ascii_value": "+",
+    "rom_unicode_name": "PLUS SIGN",
+    "ascii_unicode_name": "PLUS SIGN"
+  },
+  "0010_1100": {
+    "hex": "0x2C",
+    "binary": "0010_1100",
+    "decimal": 44,
+    "rom_value": ",",
+    "ascii_value": ",",
+    "rom_unicode_name": "COMMA",
+    "ascii_unicode_name": "COMMA"
+  },
+  "0010_1101": {
+    "hex": "0x2D",
+    "binary": "0010_1101",
+    "decimal": 45,
+    "rom_value": "-",
+    "ascii_value": "-",
+    "rom_unicode_name": "HYPHEN-MINUS",
+    "ascii_unicode_name": "HYPHEN-MINUS"
+  },
+  "0010_1110": {
+    "hex": "0x2E",
+    "binary": "0010_1110",
+    "decimal": 46,
+    "rom_value": ".",
+    "ascii_value": ".",
+    "rom_unicode_name": "FULL STOP",
+    "ascii_unicode_name": "FULL STOP"
+  },
+  "0010_1111": {
+    "hex": "0x2F",
+    "binary": "0010_1111",
+    "decimal": 47,
+    "rom_value": "/",
+    "ascii_value": "/",
+    "rom_unicode_name": "SOLIDUS",
+    "ascii_unicode_name": "SOLIDUS"
+  },
+  "0011_0000": {
+    "hex": "0x30",
+    "binary": "0011_0000",
+    "decimal": 48,
+    "rom_value": "0",
+    "ascii_value": "0",
+    "rom_unicode_name": "DIGIT ZERO",
+    "ascii_unicode_name": "DIGIT ZERO"
+  },
+  "0011_0001": {
+    "hex": "0x31",
+    "binary": "0011_0001",
+    "decimal": 49,
+    "rom_value": "1",
+    "ascii_value": "1",
+    "rom_unicode_name": "DIGIT ONE",
+    "ascii_unicode_name": "DIGIT ONE"
+  },
+  "0011_0010": {
+    "hex": "0x32",
+    "binary": "0011_0010",
+    "decimal": 50,
+    "rom_value": "2",
+    "ascii_value": "2",
+    "rom_unicode_name": "DIGIT TWO",
+    "ascii_unicode_name": "DIGIT TWO"
+  },
+  "0011_0011": {
+    "hex": "0x33",
+    "binary": "0011_0011",
+    "decimal": 51,
+    "rom_value": "3",
+    "ascii_value": "3",
+    "rom_unicode_name": "DIGIT THREE",
+    "ascii_unicode_name": "DIGIT THREE"
+  },
+  "0011_0100": {
+    "hex": "0x34",
+    "binary": "0011_0100",
+    "decimal": 52,
+    "rom_value": "4",
+    "ascii_value": "4",
+    "rom_unicode_name": "DIGIT FOUR",
+    "ascii_unicode_name": "DIGIT FOUR"
+  },
+  "0011_0101": {
+    "hex": "0x35",
+    "binary": "0011_0101",
+    "decimal": 53,
+    "rom_value": "5",
+    "ascii_value": "5",
+    "rom_unicode_name": "DIGIT FIVE",
+    "ascii_unicode_name": "DIGIT FIVE"
+  },
+  "0011_0110": {
+    "hex": "0x36",
+    "binary": "0011_0110",
+    "decimal": 54,
+    "rom_value": "6",
+    "ascii_value": "6",
+    "rom_unicode_name": "DIGIT SIX",
+    "ascii_unicode_name": "DIGIT SIX"
+  },
+  "0011_0111": {
+    "hex": "0x37",
+    "binary": "0011_0111",
+    "decimal": 55,
+    "rom_value": "7",
+    "ascii_value": "7",
+    "rom_unicode_name": "DIGIT SEVEN",
+    "ascii_unicode_name": "DIGIT SEVEN"
+  },
+  "0011_1000": {
+    "hex": "0x38",
+    "binary": "0011_1000",
+    "decimal": 56,
+    "rom_value": "8",
+    "ascii_value": "8",
+    "rom_unicode_name": "DIGIT EIGHT",
+    "ascii_unicode_name": "DIGIT EIGHT"
+  },
+  "0011_1001": {
+    "hex": "0x39",
+    "binary": "0011_1001",
+    "decimal": 57,
+    "rom_value": "9",
+    "ascii_value": "9",
+    "rom_unicode_name": "DIGIT NINE",
+    "ascii_unicode_name": "DIGIT NINE"
+  },
+  "0011_1010": {
+    "hex": "0x3A",
+    "binary": "0011_1010",
+    "decimal": 58,
+    "rom_value": ":",
+    "ascii_value": ":",
+    "rom_unicode_name": "COLON",
+    "ascii_unicode_name": "COLON"
+  },
+  "0011_1011": {
+    "hex": "0x3B",
+    "binary": "0011_1011",
+    "decimal": 59,
+    "rom_value": ";",
+    "ascii_value": ";",
+    "rom_unicode_name": "SEMICOLON",
+    "ascii_unicode_name": "SEMICOLON"
+  },
+  "0011_1100": {
+    "hex": "0x3C",
+    "binary": "0011_1100",
+    "decimal": 60,
+    "rom_value": "<",
+    "ascii_value": "<",
+    "rom_unicode_name": "LESS-THAN SIGN",
+    "ascii_unicode_name": "LESS-THAN SIGN"
+  },
+  "0011_1101": {
+    "hex": "0x3D",
+    "binary": "0011_1101",
+    "decimal": 61,
+    "rom_value": "=",
+    "ascii_value": "=",
+    "rom_unicode_name": "EQUALS SIGN",
+    "ascii_unicode_name": "EQUALS SIGN"
+  },
+  "0011_1110": {
+    "hex": "0x3E",
+    "binary": "0011_1110",
+    "decimal": 62,
+    "rom_value": ">",
+    "ascii_value": ">",
+    "rom_unicode_name": "GREATER-THAN SIGN",
+    "ascii_unicode_name": "GREATER-THAN SIGN"
+  },
+  "0011_1111": {
+    "hex": "0x3F",
+    "binary": "0011_1111",
+    "decimal": 63,
+    "rom_value": "?",
+    "ascii_value": "?",
+    "rom_unicode_name": "QUESTION MARK",
+    "ascii_unicode_name": "QUESTION MARK"
+  },
+  "0100_0000": {
+    "hex": "0x40",
+    "binary": "0100_0000",
+    "decimal": 64,
+    "rom_value": "@",
+    "ascii_value": "@",
+    "rom_unicode_name": "COMMERCIAL AT",
+    "ascii_unicode_name": "COMMERCIAL AT"
+  },
+  "0100_0001": {
+    "hex": "0x41",
+    "binary": "0100_0001",
+    "decimal": 65,
+    "rom_value": "A",
+    "ascii_value": "A",
+    "rom_unicode_name": "LATIN CAPITAL LETTER A",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A"
+  },
+  "0100_0010": {
+    "hex": "0x42",
+    "binary": "0100_0010",
+    "decimal": 66,
+    "rom_value": "B",
+    "ascii_value": "B",
+    "rom_unicode_name": "LATIN CAPITAL LETTER B",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER B"
+  },
+  "0100_0011": {
+    "hex": "0x43",
+    "binary": "0100_0011",
+    "decimal": 67,
+    "rom_value": "C",
+    "ascii_value": "C",
+    "rom_unicode_name": "LATIN CAPITAL LETTER C",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER C"
+  },
+  "0100_0100": {
+    "hex": "0x44",
+    "binary": "0100_0100",
+    "decimal": 68,
+    "rom_value": "D",
+    "ascii_value": "D",
+    "rom_unicode_name": "LATIN CAPITAL LETTER D",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER D"
+  },
+  "0100_0101": {
+    "hex": "0x45",
+    "binary": "0100_0101",
+    "decimal": 69,
+    "rom_value": "E",
+    "ascii_value": "E",
+    "rom_unicode_name": "LATIN CAPITAL LETTER E",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER E"
+  },
+  "0100_0110": {
+    "hex": "0x46",
+    "binary": "0100_0110",
+    "decimal": 70,
+    "rom_value": "F",
+    "ascii_value": "F",
+    "rom_unicode_name": "LATIN CAPITAL LETTER F",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER F"
+  },
+  "0100_0111": {
+    "hex": "0x47",
+    "binary": "0100_0111",
+    "decimal": 71,
+    "rom_value": "G",
+    "ascii_value": "G",
+    "rom_unicode_name": "LATIN CAPITAL LETTER G",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER G"
+  },
+  "0100_1000": {
+    "hex": "0x48",
+    "binary": "0100_1000",
+    "decimal": 72,
+    "rom_value": "H",
+    "ascii_value": "H",
+    "rom_unicode_name": "LATIN CAPITAL LETTER H",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER H"
+  },
+  "0100_1001": {
+    "hex": "0x49",
+    "binary": "0100_1001",
+    "decimal": 73,
+    "rom_value": "I",
+    "ascii_value": "I",
+    "rom_unicode_name": "LATIN CAPITAL LETTER I",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER I"
+  },
+  "0100_1010": {
+    "hex": "0x4A",
+    "binary": "0100_1010",
+    "decimal": 74,
+    "rom_value": "J",
+    "ascii_value": "J",
+    "rom_unicode_name": "LATIN CAPITAL LETTER J",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER J"
+  },
+  "0100_1011": {
+    "hex": "0x4B",
+    "binary": "0100_1011",
+    "decimal": 75,
+    "rom_value": "K",
+    "ascii_value": "K",
+    "rom_unicode_name": "LATIN CAPITAL LETTER K",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER K"
+  },
+  "0100_1100": {
+    "hex": "0x4C",
+    "binary": "0100_1100",
+    "decimal": 76,
+    "rom_value": "L",
+    "ascii_value": "L",
+    "rom_unicode_name": "LATIN CAPITAL LETTER L",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER L"
+  },
+  "0100_1101": {
+    "hex": "0x4D",
+    "binary": "0100_1101",
+    "decimal": 77,
+    "rom_value": "M",
+    "ascii_value": "M",
+    "rom_unicode_name": "LATIN CAPITAL LETTER M",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER M"
+  },
+  "0100_1110": {
+    "hex": "0x4E",
+    "binary": "0100_1110",
+    "decimal": 78,
+    "rom_value": "N",
+    "ascii_value": "N",
+    "rom_unicode_name": "LATIN CAPITAL LETTER N",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER N"
+  },
+  "0100_1111": {
+    "hex": "0x4F",
+    "binary": "0100_1111",
+    "decimal": 79,
+    "rom_value": "O",
+    "ascii_value": "O",
+    "rom_unicode_name": "LATIN CAPITAL LETTER O",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O"
+  },
+  "0101_0000": {
+    "hex": "0x50",
+    "binary": "0101_0000",
+    "decimal": 80,
+    "rom_value": "P",
+    "ascii_value": "P",
+    "rom_unicode_name": "LATIN CAPITAL LETTER P",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER P"
+  },
+  "0101_0001": {
+    "hex": "0x51",
+    "binary": "0101_0001",
+    "decimal": 81,
+    "rom_value": "Q",
+    "ascii_value": "Q",
+    "rom_unicode_name": "LATIN CAPITAL LETTER Q",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER Q"
+  },
+  "0101_0010": {
+    "hex": "0x52",
+    "binary": "0101_0010",
+    "decimal": 82,
+    "rom_value": "R",
+    "ascii_value": "R",
+    "rom_unicode_name": "LATIN CAPITAL LETTER R",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER R"
+  },
+  "0101_0011": {
+    "hex": "0x53",
+    "binary": "0101_0011",
+    "decimal": 83,
+    "rom_value": "S",
+    "ascii_value": "S",
+    "rom_unicode_name": "LATIN CAPITAL LETTER S",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER S"
+  },
+  "0101_0100": {
+    "hex": "0x54",
+    "binary": "0101_0100",
+    "decimal": 84,
+    "rom_value": "T",
+    "ascii_value": "T",
+    "rom_unicode_name": "LATIN CAPITAL LETTER T",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER T"
+  },
+  "0101_0101": {
+    "hex": "0x55",
+    "binary": "0101_0101",
+    "decimal": 85,
+    "rom_value": "U",
+    "ascii_value": "U",
+    "rom_unicode_name": "LATIN CAPITAL LETTER U",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER U"
+  },
+  "0101_0110": {
+    "hex": "0x56",
+    "binary": "0101_0110",
+    "decimal": 86,
+    "rom_value": "V",
+    "ascii_value": "V",
+    "rom_unicode_name": "LATIN CAPITAL LETTER V",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER V"
+  },
+  "0101_0111": {
+    "hex": "0x57",
+    "binary": "0101_0111",
+    "decimal": 87,
+    "rom_value": "W",
+    "ascii_value": "W",
+    "rom_unicode_name": "LATIN CAPITAL LETTER W",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER W"
+  },
+  "0101_1000": {
+    "hex": "0x58",
+    "binary": "0101_1000",
+    "decimal": 88,
+    "rom_value": "X",
+    "ascii_value": "X",
+    "rom_unicode_name": "LATIN CAPITAL LETTER X",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER X"
+  },
+  "0101_1001": {
+    "hex": "0x59",
+    "binary": "0101_1001",
+    "decimal": 89,
+    "rom_value": "Y",
+    "ascii_value": "Y",
+    "rom_unicode_name": "LATIN CAPITAL LETTER Y",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER Y"
+  },
+  "0101_1010": {
+    "hex": "0x5A",
+    "binary": "0101_1010",
+    "decimal": 90,
+    "rom_value": "Z",
+    "ascii_value": "Z",
+    "rom_unicode_name": "LATIN CAPITAL LETTER Z",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER Z"
+  },
+  "0101_1011": {
+    "hex": "0x5B",
+    "binary": "0101_1011",
+    "decimal": 91,
+    "rom_value": "[",
+    "ascii_value": "[",
+    "rom_unicode_name": "LEFT SQUARE BRACKET",
+    "ascii_unicode_name": "LEFT SQUARE BRACKET"
+  },
+  "0101_1100": {
+    "hex": "0x5C",
+    "binary": "0101_1100",
+    "decimal": 92,
+    "rom_value": "\\",
+    "ascii_value": "\\",
+    "rom_unicode_name": "REVERSE SOLIDUS",
+    "ascii_unicode_name": "REVERSE SOLIDUS"
+  },
+  "0101_1101": {
+    "hex": "0x5D",
+    "binary": "0101_1101",
+    "decimal": 93,
+    "rom_value": "]",
+    "ascii_value": "]",
+    "rom_unicode_name": "RIGHT SQUARE BRACKET",
+    "ascii_unicode_name": "RIGHT SQUARE BRACKET"
+  },
+  "0101_1110": {
+    "hex": "0x5E",
+    "binary": "0101_1110",
+    "decimal": 94,
+    "rom_value": "^",
+    "ascii_value": "^",
+    "rom_unicode_name": "CIRCUMFLEX ACCENT",
+    "ascii_unicode_name": "CIRCUMFLEX ACCENT"
+  },
+  "0101_1111": {
+    "hex": "0x5F",
+    "binary": "0101_1111",
+    "decimal": 95,
+    "rom_value": "_",
+    "ascii_value": "_",
+    "rom_unicode_name": "LOW LINE",
+    "ascii_unicode_name": "LOW LINE"
+  },
+  "0110_0000": {
+    "hex": "0x60",
+    "binary": "0110_0000",
+    "decimal": 96,
+    "rom_value": "`",
+    "ascii_value": "`",
+    "rom_unicode_name": "GRAVE ACCENT",
+    "ascii_unicode_name": "GRAVE ACCENT"
+  },
+  "0110_0001": {
+    "hex": "0x61",
+    "binary": "0110_0001",
+    "decimal": 97,
+    "rom_value": "a",
+    "ascii_value": "a",
+    "rom_unicode_name": "LATIN SMALL LETTER A",
+    "ascii_unicode_name": "LATIN SMALL LETTER A"
+  },
+  "0110_0010": {
+    "hex": "0x62",
+    "binary": "0110_0010",
+    "decimal": 98,
+    "rom_value": "b",
+    "ascii_value": "b",
+    "rom_unicode_name": "LATIN SMALL LETTER B",
+    "ascii_unicode_name": "LATIN SMALL LETTER B"
+  },
+  "0110_0011": {
+    "hex": "0x63",
+    "binary": "0110_0011",
+    "decimal": 99,
+    "rom_value": "c",
+    "ascii_value": "c",
+    "rom_unicode_name": "LATIN SMALL LETTER C",
+    "ascii_unicode_name": "LATIN SMALL LETTER C"
+  },
+  "0110_0100": {
+    "hex": "0x64",
+    "binary": "0110_0100",
+    "decimal": 100,
+    "rom_value": "d",
+    "ascii_value": "d",
+    "rom_unicode_name": "LATIN SMALL LETTER D",
+    "ascii_unicode_name": "LATIN SMALL LETTER D"
+  },
+  "0110_0101": {
+    "hex": "0x65",
+    "binary": "0110_0101",
+    "decimal": 101,
+    "rom_value": "e",
+    "ascii_value": "e",
+    "rom_unicode_name": "LATIN SMALL LETTER E",
+    "ascii_unicode_name": "LATIN SMALL LETTER E"
+  },
+  "0110_0110": {
+    "hex": "0x66",
+    "binary": "0110_0110",
+    "decimal": 102,
+    "rom_value": "f",
+    "ascii_value": "f",
+    "rom_unicode_name": "LATIN SMALL LETTER F",
+    "ascii_unicode_name": "LATIN SMALL LETTER F"
+  },
+  "0110_0111": {
+    "hex": "0x67",
+    "binary": "0110_0111",
+    "decimal": 103,
+    "rom_value": "g",
+    "ascii_value": "g",
+    "rom_unicode_name": "LATIN SMALL LETTER G",
+    "ascii_unicode_name": "LATIN SMALL LETTER G"
+  },
+  "0110_1000": {
+    "hex": "0x68",
+    "binary": "0110_1000",
+    "decimal": 104,
+    "rom_value": "h",
+    "ascii_value": "h",
+    "rom_unicode_name": "LATIN SMALL LETTER H",
+    "ascii_unicode_name": "LATIN SMALL LETTER H"
+  },
+  "0110_1001": {
+    "hex": "0x69",
+    "binary": "0110_1001",
+    "decimal": 105,
+    "rom_value": "i",
+    "ascii_value": "i",
+    "rom_unicode_name": "LATIN SMALL LETTER I",
+    "ascii_unicode_name": "LATIN SMALL LETTER I"
+  },
+  "0110_1010": {
+    "hex": "0x6A",
+    "binary": "0110_1010",
+    "decimal": 106,
+    "rom_value": "j",
+    "ascii_value": "j",
+    "rom_unicode_name": "LATIN SMALL LETTER J",
+    "ascii_unicode_name": "LATIN SMALL LETTER J"
+  },
+  "0110_1011": {
+    "hex": "0x6B",
+    "binary": "0110_1011",
+    "decimal": 107,
+    "rom_value": "k",
+    "ascii_value": "k",
+    "rom_unicode_name": "LATIN SMALL LETTER K",
+    "ascii_unicode_name": "LATIN SMALL LETTER K"
+  },
+  "0110_1100": {
+    "hex": "0x6C",
+    "binary": "0110_1100",
+    "decimal": 108,
+    "rom_value": "l",
+    "ascii_value": "l",
+    "rom_unicode_name": "LATIN SMALL LETTER L",
+    "ascii_unicode_name": "LATIN SMALL LETTER L"
+  },
+  "0110_1101": {
+    "hex": "0x6D",
+    "binary": "0110_1101",
+    "decimal": 109,
+    "rom_value": "m",
+    "ascii_value": "m",
+    "rom_unicode_name": "LATIN SMALL LETTER M",
+    "ascii_unicode_name": "LATIN SMALL LETTER M"
+  },
+  "0110_1110": {
+    "hex": "0x6E",
+    "binary": "0110_1110",
+    "decimal": 110,
+    "rom_value": "n",
+    "ascii_value": "n",
+    "rom_unicode_name": "LATIN SMALL LETTER N",
+    "ascii_unicode_name": "LATIN SMALL LETTER N"
+  },
+  "0110_1111": {
+    "hex": "0x6F",
+    "binary": "0110_1111",
+    "decimal": 111,
+    "rom_value": "o",
+    "ascii_value": "o",
+    "rom_unicode_name": "LATIN SMALL LETTER O",
+    "ascii_unicode_name": "LATIN SMALL LETTER O"
+  },
+  "0111_0000": {
+    "hex": "0x70",
+    "binary": "0111_0000",
+    "decimal": 112,
+    "rom_value": "p",
+    "ascii_value": "p",
+    "rom_unicode_name": "LATIN SMALL LETTER P",
+    "ascii_unicode_name": "LATIN SMALL LETTER P"
+  },
+  "0111_0001": {
+    "hex": "0x71",
+    "binary": "0111_0001",
+    "decimal": 113,
+    "rom_value": "q",
+    "ascii_value": "q",
+    "rom_unicode_name": "LATIN SMALL LETTER Q",
+    "ascii_unicode_name": "LATIN SMALL LETTER Q"
+  },
+  "0111_0010": {
+    "hex": "0x72",
+    "binary": "0111_0010",
+    "decimal": 114,
+    "rom_value": "r",
+    "ascii_value": "r",
+    "rom_unicode_name": "LATIN SMALL LETTER R",
+    "ascii_unicode_name": "LATIN SMALL LETTER R"
+  },
+  "0111_0011": {
+    "hex": "0x73",
+    "binary": "0111_0011",
+    "decimal": 115,
+    "rom_value": "s",
+    "ascii_value": "s",
+    "rom_unicode_name": "LATIN SMALL LETTER S",
+    "ascii_unicode_name": "LATIN SMALL LETTER S"
+  },
+  "0111_0100": {
+    "hex": "0x74",
+    "binary": "0111_0100",
+    "decimal": 116,
+    "rom_value": "t",
+    "ascii_value": "t",
+    "rom_unicode_name": "LATIN SMALL LETTER T",
+    "ascii_unicode_name": "LATIN SMALL LETTER T"
+  },
+  "0111_0101": {
+    "hex": "0x75",
+    "binary": "0111_0101",
+    "decimal": 117,
+    "rom_value": "u",
+    "ascii_value": "u",
+    "rom_unicode_name": "LATIN SMALL LETTER U",
+    "ascii_unicode_name": "LATIN SMALL LETTER U"
+  },
+  "0111_0110": {
+    "hex": "0x76",
+    "binary": "0111_0110",
+    "decimal": 118,
+    "rom_value": "v",
+    "ascii_value": "v",
+    "rom_unicode_name": "LATIN SMALL LETTER V",
+    "ascii_unicode_name": "LATIN SMALL LETTER V"
+  },
+  "0111_0111": {
+    "hex": "0x77",
+    "binary": "0111_0111",
+    "decimal": 119,
+    "rom_value": "w",
+    "ascii_value": "w",
+    "rom_unicode_name": "LATIN SMALL LETTER W",
+    "ascii_unicode_name": "LATIN SMALL LETTER W"
+  },
+  "0111_1000": {
+    "hex": "0x78",
+    "binary": "0111_1000",
+    "decimal": 120,
+    "rom_value": "x",
+    "ascii_value": "x",
+    "rom_unicode_name": "LATIN SMALL LETTER X",
+    "ascii_unicode_name": "LATIN SMALL LETTER X"
+  },
+  "0111_1001": {
+    "hex": "0x79",
+    "binary": "0111_1001",
+    "decimal": 121,
+    "rom_value": "y",
+    "ascii_value": "y",
+    "rom_unicode_name": "LATIN SMALL LETTER Y",
+    "ascii_unicode_name": "LATIN SMALL LETTER Y"
+  },
+  "0111_1010": {
+    "hex": "0x7A",
+    "binary": "0111_1010",
+    "decimal": 122,
+    "rom_value": "z",
+    "ascii_value": "z",
+    "rom_unicode_name": "LATIN SMALL LETTER Z",
+    "ascii_unicode_name": "LATIN SMALL LETTER Z"
+  },
+  "0111_1011": {
+    "hex": "0x7B",
+    "binary": "0111_1011",
+    "decimal": 123,
+    "rom_value": "{",
+    "ascii_value": "{",
+    "rom_unicode_name": "LEFT CURLY BRACKET",
+    "ascii_unicode_name": "LEFT CURLY BRACKET"
+  },
+  "0111_1100": {
+    "hex": "0x7C",
+    "binary": "0111_1100",
+    "decimal": 124,
+    "rom_value": "|",
+    "ascii_value": "|",
+    "rom_unicode_name": "VERTICAL LINE",
+    "ascii_unicode_name": "VERTICAL LINE"
+  },
+  "0111_1101": {
+    "hex": "0x7D",
+    "binary": "0111_1101",
+    "decimal": 125,
+    "rom_value": "}",
+    "ascii_value": "}",
+    "rom_unicode_name": "RIGHT CURLY BRACKET",
+    "ascii_unicode_name": "RIGHT CURLY BRACKET"
+  },
+  "0111_1110": {
+    "hex": "0x7E",
+    "binary": "0111_1110",
+    "decimal": 126,
+    "rom_value": "￫",
+    "ascii_value": "~",
+    "rom_unicode_name": "HALFWIDTH RIGHTWARDS ARROW",
+    "ascii_unicode_name": "TILDE"
+  },
+  "0111_1111": {
+    "hex": "0x7F",
+    "binary": "0111_1111",
+    "decimal": 127,
+    "rom_value": "￩",
+    "ascii_value": "CONTROL (U+007F)",
+    "rom_unicode_name": "HALFWIDTH LEFTWARDS ARROW",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+007F)"
+  },
+  "1000_0000": {
+    "hex": "0x80",
+    "binary": "1000_0000",
+    "decimal": 128,
+    "rom_value": "Ç",
+    "ascii_value": "CONTROL (U+0080)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER C WITH CEDILLA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0080)"
+  },
+  "1000_0001": {
+    "hex": "0x81",
+    "binary": "1000_0001",
+    "decimal": 129,
+    "rom_value": "ü",
+    "ascii_value": "CONTROL (U+0081)",
+    "rom_unicode_name": "LATIN SMALL LETTER U WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0081)"
+  },
+  "1000_0010": {
+    "hex": "0x82",
+    "binary": "1000_0010",
+    "decimal": 130,
+    "rom_value": "é",
+    "ascii_value": "CONTROL (U+0082)",
+    "rom_unicode_name": "LATIN SMALL LETTER E WITH ACUTE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0082)"
+  },
+  "1000_0011": {
+    "hex": "0x83",
+    "binary": "1000_0011",
+    "decimal": 131,
+    "rom_value": "ȧ",
+    "ascii_value": "CONTROL (U+0083)",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH DOT ABOVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0083)"
+  },
+  "1000_0100": {
+    "hex": "0x84",
+    "binary": "1000_0100",
+    "decimal": 132,
+    "rom_value": "ä",
+    "ascii_value": "CONTROL (U+0084)",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0084)"
+  },
+  "1000_0101": {
+    "hex": "0x85",
+    "binary": "1000_0101",
+    "decimal": 133,
+    "rom_value": "à",
+    "ascii_value": "CONTROL (U+0085)",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH GRAVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0085)"
+  },
+  "1000_0110": {
+    "hex": "0x86",
+    "binary": "1000_0110",
+    "decimal": 134,
+    "rom_value": "ȧ",
+    "ascii_value": "CONTROL (U+0086)",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH DOT ABOVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0086)"
+  },
+  "1000_0111": {
+    "hex": "0x87",
+    "binary": "1000_0111",
+    "decimal": 135,
+    "rom_value": "ç",
+    "ascii_value": "CONTROL (U+0087)",
+    "rom_unicode_name": "LATIN SMALL LETTER C WITH CEDILLA",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0087)"
+  },
+  "1000_1000": {
+    "hex": "0x88",
+    "binary": "1000_1000",
+    "decimal": 136,
+    "rom_value": "ê",
+    "ascii_value": "CONTROL (U+0088)",
+    "rom_unicode_name": "LATIN SMALL LETTER E WITH CIRCUMFLEX",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0088)"
+  },
+  "1000_1001": {
+    "hex": "0x89",
+    "binary": "1000_1001",
+    "decimal": 137,
+    "rom_value": "ë",
+    "ascii_value": "CONTROL (U+0089)",
+    "rom_unicode_name": "LATIN SMALL LETTER E WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0089)"
+  },
+  "1000_1010": {
+    "hex": "0x8A",
+    "binary": "1000_1010",
+    "decimal": 138,
+    "rom_value": "è",
+    "ascii_value": "CONTROL (U+008A)",
+    "rom_unicode_name": "LATIN SMALL LETTER E WITH GRAVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008A)"
+  },
+  "1000_1011": {
+    "hex": "0x8B",
+    "binary": "1000_1011",
+    "decimal": 139,
+    "rom_value": "ï",
+    "ascii_value": "CONTROL (U+008B)",
+    "rom_unicode_name": "LATIN SMALL LETTER I WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008B)"
+  },
+  "1000_1100": {
+    "hex": "0x8C",
+    "binary": "1000_1100",
+    "decimal": 140,
+    "rom_value": "î",
+    "ascii_value": "CONTROL (U+008C)",
+    "rom_unicode_name": "LATIN SMALL LETTER I WITH CIRCUMFLEX",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008C)"
+  },
+  "1000_1101": {
+    "hex": "0x8D",
+    "binary": "1000_1101",
+    "decimal": 141,
+    "rom_value": "ì",
+    "ascii_value": "CONTROL (U+008D)",
+    "rom_unicode_name": "LATIN SMALL LETTER I WITH GRAVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008D)"
+  },
+  "1000_1110": {
+    "hex": "0x8E",
+    "binary": "1000_1110",
+    "decimal": 142,
+    "rom_value": "Ä",
+    "ascii_value": "CONTROL (U+008E)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER A WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008E)"
+  },
+  "1000_1111": {
+    "hex": "0x8F",
+    "binary": "1000_1111",
+    "decimal": 143,
+    "rom_value": "Â",
+    "ascii_value": "CONTROL (U+008F)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+008F)"
+  },
+  "1001_0000": {
+    "hex": "0x90",
+    "binary": "1001_0000",
+    "decimal": 144,
+    "rom_value": "É",
+    "ascii_value": "CONTROL (U+0090)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER E WITH ACUTE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0090)"
+  },
+  "1001_0001": {
+    "hex": "0x91",
+    "binary": "1001_0001",
+    "decimal": 145,
+    "rom_value": "æ",
+    "ascii_value": "CONTROL (U+0091)",
+    "rom_unicode_name": "LATIN SMALL LETTER AE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0091)"
+  },
+  "1001_0010": {
+    "hex": "0x92",
+    "binary": "1001_0010",
+    "decimal": 146,
+    "rom_value": "Æ",
+    "ascii_value": "CONTROL (U+0092)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER AE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0092)"
+  },
+  "1001_0011": {
+    "hex": "0x93",
+    "binary": "1001_0011",
+    "decimal": 147,
+    "rom_value": "ô",
+    "ascii_value": "CONTROL (U+0093)",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH CIRCUMFLEX",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0093)"
+  },
+  "1001_0100": {
+    "hex": "0x94",
+    "binary": "1001_0100",
+    "decimal": 148,
+    "rom_value": "ö",
+    "ascii_value": "CONTROL (U+0094)",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0094)"
+  },
+  "1001_0101": {
+    "hex": "0x95",
+    "binary": "1001_0101",
+    "decimal": 149,
+    "rom_value": "ò",
+    "ascii_value": "CONTROL (U+0095)",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH GRAVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0095)"
+  },
+  "1001_0110": {
+    "hex": "0x96",
+    "binary": "1001_0110",
+    "decimal": 150,
+    "rom_value": "û",
+    "ascii_value": "CONTROL (U+0096)",
+    "rom_unicode_name": "LATIN SMALL LETTER U WITH CIRCUMFLEX",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0096)"
+  },
+  "1001_0111": {
+    "hex": "0x97",
+    "binary": "1001_0111",
+    "decimal": 151,
+    "rom_value": "ù",
+    "ascii_value": "CONTROL (U+0097)",
+    "rom_unicode_name": "LATIN SMALL LETTER U WITH GRAVE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0097)"
+  },
+  "1001_1000": {
+    "hex": "0x98",
+    "binary": "1001_1000",
+    "decimal": 152,
+    "rom_value": "ÿ",
+    "ascii_value": "CONTROL (U+0098)",
+    "rom_unicode_name": "LATIN SMALL LETTER Y WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0098)"
+  },
+  "1001_1001": {
+    "hex": "0x99",
+    "binary": "1001_1001",
+    "decimal": 153,
+    "rom_value": "Ö",
+    "ascii_value": "CONTROL (U+0099)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER O WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+0099)"
+  },
+  "1001_1010": {
+    "hex": "0x9A",
+    "binary": "1001_1010",
+    "decimal": 154,
+    "rom_value": "Ü",
+    "ascii_value": "CONTROL (U+009A)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER U WITH DIAERESIS",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009A)"
+  },
+  "1001_1011": {
+    "hex": "0x9B",
+    "binary": "1001_1011",
+    "decimal": 155,
+    "rom_value": "ñ",
+    "ascii_value": "CONTROL (U+009B)",
+    "rom_unicode_name": "LATIN SMALL LETTER N WITH TILDE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009B)"
+  },
+  "1001_1100": {
+    "hex": "0x9C",
+    "binary": "1001_1100",
+    "decimal": 156,
+    "rom_value": "Ñ",
+    "ascii_value": "CONTROL (U+009C)",
+    "rom_unicode_name": "LATIN CAPITAL LETTER N WITH TILDE",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009C)"
+  },
+  "1001_1101": {
+    "hex": "0x9D",
+    "binary": "1001_1101",
+    "decimal": 157,
+    "rom_value": "UNMAPPED",
+    "ascii_value": "CONTROL (U+009D)",
+    "rom_unicode_name": "UNMAPPED",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009D)"
+  },
+  "1001_1110": {
+    "hex": "0x9E",
+    "binary": "1001_1110",
+    "decimal": 158,
+    "rom_value": "UNMAPPED",
+    "ascii_value": "CONTROL (U+009E)",
+    "rom_unicode_name": "UNMAPPED",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009E)"
+  },
+  "1001_1111": {
+    "hex": "0x9F",
+    "binary": "1001_1111",
+    "decimal": 159,
+    "rom_value": "¿",
+    "ascii_value": "CONTROL (U+009F)",
+    "rom_unicode_name": "INVERTED QUESTION MARK",
+    "ascii_unicode_name": "CONTROL CHARACTER (U+009F)"
+  },
+  "1010_0000": {
+    "hex": "0xA0",
+    "binary": "1010_0000",
+    "decimal": 160,
+    "rom_value": "UNDEFINED",
+    "ascii_value": " ",
+    "rom_unicode_name": "UNDEFINED",
+    "ascii_unicode_name": "NO-BREAK SPACE"
+  },
+  "1010_0001": {
+    "hex": "0xA1",
+    "binary": "1010_0001",
+    "decimal": 161,
+    "rom_value": "｡",
+    "ascii_value": "¡",
+    "rom_unicode_name": "HALFWIDTH IDEOGRAPHIC FULL STOP",
+    "ascii_unicode_name": "INVERTED EXCLAMATION MARK"
+  },
+  "1010_0010": {
+    "hex": "0xA2",
+    "binary": "1010_0010",
+    "decimal": 162,
+    "rom_value": "｢",
+    "ascii_value": "¢",
+    "rom_unicode_name": "HALFWIDTH LEFT CORNER BRACKET",
+    "ascii_unicode_name": "CENT SIGN"
+  },
+  "1010_0011": {
+    "hex": "0xA3",
+    "binary": "1010_0011",
+    "decimal": 163,
+    "rom_value": "｣",
+    "ascii_value": "£",
+    "rom_unicode_name": "HALFWIDTH RIGHT CORNER BRACKET",
+    "ascii_unicode_name": "POUND SIGN"
+  },
+  "1010_0100": {
+    "hex": "0xA4",
+    "binary": "1010_0100",
+    "decimal": 164,
+    "rom_value": "､",
+    "ascii_value": "¤",
+    "rom_unicode_name": "HALFWIDTH IDEOGRAPHIC COMMA",
+    "ascii_unicode_name": "CURRENCY SIGN"
+  },
+  "1010_0101": {
+    "hex": "0xA5",
+    "binary": "1010_0101",
+    "decimal": 165,
+    "rom_value": "･",
+    "ascii_value": "¥",
+    "rom_unicode_name": "HALFWIDTH KATAKANA MIDDLE DOT",
+    "ascii_unicode_name": "YEN SIGN"
+  },
+  "1010_0110": {
+    "hex": "0xA6",
+    "binary": "1010_0110",
+    "decimal": 166,
+    "rom_value": "ｦ",
+    "ascii_value": "¦",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER WO",
+    "ascii_unicode_name": "BROKEN BAR"
+  },
+  "1010_0111": {
+    "hex": "0xA7",
+    "binary": "1010_0111",
+    "decimal": 167,
+    "rom_value": "ｧ",
+    "ascii_value": "§",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL A",
+    "ascii_unicode_name": "SECTION SIGN"
+  },
+  "1010_1000": {
+    "hex": "0xA8",
+    "binary": "1010_1000",
+    "decimal": 168,
+    "rom_value": "ｨ",
+    "ascii_value": "¨",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL I",
+    "ascii_unicode_name": "DIAERESIS"
+  },
+  "1010_1001": {
+    "hex": "0xA9",
+    "binary": "1010_1001",
+    "decimal": 169,
+    "rom_value": "ｩ",
+    "ascii_value": "©",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL U",
+    "ascii_unicode_name": "COPYRIGHT SIGN"
+  },
+  "1010_1010": {
+    "hex": "0xAA",
+    "binary": "1010_1010",
+    "decimal": 170,
+    "rom_value": "ｪ",
+    "ascii_value": "ª",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL E",
+    "ascii_unicode_name": "FEMININE ORDINAL INDICATOR"
+  },
+  "1010_1011": {
+    "hex": "0xAB",
+    "binary": "1010_1011",
+    "decimal": 171,
+    "rom_value": "ｫ",
+    "ascii_value": "«",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL O",
+    "ascii_unicode_name": "LEFT-POINTING DOUBLE ANGLE QUOTATION MARK"
+  },
+  "1010_1100": {
+    "hex": "0xAC",
+    "binary": "1010_1100",
+    "decimal": 172,
+    "rom_value": "ｬ",
+    "ascii_value": "¬",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL YA",
+    "ascii_unicode_name": "NOT SIGN"
+  },
+  "1010_1101": {
+    "hex": "0xAD",
+    "binary": "1010_1101",
+    "decimal": 173,
+    "rom_value": "ｭ",
+    "ascii_value": "­",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL YU",
+    "ascii_unicode_name": "SOFT HYPHEN"
+  },
+  "1010_1110": {
+    "hex": "0xAE",
+    "binary": "1010_1110",
+    "decimal": 174,
+    "rom_value": "ｮ",
+    "ascii_value": "®",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL YO",
+    "ascii_unicode_name": "REGISTERED SIGN"
+  },
+  "1010_1111": {
+    "hex": "0xAF",
+    "binary": "1010_1111",
+    "decimal": 175,
+    "rom_value": "ｯ",
+    "ascii_value": "¯",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SMALL TU",
+    "ascii_unicode_name": "MACRON"
+  },
+  "1011_0000": {
+    "hex": "0xB0",
+    "binary": "1011_0000",
+    "decimal": 176,
+    "rom_value": "ｰ",
+    "ascii_value": "°",
+    "rom_unicode_name": "HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK",
+    "ascii_unicode_name": "DEGREE SIGN"
+  },
+  "1011_0001": {
+    "hex": "0xB1",
+    "binary": "1011_0001",
+    "decimal": 177,
+    "rom_value": "ｱ",
+    "ascii_value": "±",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER A",
+    "ascii_unicode_name": "PLUS-MINUS SIGN"
+  },
+  "1011_0010": {
+    "hex": "0xB2",
+    "binary": "1011_0010",
+    "decimal": 178,
+    "rom_value": "ｲ",
+    "ascii_value": "²",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER I",
+    "ascii_unicode_name": "SUPERSCRIPT TWO"
+  },
+  "1011_0011": {
+    "hex": "0xB3",
+    "binary": "1011_0011",
+    "decimal": 179,
+    "rom_value": "ｳ",
+    "ascii_value": "³",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER U",
+    "ascii_unicode_name": "SUPERSCRIPT THREE"
+  },
+  "1011_0100": {
+    "hex": "0xB4",
+    "binary": "1011_0100",
+    "decimal": 180,
+    "rom_value": "ｴ",
+    "ascii_value": "´",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER E",
+    "ascii_unicode_name": "ACUTE ACCENT"
+  },
+  "1011_0101": {
+    "hex": "0xB5",
+    "binary": "1011_0101",
+    "decimal": 181,
+    "rom_value": "ｵ",
+    "ascii_value": "µ",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER O",
+    "ascii_unicode_name": "MICRO SIGN"
+  },
+  "1011_0110": {
+    "hex": "0xB6",
+    "binary": "1011_0110",
+    "decimal": 182,
+    "rom_value": "ｶ",
+    "ascii_value": "¶",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER KA",
+    "ascii_unicode_name": "PILCROW SIGN"
+  },
+  "1011_0111": {
+    "hex": "0xB7",
+    "binary": "1011_0111",
+    "decimal": 183,
+    "rom_value": "ｷ",
+    "ascii_value": "·",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER KI",
+    "ascii_unicode_name": "MIDDLE DOT"
+  },
+  "1011_1000": {
+    "hex": "0xB8",
+    "binary": "1011_1000",
+    "decimal": 184,
+    "rom_value": "ｸ",
+    "ascii_value": "¸",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER KU",
+    "ascii_unicode_name": "CEDILLA"
+  },
+  "1011_1001": {
+    "hex": "0xB9",
+    "binary": "1011_1001",
+    "decimal": 185,
+    "rom_value": "ｹ",
+    "ascii_value": "¹",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER KE",
+    "ascii_unicode_name": "SUPERSCRIPT ONE"
+  },
+  "1011_1010": {
+    "hex": "0xBA",
+    "binary": "1011_1010",
+    "decimal": 186,
+    "rom_value": "ｺ",
+    "ascii_value": "º",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER KO",
+    "ascii_unicode_name": "MASCULINE ORDINAL INDICATOR"
+  },
+  "1011_1011": {
+    "hex": "0xBB",
+    "binary": "1011_1011",
+    "decimal": 187,
+    "rom_value": "ｻ",
+    "ascii_value": "»",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SA",
+    "ascii_unicode_name": "RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK"
+  },
+  "1011_1100": {
+    "hex": "0xBC",
+    "binary": "1011_1100",
+    "decimal": 188,
+    "rom_value": "ｼ",
+    "ascii_value": "¼",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SI",
+    "ascii_unicode_name": "VULGAR FRACTION ONE QUARTER"
+  },
+  "1011_1101": {
+    "hex": "0xBD",
+    "binary": "1011_1101",
+    "decimal": 189,
+    "rom_value": "ｽ",
+    "ascii_value": "½",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SU",
+    "ascii_unicode_name": "VULGAR FRACTION ONE HALF"
+  },
+  "1011_1110": {
+    "hex": "0xBE",
+    "binary": "1011_1110",
+    "decimal": 190,
+    "rom_value": "ｾ",
+    "ascii_value": "¾",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SE",
+    "ascii_unicode_name": "VULGAR FRACTION THREE QUARTERS"
+  },
+  "1011_1111": {
+    "hex": "0xBF",
+    "binary": "1011_1111",
+    "decimal": 191,
+    "rom_value": "ｿ",
+    "ascii_value": "¿",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER SO",
+    "ascii_unicode_name": "INVERTED QUESTION MARK"
+  },
+  "1100_0000": {
+    "hex": "0xC0",
+    "binary": "1100_0000",
+    "decimal": 192,
+    "rom_value": "ﾀ",
+    "ascii_value": "À",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER TA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH GRAVE"
+  },
+  "1100_0001": {
+    "hex": "0xC1",
+    "binary": "1100_0001",
+    "decimal": 193,
+    "rom_value": "ﾁ",
+    "ascii_value": "Á",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER TI",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH ACUTE"
+  },
+  "1100_0010": {
+    "hex": "0xC2",
+    "binary": "1100_0010",
+    "decimal": 194,
+    "rom_value": "ﾂ",
+    "ascii_value": "Â",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER TU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX"
+  },
+  "1100_0011": {
+    "hex": "0xC3",
+    "binary": "1100_0011",
+    "decimal": 195,
+    "rom_value": "ﾃ",
+    "ascii_value": "Ã",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER TE",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH TILDE"
+  },
+  "1100_0100": {
+    "hex": "0xC4",
+    "binary": "1100_0100",
+    "decimal": 196,
+    "rom_value": "ﾄ",
+    "ascii_value": "Ä",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER TO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH DIAERESIS"
+  },
+  "1100_0101": {
+    "hex": "0xC5",
+    "binary": "1100_0101",
+    "decimal": 197,
+    "rom_value": "ﾅ",
+    "ascii_value": "Å",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER NA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER A WITH RING ABOVE"
+  },
+  "1100_0110": {
+    "hex": "0xC6",
+    "binary": "1100_0110",
+    "decimal": 198,
+    "rom_value": "ﾆ",
+    "ascii_value": "Æ",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER NI",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER AE"
+  },
+  "1100_0111": {
+    "hex": "0xC7",
+    "binary": "1100_0111",
+    "decimal": 199,
+    "rom_value": "ﾇ",
+    "ascii_value": "Ç",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER NU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER C WITH CEDILLA"
+  },
+  "1100_1000": {
+    "hex": "0xC8",
+    "binary": "1100_1000",
+    "decimal": 200,
+    "rom_value": "ﾈ",
+    "ascii_value": "È",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER NE",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER E WITH GRAVE"
+  },
+  "1100_1001": {
+    "hex": "0xC9",
+    "binary": "1100_1001",
+    "decimal": 201,
+    "rom_value": "ﾉ",
+    "ascii_value": "É",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER NO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER E WITH ACUTE"
+  },
+  "1100_1010": {
+    "hex": "0xCA",
+    "binary": "1100_1010",
+    "decimal": 202,
+    "rom_value": "ﾊ",
+    "ascii_value": "Ê",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER HA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX"
+  },
+  "1100_1011": {
+    "hex": "0xCB",
+    "binary": "1100_1011",
+    "decimal": 203,
+    "rom_value": "ﾋ",
+    "ascii_value": "Ë",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER HI",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER E WITH DIAERESIS"
+  },
+  "1100_1100": {
+    "hex": "0xCC",
+    "binary": "1100_1100",
+    "decimal": 204,
+    "rom_value": "ﾌ",
+    "ascii_value": "Ì",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER HU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER I WITH GRAVE"
+  },
+  "1100_1101": {
+    "hex": "0xCD",
+    "binary": "1100_1101",
+    "decimal": 205,
+    "rom_value": "ﾍ",
+    "ascii_value": "Í",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER HE",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER I WITH ACUTE"
+  },
+  "1100_1110": {
+    "hex": "0xCE",
+    "binary": "1100_1110",
+    "decimal": 206,
+    "rom_value": "ﾎ",
+    "ascii_value": "Î",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER HO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER I WITH CIRCUMFLEX"
+  },
+  "1100_1111": {
+    "hex": "0xCF",
+    "binary": "1100_1111",
+    "decimal": 207,
+    "rom_value": "ﾏ",
+    "ascii_value": "Ï",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER MA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER I WITH DIAERESIS"
+  },
+  "1101_0000": {
+    "hex": "0xD0",
+    "binary": "1101_0000",
+    "decimal": 208,
+    "rom_value": "ﾐ",
+    "ascii_value": "Ð",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER MI",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER ETH"
+  },
+  "1101_0001": {
+    "hex": "0xD1",
+    "binary": "1101_0001",
+    "decimal": 209,
+    "rom_value": "ﾑ",
+    "ascii_value": "Ñ",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER MU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER N WITH TILDE"
+  },
+  "1101_0010": {
+    "hex": "0xD2",
+    "binary": "1101_0010",
+    "decimal": 210,
+    "rom_value": "ﾒ",
+    "ascii_value": "Ò",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER ME",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH GRAVE"
+  },
+  "1101_0011": {
+    "hex": "0xD3",
+    "binary": "1101_0011",
+    "decimal": 211,
+    "rom_value": "ﾓ",
+    "ascii_value": "Ó",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER MO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH ACUTE"
+  },
+  "1101_0100": {
+    "hex": "0xD4",
+    "binary": "1101_0100",
+    "decimal": 212,
+    "rom_value": "ﾔ",
+    "ascii_value": "Ô",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER YA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX"
+  },
+  "1101_0101": {
+    "hex": "0xD5",
+    "binary": "1101_0101",
+    "decimal": 213,
+    "rom_value": "ﾕ",
+    "ascii_value": "Õ",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER YU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH TILDE"
+  },
+  "1101_0110": {
+    "hex": "0xD6",
+    "binary": "1101_0110",
+    "decimal": 214,
+    "rom_value": "ﾖ",
+    "ascii_value": "Ö",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER YO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH DIAERESIS"
+  },
+  "1101_0111": {
+    "hex": "0xD7",
+    "binary": "1101_0111",
+    "decimal": 215,
+    "rom_value": "ﾗ",
+    "ascii_value": "×",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER RA",
+    "ascii_unicode_name": "MULTIPLICATION SIGN"
+  },
+  "1101_1000": {
+    "hex": "0xD8",
+    "binary": "1101_1000",
+    "decimal": 216,
+    "rom_value": "ﾘ",
+    "ascii_value": "Ø",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER RI",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER O WITH STROKE"
+  },
+  "1101_1001": {
+    "hex": "0xD9",
+    "binary": "1101_1001",
+    "decimal": 217,
+    "rom_value": "ﾙ",
+    "ascii_value": "Ù",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER RU",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER U WITH GRAVE"
+  },
+  "1101_1010": {
+    "hex": "0xDA",
+    "binary": "1101_1010",
+    "decimal": 218,
+    "rom_value": "ﾚ",
+    "ascii_value": "Ú",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER RE",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER U WITH ACUTE"
+  },
+  "1101_1011": {
+    "hex": "0xDB",
+    "binary": "1101_1011",
+    "decimal": 219,
+    "rom_value": "ﾛ",
+    "ascii_value": "Û",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER RO",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER U WITH CIRCUMFLEX"
+  },
+  "1101_1100": {
+    "hex": "0xDC",
+    "binary": "1101_1100",
+    "decimal": 220,
+    "rom_value": "ﾜ",
+    "ascii_value": "Ü",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER WA",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER U WITH DIAERESIS"
+  },
+  "1101_1101": {
+    "hex": "0xDD",
+    "binary": "1101_1101",
+    "decimal": 221,
+    "rom_value": "ﾝ",
+    "ascii_value": "Ý",
+    "rom_unicode_name": "HALFWIDTH KATAKANA LETTER N",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER Y WITH ACUTE"
+  },
+  "1101_1110": {
+    "hex": "0xDE",
+    "binary": "1101_1110",
+    "decimal": 222,
+    "rom_value": "ﾞ",
+    "ascii_value": "Þ",
+    "rom_unicode_name": "HALFWIDTH KATAKANA VOICED SOUND MARK",
+    "ascii_unicode_name": "LATIN CAPITAL LETTER THORN"
+  },
+  "1101_1111": {
+    "hex": "0xDF",
+    "binary": "1101_1111",
+    "decimal": 223,
+    "rom_value": "ﾟ",
+    "ascii_value": "ß",
+    "rom_unicode_name": "HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK",
+    "ascii_unicode_name": "LATIN SMALL LETTER SHARP S"
+  },
+  "1110_0000": {
+    "hex": "0xE0",
+    "binary": "1110_0000",
+    "decimal": 224,
+    "rom_value": "á",
+    "ascii_value": "à",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH ACUTE",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH GRAVE"
+  },
+  "1110_0001": {
+    "hex": "0xE1",
+    "binary": "1110_0001",
+    "decimal": 225,
+    "rom_value": "í",
+    "ascii_value": "á",
+    "rom_unicode_name": "LATIN SMALL LETTER I WITH ACUTE",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH ACUTE"
+  },
+  "1110_0010": {
+    "hex": "0xE2",
+    "binary": "1110_0010",
+    "decimal": 226,
+    "rom_value": "ó",
+    "ascii_value": "â",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH ACUTE",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH CIRCUMFLEX"
+  },
+  "1110_0011": {
+    "hex": "0xE3",
+    "binary": "1110_0011",
+    "decimal": 227,
+    "rom_value": "ú",
+    "ascii_value": "ã",
+    "rom_unicode_name": "LATIN SMALL LETTER U WITH ACUTE",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH TILDE"
+  },
+  "1110_0100": {
+    "hex": "0xE4",
+    "binary": "1110_0100",
+    "decimal": 228,
+    "rom_value": "¢",
+    "ascii_value": "ä",
+    "rom_unicode_name": "CENT SIGN",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH DIAERESIS"
+  },
+  "1110_0101": {
+    "hex": "0xE5",
+    "binary": "1110_0101",
+    "decimal": 229,
+    "rom_value": "£",
+    "ascii_value": "å",
+    "rom_unicode_name": "POUND SIGN",
+    "ascii_unicode_name": "LATIN SMALL LETTER A WITH RING ABOVE"
+  },
+  "1110_0110": {
+    "hex": "0xE6",
+    "binary": "1110_0110",
+    "decimal": 230,
+    "rom_value": "¥",
+    "ascii_value": "æ",
+    "rom_unicode_name": "YEN SIGN",
+    "ascii_unicode_name": "LATIN SMALL LETTER AE"
+  },
+  "1110_0111": {
+    "hex": "0xE7",
+    "binary": "1110_0111",
+    "decimal": 231,
+    "rom_value": "㌮",
+    "ascii_value": "ç",
+    "rom_unicode_name": "SQUARE PIASUTORU",
+    "ascii_unicode_name": "LATIN SMALL LETTER C WITH CEDILLA"
+  },
+  "1110_1000": {
+    "hex": "0xE8",
+    "binary": "1110_1000",
+    "decimal": 232,
+    "rom_value": "ƒ",
+    "ascii_value": "è",
+    "rom_unicode_name": "LATIN SMALL LETTER F WITH HOOK",
+    "ascii_unicode_name": "LATIN SMALL LETTER E WITH GRAVE"
+  },
+  "1110_1001": {
+    "hex": "0xE9",
+    "binary": "1110_1001",
+    "decimal": 233,
+    "rom_value": "UNMAPPED",
+    "ascii_value": "é",
+    "rom_unicode_name": "UNMAPPED",
+    "ascii_unicode_name": "LATIN SMALL LETTER E WITH ACUTE"
+  },
+  "1110_1010": {
+    "hex": "0xEA",
+    "binary": "1110_1010",
+    "decimal": 234,
+    "rom_value": "Ã",
+    "ascii_value": "ê",
+    "rom_unicode_name": "LATIN CAPITAL LETTER A WITH TILDE",
+    "ascii_unicode_name": "LATIN SMALL LETTER E WITH CIRCUMFLEX"
+  },
+  "1110_1011": {
+    "hex": "0xEB",
+    "binary": "1110_1011",
+    "decimal": 235,
+    "rom_value": "ã",
+    "ascii_value": "ë",
+    "rom_unicode_name": "LATIN SMALL LETTER A WITH TILDE",
+    "ascii_unicode_name": "LATIN SMALL LETTER E WITH DIAERESIS"
+  },
+  "1110_1100": {
+    "hex": "0xEC",
+    "binary": "1110_1100",
+    "decimal": 236,
+    "rom_value": "Õ",
+    "ascii_value": "ì",
+    "rom_unicode_name": "LATIN CAPITAL LETTER O WITH TILDE",
+    "ascii_unicode_name": "LATIN SMALL LETTER I WITH GRAVE"
+  },
+  "1110_1101": {
+    "hex": "0xED",
+    "binary": "1110_1101",
+    "decimal": 237,
+    "rom_value": "õ",
+    "ascii_value": "í",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH TILDE",
+    "ascii_unicode_name": "LATIN SMALL LETTER I WITH ACUTE"
+  },
+  "1110_1110": {
+    "hex": "0xEE",
+    "binary": "1110_1110",
+    "decimal": 238,
+    "rom_value": "Ø",
+    "ascii_value": "î",
+    "rom_unicode_name": "LATIN CAPITAL LETTER O WITH STROKE",
+    "ascii_unicode_name": "LATIN SMALL LETTER I WITH CIRCUMFLEX"
+  },
+  "1110_1111": {
+    "hex": "0xEF",
+    "binary": "1110_1111",
+    "decimal": 239,
+    "rom_value": "ø",
+    "ascii_value": "ï",
+    "rom_unicode_name": "LATIN SMALL LETTER O WITH STROKE",
+    "ascii_unicode_name": "LATIN SMALL LETTER I WITH DIAERESIS"
+  },
+  "1111_0000": {
+    "hex": "0xF0",
+    "binary": "1111_0000",
+    "decimal": 240,
+    "rom_value": "˙",
+    "ascii_value": "ð",
+    "rom_unicode_name": "DOT ABOVE",
+    "ascii_unicode_name": "LATIN SMALL LETTER ETH"
+  },
+  "1111_0001": {
+    "hex": "0xF1",
+    "binary": "1111_0001",
+    "decimal": 241,
+    "rom_value": "¨",
+    "ascii_value": "ñ",
+    "rom_unicode_name": "DIAERESIS",
+    "ascii_unicode_name": "LATIN SMALL LETTER N WITH TILDE"
+  },
+  "1111_0010": {
+    "hex": "0xF2",
+    "binary": "1111_0010",
+    "decimal": 242,
+    "rom_value": "˚",
+    "ascii_value": "ò",
+    "rom_unicode_name": "RING ABOVE",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH GRAVE"
+  },
+  "1111_0011": {
+    "hex": "0xF3",
+    "binary": "1111_0011",
+    "decimal": 243,
+    "rom_value": "ˋ",
+    "ascii_value": "ó",
+    "rom_unicode_name": "MODIFIER LETTER GRAVE ACCENT",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH ACUTE"
+  },
+  "1111_0100": {
+    "hex": "0xF4",
+    "binary": "1111_0100",
+    "decimal": 244,
+    "rom_value": "´",
+    "ascii_value": "ô",
+    "rom_unicode_name": "ACUTE ACCENT",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH CIRCUMFLEX"
+  },
+  "1111_0101": {
+    "hex": "0xF5",
+    "binary": "1111_0101",
+    "decimal": 245,
+    "rom_value": "½",
+    "ascii_value": "õ",
+    "rom_unicode_name": "VULGAR FRACTION ONE HALF",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH TILDE"
+  },
+  "1111_0110": {
+    "hex": "0xF6",
+    "binary": "1111_0110",
+    "decimal": 246,
+    "rom_value": "¼",
+    "ascii_value": "ö",
+    "rom_unicode_name": "VULGAR FRACTION ONE QUARTER",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH DIAERESIS"
+  },
+  "1111_0111": {
+    "hex": "0xF7",
+    "binary": "1111_0111",
+    "decimal": 247,
+    "rom_value": "×",
+    "ascii_value": "÷",
+    "rom_unicode_name": "MULTIPLICATION SIGN",
+    "ascii_unicode_name": "DIVISION SIGN"
+  },
+  "1111_1000": {
+    "hex": "0xF8",
+    "binary": "1111_1000",
+    "decimal": 248,
+    "rom_value": "÷",
+    "ascii_value": "ø",
+    "rom_unicode_name": "DIVISION SIGN",
+    "ascii_unicode_name": "LATIN SMALL LETTER O WITH STROKE"
+  },
+  "1111_1001": {
+    "hex": "0xF9",
+    "binary": "1111_1001",
+    "decimal": 249,
+    "rom_value": "≥",
+    "ascii_value": "ù",
+    "rom_unicode_name": "GREATER-THAN OR EQUAL TO",
+    "ascii_unicode_name": "LATIN SMALL LETTER U WITH GRAVE"
+  },
+  "1111_1010": {
+    "hex": "0xFA",
+    "binary": "1111_1010",
+    "decimal": 250,
+    "rom_value": "≤",
+    "ascii_value": "ú",
+    "rom_unicode_name": "LESS-THAN OR EQUAL TO",
+    "ascii_unicode_name": "LATIN SMALL LETTER U WITH ACUTE"
+  },
+  "1111_1011": {
+    "hex": "0xFB",
+    "binary": "1111_1011",
+    "decimal": 251,
+    "rom_value": "≪",
+    "ascii_value": "û",
+    "rom_unicode_name": "MUCH LESS-THAN",
+    "ascii_unicode_name": "LATIN SMALL LETTER U WITH CIRCUMFLEX"
+  },
+  "1111_1100": {
+    "hex": "0xFC",
+    "binary": "1111_1100",
+    "decimal": 252,
+    "rom_value": "≫",
+    "ascii_value": "ü",
+    "rom_unicode_name": "MUCH GREATER-THAN",
+    "ascii_unicode_name": "LATIN SMALL LETTER U WITH DIAERESIS"
+  },
+  "1111_1101": {
+    "hex": "0xFD",
+    "binary": "1111_1101",
+    "decimal": 253,
+    "rom_value": "≠",
+    "ascii_value": "ý",
+    "rom_unicode_name": "NOT EQUAL TO",
+    "ascii_unicode_name": "LATIN SMALL LETTER Y WITH ACUTE"
+  },
+  "1111_1110": {
+    "hex": "0xFE",
+    "binary": "1111_1110",
+    "decimal": 254,
+    "rom_value": "√",
+    "ascii_value": "þ",
+    "rom_unicode_name": "SQUARE ROOT",
+    "ascii_unicode_name": "LATIN SMALL LETTER THORN"
+  },
+  "1111_1111": {
+    "hex": "0xFF",
+    "binary": "1111_1111",
+    "decimal": 255,
+    "rom_value": "‾",
+    "ascii_value": "ÿ",
+    "rom_unicode_name": "OVERLINE",
+    "ascii_unicode_name": "LATIN SMALL LETTER Y WITH DIAERESIS"
+  }
+}
