@@ -25,13 +25,12 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <label class="btn btn-outline-secondary mb-0">
-                                Upload File
-                                <input type="file" id="fileInput" accept=".txt,.csv,.text" hidden>
-                            </label>
-                            <span id="fileName" class="text-muted small"></span>
+                        <div id="dropZone" class="drop-zone mb-3">
+                            <p class="mb-1">Drag & drop a file here, or click to select</p>
+                            <p class="text-muted small mb-0">Supports .txt, .json, .csv and other text files</p>
+                            <input type="file" id="fileInput" hidden>
                         </div>
+                        <span id="fileName" class="text-muted small mb-2 d-block"></span>
                         <textarea id="inputText" class="form-control" rows="6" placeholder="Or paste text here..."></textarea>
                     </div>
                     <div class="col-md-4">
@@ -75,6 +74,16 @@
             </div>
             <div class="card-body">
                 <div id="previewArea" class="preview-area"></div>
+            </div>
+        </div>
+
+        <!-- Character Replacements Card -->
+        <div class="card mb-4" id="unmappedCard" style="display:none;">
+            <div class="card-header">
+                <h5 class="mb-0">Character Replacements</h5>
+            </div>
+            <div class="card-body">
+                <div id="unmappedList"></div>
             </div>
         </div>
 

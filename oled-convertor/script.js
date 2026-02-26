@@ -153,7 +153,7 @@ class OledConvertor {
             // 4. Handle based on mode
             if (unmappedMode === 'auto' && entry.alternatives.length > 0) {
                 entry.replacementChar = entry.alternatives[0].replacementChar;
-                entry.status = 'mapped';
+                entry.status = 'auto-fallback';
             } else if (unmappedMode === 'replace') {
                 entry.replacementChar = '?';
                 entry.status = 'mapped';
@@ -177,7 +177,7 @@ class OledConvertor {
         const highlight = document.getElementById('highlightToggle').checked;
         previewArea.innerHTML = '';
 
-        let mapped = 0, unmapped = 0, custom = 0;
+        let mapped = 0, unmapped = 0, custom = 0, autoFallback = 0;
 
         this.conversionResult.forEach((entry, idx) => {
             if (entry.status === 'passthrough') {
@@ -197,6 +197,11 @@ class OledConvertor {
                 } else if (entry.status === 'custom') {
                     span.className = 'char-custom';
                     custom++;
+                } else if (entry.status === 'auto-fallback') {
+                    span.className = 'char-auto-fallback';
+                    autoFallback++;
+                    span.title += ` — Auto-replaced: "${entry.inputChar}" → "${entry.replacementChar}" — Click to change`;
+                    span.addEventListener('click', () => this.openCharacterModal(idx));
                 } else {
                     span.className = 'char-unmapped';
                     unmapped++;
@@ -206,7 +211,11 @@ class OledConvertor {
             } else {
                 if (entry.status === 'mapped') mapped++;
                 else if (entry.status === 'custom') custom++;
-                else {
+                else if (entry.status === 'auto-fallback') {
+                    autoFallback++;
+                    span.style.cursor = 'pointer';
+                    span.addEventListener('click', () => this.openCharacterModal(idx));
+                } else {
                     unmapped++;
                     span.style.cursor = 'pointer';
                     span.addEventListener('click', () => this.openCharacterModal(idx));
@@ -220,14 +229,92 @@ class OledConvertor {
             previewArea.appendChild(span);
         });
 
-        document.getElementById('statsBar').textContent =
-            `${mapped + custom} mapped / ${unmapped} unmapped` +
-            (custom > 0 ? ` (${custom} custom)` : '');
+        let statsText = `${mapped + custom} mapped`;
+        if (autoFallback > 0) statsText += ` / ${autoFallback} auto-replaced`;
+        if (unmapped > 0) statsText += ` / ${unmapped} unmapped`;
+        if (custom > 0) statsText += ` (${custom} custom)`;
+        document.getElementById('statsBar').textContent = statsText;
 
         document.getElementById('previewCard').style.display = '';
         document.getElementById('mappingsCard').style.display = '';
         document.getElementById('btnDownload').disabled = false;
         this.renderMappingsTable();
+        this.renderUnmappedList();
+    }
+
+    renderUnmappedList() {
+        const card = document.getElementById('unmappedCard');
+        const container = document.getElementById('unmappedList');
+
+        // Collect unique chars with status 'unmapped' or 'auto-fallback'
+        const charMap = new Map(); // inputChar -> { entry, indices }
+        this.conversionResult.forEach((entry, idx) => {
+            if (entry.status !== 'unmapped' && entry.status !== 'auto-fallback') return;
+            if (!charMap.has(entry.inputChar)) {
+                charMap.set(entry.inputChar, { entry, indices: [idx] });
+            } else {
+                charMap.get(entry.inputChar).indices.push(idx);
+            }
+        });
+
+        if (charMap.size === 0) {
+            card.style.display = 'none';
+            container.innerHTML = '';
+            return;
+        }
+
+        card.style.display = '';
+        let html = '<table class="table table-sm"><thead><tr>' +
+            '<th>Input</th><th>Unicode</th><th>Count</th><th>Current</th><th>Alternatives</th></tr></thead><tbody>';
+
+        for (const [char, { entry, indices }] of charMap) {
+            const cp = char.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+            const current = entry.status === 'auto-fallback'
+                ? `<span class="badge bg-warning text-dark">${this.escapeHtml(entry.replacementChar)} (auto)</span>`
+                : '<span class="badge bg-danger">?</span>';
+
+            let altButtons = '';
+            if (entry.alternatives.length > 0) {
+                entry.alternatives.forEach((alt, altIdx) => {
+                    const isActive = entry.status === 'auto-fallback' && entry.replacementChar === alt.replacementChar;
+                    const btnClass = isActive ? 'btn btn-warning btn-sm' : 'btn btn-outline-secondary btn-sm';
+                    altButtons += `<button class="${btnClass} me-1 mb-1 font-monospace" ` +
+                        `data-unmapped-char="${this.escapeAttr(char)}" ` +
+                        `data-alt-idx="${altIdx}" ` +
+                        `title="${this.escapeHtml(alt.displayChar)} → ${this.escapeHtml(alt.replacementChar)}"` +
+                        `>${this.escapeHtml(alt.displayChar)}</button>`;
+                });
+            } else {
+                altButtons = '<span class="text-muted small">None available</span>';
+            }
+
+            html += `<tr>
+                <td class="font-monospace fs-5">${this.escapeHtml(char)}</td>
+                <td class="text-muted small">U+${cp}</td>
+                <td>${indices.length}</td>
+                <td>${current}</td>
+                <td>${altButtons}</td>
+            </tr>`;
+        }
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+
+        // Bind click handlers for alternative buttons
+        container.querySelectorAll('[data-unmapped-char]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const ch = btn.getAttribute('data-unmapped-char');
+                const altIdx = parseInt(btn.getAttribute('data-alt-idx'));
+                const { entry } = charMap.get(ch);
+                const alt = entry.alternatives[altIdx];
+                if (!alt) return;
+
+                // Save as custom mapping and re-render
+                this.customMappings[this.currentRom][ch] = alt.replacementChar;
+                this.saveCustomMappings();
+                this.renderPreview();
+            });
+        });
     }
 
     openCharacterModal(charIndex) {
@@ -477,18 +564,44 @@ class OledConvertor {
         return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
     }
 
+    loadFile(file) {
+        this.fileName = file.name;
+        document.getElementById('fileName').textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            document.getElementById('inputText').value = ev.target.result;
+        };
+        reader.readAsText(file);
+    }
+
     bindEvents() {
-        // File upload
-        document.getElementById('fileInput').addEventListener('change', (e) => {
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        // Click drop zone to open file picker
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag-and-drop events
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) this.loadFile(file);
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if (!file) return;
-            this.fileName = file.name;
-            document.getElementById('fileName').textContent = file.name;
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                document.getElementById('inputText').value = ev.target.result;
-            };
-            reader.readAsText(file);
+            if (file) this.loadFile(file);
         });
 
         // Preview button
